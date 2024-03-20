@@ -4,25 +4,17 @@ import 'styles/Board.css';
 
 const Board = () => {
   const [selectedMenu, setSelectedMenu] = useState('board');
-
   const [boardName, setBoardName] = useState('게시판');
-
   const [showWriteButton, setShowWriteButton] = useState(true);
-
   const navigate = useNavigate();
 
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
-
-    // 버튼 클릭 시 해당 메뉴의 이름으로 boardname 변경
     setBoardName(getMenuName(menu));
-
-    // 게시판 메뉴일 경우에만 글쓰기 버튼 표시
     setShowWriteButton(menu === 'board');
   };
 
   const getMenuName = (menu) => {
-
     switch (menu) {
       case 'board':
         return '게시판';
@@ -33,6 +25,14 @@ const Board = () => {
       default:
         return '';
     }
+  };
+
+  const handleWriteButtonClick = () => {
+    navigate('/recruit');
+  };
+
+  const handleDetailButtonClick = () => {
+    navigate('/recruitdetail');
   };
 
   return (
@@ -51,15 +51,16 @@ const Board = () => {
         </div>
         <div className="board-content">
           <div className="wrap1">
-          <div className="board-name">
-            {boardName}
-          </div>
-          {showWriteButton && (
-            <button className="write-button">글쓰기</button>
-          )}
+            <div className="board-name">
+              {boardName}
+            </div>
+            {showWriteButton && (
+              <button className="write-button" onClick={handleWriteButtonClick}>글쓰기</button>
+            )}
           </div>
           <div className="contents-box">
           </div>
+          <button className="detail-button" onClick={handleDetailButtonClick}>모집글 세부페이지(임시버튼)</button>
         </div>
       </div>
     </div>

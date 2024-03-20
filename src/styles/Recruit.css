@@ -1,0 +1,193 @@
+.recruit-content {
+    margin: 60px auto;
+    width: 70%;
+    text-align: center;
+    padding-bottom: 10px;
+    min-width: 600px;
+}
+
+.select-button {
+    background-color: rgb(238, 238, 238);
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0px 7px 0px 10px;
+    margin: 40px 20px 0px 0px;
+}
+
+    .select-button:hover {
+        background-color: rgb(191, 191, 191);
+    }
+
+.rcontents-box {
+    text-align: left;
+    background-color: white;
+    border-radius: 0px 10px 10px 10px;
+    border-color: navy;
+    border: 2px solid navy;
+    min-height: 300px;
+    padding: 20px;
+    margin: 0px 20px 20px 20px;
+}
+
+.text1 {
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+
+input[type="text"] {
+    background-color: rgb(220, 220, 220);
+    text-align: left;
+    border-radius: 10px;
+    border: none;
+    min-height: 20px;
+    min-width: calc(100% - 50px);
+    padding: 7px;
+    margin: 10px 20px 20px 20px;
+}
+
+textarea {
+    background-color: rgb(220, 220, 220);
+    text-align: left;
+    border-radius: 10px;
+    border: none;
+    min-height: 20px;
+    min-width: calc(100% - 50px);
+    max-width: 600px;
+    padding: 7px;
+    margin: 10px 20px 20px 20px;
+}
+
+.team-buttons {
+    background-color: rgb(220, 220, 220);
+    border-radius: 10px;
+    border: none;
+    min-height: 20px;
+    min-width: calc(100% - 50px);
+    padding: 5px;
+    margin: 10px 20px 20px 20px;
+}  
+
+.team-buttons label {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.team-buttons input[type="radio"], .filetype-buttons input[type="radio"]{
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 30%;
+    border: 2px solid #ccc;
+    margin-right: 8px;
+}
+  
+    .team-buttons input[type="radio"]:checked, .filetype-buttons input[type="radio"]:checked {
+        background-color: #007bff;
+    }
+
+.requirement-container {
+    background-color: rgb(220, 220, 220);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: none;
+    min-width: calc(100% - 55px);
+    padding: 0px 0px 20px 20px;
+    margin: 10px 20px 0px 20px;
+}
+  
+.requirement, .filetype {
+    display: flex;
+    align-items: center;
+}
+
+.text2 {
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.requirement input[type="text"] {
+    height: 10px;
+    min-width: calc(100% - 150px);
+    background-color: white;
+    margin-top: 20px;
+}
+
+.delete-button {
+    background-color: rgb(238, 238, 238);
+    width: 25px;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: -30px 0px 0px 0px;
+}
+    .delete-button:hover {
+        background-color: rgb(191, 191, 191);
+        cursor: pointer;
+    }
+  
+.add-button {
+    appearance: none;
+    height: 90px;
+    background-color: rgb(220, 220, 220);
+    color: #007bff;
+    border-radius: 10px;
+    border: none;
+    font-size: 80px;
+    min-width: calc(100% - 35px);
+    margin: 10px 20px 0px 20px;
+}
+    .add-button:hover {
+        background-color: rgb(191, 191, 191);
+        cursor: pointer;
+    }
+
+.post-button {
+    background-color: rgb(238, 238, 238);
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 0px 20px 0px 20px;
+}
+    .post-button:hover {
+        background-color: rgb(191, 191, 191);
+        cursor: pointer;
+    }
+
+.requirement-detail-container {
+    background-color: rgb(220, 220, 220);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: none;
+    min-width: calc(100% - 55px);
+    padding: 10px 0px 10px 10px;
+    margin: 10px 20px 0px 20px;
+}
+
+.text3 {
+    background-color: rgb(220, 220, 220);
+    text-align: left;
+    border-radius: 10px;
+    border: none;
+    min-height: 20px;
+    min-width: calc(100% - 50px);
+    padding: 10px 7px 5px 10px;
+    margin: 10px 20px 20px 20px;
+    font-size: 13px;
+}
+
+.text4 {
+    margin: 10px 0px 10px 10px;
+    font-size: 13px;
+    max-width: 380px;
+}
