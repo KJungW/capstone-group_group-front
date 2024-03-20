@@ -4,6 +4,7 @@
     margin: auto 0;
     background-color: navy;
     z-index: 1000;
+    min-width: 600px;
 }
 
 .header-contents {
