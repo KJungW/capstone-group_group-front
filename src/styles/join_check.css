@@ -1,0 +1,98 @@
+.board-map {
+  margin: 60px auto;
+  width: 70%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.menu-bar {
+  justify-content: center;
+  display: flex;
+  height: 50px;
+  background-color: rgb(238, 238, 238);
+  border-bottom: 4px solid navy;
+}
+
+.menu-bar button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0px 60px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu-bar button:hover {
+  background-color: rgb(191, 191, 191);
+}
+
+.menu-bar button.active {
+  background-color: navy;
+  color: white;
+}
+
+.wrap1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.write-button {
+  background-color: rgb(238, 238, 238);
+  height: 30px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 7px 15px 10px 15px;
+  margin: 40px 20px 0px 0px;
+}
+
+.write-button:hover {
+  background-color: rgb(191, 191, 191);
+}
+
+.board-name {
+  margin: 40px 0px 0px 20px;
+  background-color: navy;
+  height: 25px;
+  color: white;
+  width: 250px;
+  border-radius: 10px 10px 0px 0px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 8px;
+}
+
+.contents-box {
+  background-color: white;
+  border-radius: 0px 10px 10px 10px;
+  border-color: navy;
+  border: 2px solid blue;
+  min-height: 300px;
+  padding: 10px;
+  margin: 0px 20px 20px 20px;
+}
+
+.back {
+  margin-left: 10px;
+  border-radius: 10px;
+  width: 172px;
+  height: 65px;
+  background: #434343;
+  color: white;
+  border: none;
+  font-size: 26px;
+  font-style: bold;
+}
+
+.approval {
+  margin-right: 10px;
+  border-radius: 10px;
+  width: 172px;
+  height: 65px;
+  background: #434343;
+  color: white;
+  border: none;
+  font-size: 26px;
+  font-style: bold;
+}
