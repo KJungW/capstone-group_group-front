@@ -1,9 +1,11 @@
 import React from 'react';
-import styles from "styles/index.module.css";
+import 'styles/App.module.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from 'components/Login';
 import Header from 'components/Header';
+import Nav from 'components/Nav';
 import Board from 'components/Board';
+import Applications from 'components/Applications';
+import Recruitments from 'components/Recruitments';
 import Recruit from 'components/Recruit';
 import RecruitDetail from 'components/RecruitDetail';
 
@@ -12,10 +14,11 @@ function App() {
     <Router>
       <div>
         <Header />
+        <Nav />
         <Routes>
           <Route path="/" element={<Board />} />
-          <Route path="/header" element={<Header />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/recruitments" element={<Recruitments />} />
           <Route path="/recruit" element={<Recruit />} />
           <Route path="/recruitdetail" element={<RecruitDetail />} />
         </Routes>
