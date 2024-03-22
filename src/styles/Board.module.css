@@ -1,35 +1,9 @@
-.board-map {
-  margin: 60px auto;
+.boardmap {
+  margin: 0px auto;
   width: 70%;
   text-align: center;
   padding-bottom: 10px;
-  min-width: 600px;
-}
-
-.menu-bar {
-  justify-content: center; 
-  display: flex;
-  height: 50px;
-  background-color: rgb(238, 238, 238);
-  border-bottom: 4px solid navy;
-}
-
-.menu-bar button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0px 60px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.menu-bar button:hover {
-  background-color: rgb(191, 191, 191);
-}
-
-.menu-bar button.active {
-  background-color: navy;
-  color: white;
+  min-width: 700px;
 }
 
 .wrap1 {
@@ -37,7 +11,7 @@
   justify-content: space-between;
 }
 
-.write-button {
+.writebutton {
   background-color: rgb(238, 238, 238);
   height: 30px;
   border: none;
@@ -48,11 +22,11 @@
   margin: 40px 20px 0px 0px;
 }
 
-.write-button:hover {
+.writebutton:hover {
   background-color: rgb(191, 191, 191);
 }
 
-.board-name {
+.boardname {
   margin: 40px 0px 0px 20px;
   background-color: navy;
   height: 25px;
@@ -64,7 +38,7 @@
   padding-top: 8px;
 }
 
-.contents-box {
+.contentsbox {
   background-color: white;
   border-radius: 0px 10px 10px 10px;
   border-color: navy;
