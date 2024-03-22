@@ -1,13 +1,13 @@
-#header-container {
+.headercontainer {
     width: 100%;
     height: 60px;
     margin: auto 0;
     background-color: navy;
     z-index: 1000;
-    min-width: 600px;
+    min-width: 700px;
 }
 
-.header-contents {
+.headercontents {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,7 +15,7 @@
     padding: 0px 30px 0px 30px;
 }
 
-.header-image {
+.headerimage {
     background-color: #ffffffac;
     border-radius: 20px;
     width: 130px;
@@ -27,7 +27,7 @@
     margin-top: 2px;
 }
 
-.signin-button, .login-button {
+.signinbutton, .loginbutton {
     padding: 10px 15px;
     background-color: #ffffffac;
     color: rgb(0, 0, 0);
@@ -36,11 +36,11 @@
     cursor: pointer;
 }
 
-.login-button { margin-right: 15px; }
+.loginbutton { margin-right: 15px; }
 
-.signin-button { margin-left: auto; }
+.signinbutton { margin-left: auto; }
 
-.signin-button:hover, .login-button:hover {
+.signinbutton:hover, .loginbutton:hover {
     background-color: white;
     color: rgb(68, 68, 68);
 }

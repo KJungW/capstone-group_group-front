@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import 'styles/Board.css';
+import styles from "styles/Board.module.css";
 
 const Board = () => {
   const [selectedMenu, setSelectedMenu] = useState('board');
@@ -36,9 +36,9 @@ const Board = () => {
   };
 
   return (
-    <div className="scroll-container">
-      <div className="board-map">
-        <div className="menu-bar">
+    <div className={styles.scrollcontainer}>
+      <div className={styles.boardmap}>
+        <div className={styles.menubar}>
           <button onClick={() => handleMenuClick('board')} className={selectedMenu === 'board' ? 'active' : ''}>
             게시판
           </button>
@@ -49,18 +49,18 @@ const Board = () => {
             신청 목록
           </button>
         </div>
-        <div className="board-content">
-          <div className="wrap1">
-            <div className="board-name">
+        <div className={styles.boardcontent}>
+          <div className={styles.wrap1}>
+            <div className={styles.boardname}>
               {boardName}
             </div>
             {showWriteButton && (
-              <button className="write-button" onClick={handleWriteButtonClick}>글쓰기</button>
+              <button className={styles.writebutton} onClick={handleWriteButtonClick}>글쓰기</button>
             )}
           </div>
-          <div className="contents-box">
+          <div className={styles.contentsbox}>
           </div>
-          <button className="detail-button" onClick={handleDetailButtonClick}>모집글 세부페이지(임시버튼)</button>
+          <button className={styles.detailbutton} onClick={handleDetailButtonClick}>모집글 세부페이지(임시버튼)</button>
         </div>
       </div>
     </div>

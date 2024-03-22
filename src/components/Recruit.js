@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import 'styles/Recruit.css';
-import 'styles/Board.css';
+import styles from "styles/Recruit.module.css";
 
 function Recruit() {
   const [requirements, setRequirements] = useState([{ id: 1, text: '', fileType: '' }]);
@@ -47,26 +46,26 @@ function Recruit() {
   };
 
   return (
-    <div className="scroll-container">
-      <div className="recruit-content">
-        <div className="wrap1">
-          <div className="board-name">
+    <div className={styles.scrollcontainer}>
+      <div className={styles.recruitcontent}>
+        <div className={styles.wrap1}>
+          <div className={styles.boardname}>
             모집글 작성
           </div>
-          <select className="select-button" value={boardOption} onChange={handleBoardChange}>
+          <select className={styles.selectbutton} value={boardOption} onChange={handleBoardChange}>
             <option value="">게시판 선택</option>
             <option value="1">조별과제/캡스톤</option>
             <option value="2">대회/공모전</option>
             <option value="3">스터디</option>
           </select>
         </div>
-        <div className="rcontents-box">
-          <div className="text1">제목 :</div>
+        <div className={styles.rcontentsbox}>
+          <div className={styles.text1}>제목 :</div>
           <input type="text" name="input" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <div className="text1">활동내용 :</div>
+          <div className={styles.text1}>활동내용 :</div>
           <textarea name="activity" value={activity} onChange={(e) => setActivity(e.target.value)} />
-          <div className="text1">팀성향 :</div>
-          <div className="team-buttons">
+          <div className={styles.text1}>팀성향 :</div>
+          <div className={styles.teambuttons}>
             <label>
               <input type="radio" name="team-preference" value="1" checked={teamPreference === '1'} onChange={() => setTeamPreference('1')} />
               1등이 목표입니다!
@@ -80,21 +79,21 @@ function Recruit() {
               제출만 하면 돼요!
             </label>
           </div>
-          <div className="text1">오픈채팅방 주소 :</div>
+          <div className={styles.text1}>오픈채팅방 주소 :</div>
           <input type="text" name="input" value={chatAddress} onChange={(e) => setChatAddress(e.target.value)} />
-          <div className="text1">하고싶은 말 :</div>
+          <div className={styles.text1}>하고싶은 말 :</div>
           <textarea name="additionalComments" value={additionalComments} onChange={(e) => setAdditionalComments(e.target.value)} />
-          <div className="text1">참여요건</div>
+          <div className={styles.text1}>참여요건</div>
           {requirements.map((requirement, index) => (
-            <div key={requirement.id} className="requirement-container">
-              <div className="requirement">
-                <div className="text2">참여요건 :</div>
+            <div key={requirement.id} className={styles.requirementcontainer}>
+              <div className={styles.requirement}>
+                <div className={styles.text2}>참여요건 :</div>
                 <input type="text" name="input" />
-                {index > 0 && <button className="delete-button" onClick={() => deleteRequirement(requirement.id)}>X</button>}
+                {index > 0 && <button className={styles.deletebutton} onClick={() => deleteRequirement(requirement.id)}>X</button>}
               </div>
-              <div className="filetype">
-                <div className="text2">제출물 타입 :</div>
-                <div className="filetype-buttons">
+              <div className={styles.filetype}>
+                <div className={styles.text2}>제출물 타입 :</div>
+                <div className={styles.filetypebuttons}>
                   <label>
                     <input type="radio" name={`filetype-preference-${requirement.id}`} value="1" checked={requirement.fileType === '1'} onChange={() => handleFileTypeChange(index, '1')} />
                     텍스트
@@ -107,9 +106,9 @@ function Recruit() {
               </div>
             </div>
           ))}
-          <button className="add-button" onClick={addRequirement}>+</button>
+          <button className={styles.addbutton} onClick={addRequirement}>+</button>
         </div>
-        <button className="post-button" onClick={handlePostButtonClick}>등록하기</button>
+        <button className={styles.postbutton} onClick={handlePostButtonClick}>등록하기</button>
       </div>
     </div>
   );

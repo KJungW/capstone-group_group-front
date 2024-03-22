@@ -1,12 +1,29 @@
-.recruit-content {
+.boardname {
+    margin: 40px 0px 0px 20px;
+    background-color: navy;
+    height: 25px;
+    color: white;
+    width: 250px;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 8px;
+}
+
+.wrap1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recruitcontent {
     margin: 60px auto;
     width: 70%;
     text-align: center;
     padding-bottom: 10px;
-    min-width: 600px;
+    min-width: 700px;
 }
 
-.select-button {
+.selectbutton {
     background-color: rgb(238, 238, 238);
     height: 30px;
     border: none;
@@ -17,11 +34,11 @@
     margin: 40px 20px 0px 0px;
 }
 
-    .select-button:hover {
+    .selectbutton:hover {
         background-color: rgb(191, 191, 191);
     }
 
-.rcontents-box {
+.rcontentsbox {
     text-align: left;
     background-color: white;
     border-radius: 0px 10px 10px 10px;
@@ -61,7 +78,7 @@ textarea {
     margin: 10px 20px 20px 20px;
 }
 
-.team-buttons {
+.teambuttons {
     background-color: rgb(220, 220, 220);
     border-radius: 10px;
     border: none;
@@ -71,13 +88,13 @@ textarea {
     margin: 10px 20px 20px 20px;
 }  
 
-.team-buttons label {
+.teambuttons label {
     display: flex;
     align-items: center;
     margin: 10px;
 }
 
-.team-buttons input[type="radio"], .filetype-buttons input[type="radio"]{
+.teambuttons input[type="radio"], .filetypebuttons input[type="radio"]{
     appearance: none;
     width: 18px;
     height: 18px;
@@ -87,11 +104,11 @@ textarea {
     margin-right: 8px;
 }
   
-    .team-buttons input[type="radio"]:checked, .filetype-buttons input[type="radio"]:checked {
+    .teambuttons input[type="radio"]:checked, .filetypebuttons input[type="radio"]:checked {
         background-color: #007bff;
     }
 
-.requirement-container {
+.requirementcontainer {
     background-color: rgb(220, 220, 220);
     display: flex;
     flex-direction: column;
@@ -119,7 +136,7 @@ textarea {
     margin-top: 20px;
 }
 
-.delete-button {
+.deletebutton {
     background-color: rgb(238, 238, 238);
     width: 25px;
     height: 20px;
@@ -128,12 +145,12 @@ textarea {
     font-weight: bold;
     margin: -30px 0px 0px 0px;
 }
-    .delete-button:hover {
+    .deletebutton:hover {
         background-color: rgb(191, 191, 191);
         cursor: pointer;
     }
   
-.add-button {
+.addbutton {
     appearance: none;
     height: 90px;
     background-color: rgb(220, 220, 220);
@@ -144,12 +161,12 @@ textarea {
     min-width: calc(100% - 35px);
     margin: 10px 20px 0px 20px;
 }
-    .add-button:hover {
+    .addbutton:hover {
         background-color: rgb(191, 191, 191);
         cursor: pointer;
     }
 
-.post-button {
+.postbutton {
     background-color: rgb(238, 238, 238);
     height: 50px;
     border: none;
@@ -158,12 +175,12 @@ textarea {
     font-size: 16px;
     padding: 0px 20px 0px 20px;
 }
-    .post-button:hover {
+    .postbutton:hover {
         background-color: rgb(191, 191, 191);
         cursor: pointer;
     }
 
-.requirement-detail-container {
+.requirementdetailcontainer {
     background-color: rgb(220, 220, 220);
     display: flex;
     flex-direction: column;
