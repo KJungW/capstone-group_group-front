@@ -71,9 +71,14 @@
   min-height: 300px;
   padding: 10px;
   margin: 0px 20px 20px 20px;
+  /* overflow: hidden; */
 }
 
-.save {
+.Item {
+  position: relative;
+}
+
+.save-button {
   border-radius: 10px;
   width: 172px;
   height: 65px;
@@ -82,4 +87,65 @@
   border: none;
   font-size: 26px;
   font-style: bold;
+}
+
+.input-content {
+  flex-grow: 1;
+  position: absolute;
+  background-color: rgb(220, 220, 220);
+  text-align: left;
+  border-radius: 10px;
+  border: none;
+  min-height: 20px;
+  height: 64px;
+  min-width: calc(100% - 50px);
+  width: 100%;
+  padding: 7px;
+  margin: 10px 20px 20px 20px;
+  position: relative;
+}
+
+.Item .requirement {
+  display: flex;
+  padding-bottom: 20px;
+  width: 100%;
+  margin-right: auto;
+}
+
+.inputline {
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.upload-button {
+  width: 153px;
+  min-width: 153px;
+  height: 74px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  padding: 7px;
+  background: #186ae5;
+  color: white;
+  font-style: bold;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.list {
+  display: flex; /* 요소들을 가로로 배치하기 위해 Flexbox 사용 */
+  list-style: none; /* 리스트 스타일 제거 */
+  padding: 0; /* 내부 여백 제거 */
+  width: 100%;
+  margin-right: 20px;
+}
+
+.content-list {
+  flex-grow: 1;
+  margin-right: 30px;
+  margin-left: -10px;
 }
