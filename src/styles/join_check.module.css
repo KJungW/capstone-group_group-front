@@ -1,11 +1,11 @@
-.board-map {
+.boardMap {
   margin: 60px auto;
   width: 70%;
   text-align: center;
   padding-bottom: 10px;
 }
 
-.menu-bar {
+.menuBar {
   justify-content: center;
   display: flex;
   height: 50px;
@@ -13,7 +13,7 @@
   border-bottom: 4px solid navy;
 }
 
-.menu-bar button {
+.menuBar button {
   cursor: pointer;
   background: none;
   border: none;
@@ -22,11 +22,11 @@
   font-weight: bold;
 }
 
-.menu-bar button:hover {
+.menuBar button:hover {
   background-color: rgb(191, 191, 191);
 }
 
-.menu-bar button.active {
+.menuBar button.active {
   background-color: navy;
   color: white;
 }
@@ -36,7 +36,7 @@
   justify-content: space-between;
 }
 
-.write-button {
+.writeButton {
   background-color: rgb(238, 238, 238);
   height: 30px;
   border: none;
@@ -47,11 +47,11 @@
   margin: 40px 20px 0px 0px;
 }
 
-.write-button:hover {
+.writeButton:hover {
   background-color: rgb(191, 191, 191);
 }
 
-.board-name {
+.boardName {
   margin: 40px 0px 0px 20px;
   background-color: navy;
   height: 25px;
@@ -63,7 +63,7 @@
   padding-top: 8px;
 }
 
-.contents-box {
+.contentsBox {
   background-color: white;
   border-radius: 0px 10px 10px 10px;
   border-color: navy;
@@ -71,14 +71,10 @@
   min-height: 300px;
   padding: 10px;
   margin: 0px 20px 20px 20px;
-  /* overflow: hidden; */
 }
 
-.Item {
-  position: relative;
-}
-
-.save-button {
+.back {
+  margin-left: 10px;
   border-radius: 10px;
   width: 172px;
   height: 65px;
@@ -89,39 +85,11 @@
   font-style: bold;
 }
 
-.input-content {
-  flex-grow: 1;
-  position: absolute;
-  background-color: rgb(220, 220, 220);
-  text-align: left;
-  border-radius: 10px;
-  border: none;
-  min-height: 20px;
-  height: 64px;
-  min-width: calc(100% - 50px);
-  width: 100%;
-  padding: 7px;
-  margin: 10px 20px 20px 20px;
-  position: relative;
+.item {
+  align-items: center; /* 아이템을 수직 가운데 정렬합니다. */
 }
 
-.Item .requirement {
-  display: flex;
-  padding-bottom: 20px;
-  width: 100%;
-  margin-right: auto;
-}
-
-.inputline {
-  position: relative;
-  width: 100%;
-  display: flex;
-  padding-bottom: 20px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.upload-button {
+.downloadButton {
   width: 153px;
   min-width: 153px;
   height: 74px;
@@ -132,6 +100,60 @@
   background: #186ae5;
   color: white;
   font-style: bold;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.inputContent {
+  flex-grow: 1;
+  position: absolute;
+  background-color: rgb(220, 220, 220);
+  text-align: left;
+  border-radius: 10px;
+  border: none;
+  min-height: 20px;
+  min-width: calc(100% - 50px);
+  height: 64px;
+  width: 100%;
+  padding: 7px;
+  margin: 10px 20px 20px 20px;
+  position: relative;
+  font-size: 20px;
+}
+
+.item {
+  position: relative;
+}
+
+.item .requirement {
+  display: flex;
+  padding-bottom: 20px;
+  width: 100%;
+  margin-right: auto;
+}
+
+.inputLine {
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.uploadButton {
+  width: 153px;
+  min-width: 153px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  padding: 7px;
+  background: #186ae5;
+  color: white;
+  font-style: bold;
+  font-size: 20px;
   margin-top: 10px;
   margin-left: 20px;
 }
@@ -144,7 +166,7 @@
   margin-right: 20px;
 }
 
-.content-list {
+.contentList {
   flex-grow: 1;
   margin-right: 30px;
   margin-left: -10px;

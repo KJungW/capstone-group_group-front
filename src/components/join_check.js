@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "styles/join_check.css";
-import Item_check from "./Item_check";
+import styles from "styles/join_check.module.css";
 
 const mockData = [
   // 일단 임시로 데이터 넣었음
@@ -31,68 +30,59 @@ const Check = () => {
   const [showWriteButton, setShowWriteButton] = useState(true);
   const navigate = useNavigate();
 
-  const handleMenuClick = (menu) => {
-    // 사용자가 확인을 눌렀을 때만 메뉴를 변경합니다.
-    const userConfirmation = window.confirm("현재 페이지를 벗어나시겠습니까?");
-    if (userConfirmation) {
-      setSelectedMenu(menu);
-      setBoardName(getMenuName(menu));
-      setShowWriteButton(menu === "board");
-    }
-  };
-
-  const getMenuName = (menu) => {
-    let confirmationMessage = "";
-
-    switch (menu) {
-      case "board":
-        confirmationMessage = "게시판";
-        break;
-      case "applications":
-        confirmationMessage = "작성글 목록";
-        break;
-      case "recruitments":
-        confirmationMessage = "신청 목록";
-        break;
-      default:
-        return "";
+  const renderInputLine = (dataItem) => {
+    if (dataItem.file) {
+      return (
+        <div className={styles.inputLine}>
+          <ul className={styles.list}>
+            <li>
+              <button className={styles.downloadButton}>파일 다운로드</button>
+            </li>
+            <li className={styles.contentList}>
+              <input
+                type="text"
+                className={styles.inputContent}
+                readOnly
+                value={dataItem.content}
+              />
+            </li>
+          </ul>
+        </div>
+      );
+    } else {
+      return (
+        <div className={styles.inputLine}>
+          <input
+            type="text"
+            className={styles.inputContent}
+            readOnly
+            value={dataItem.content}
+          />
+        </div>
+      );
     }
   };
 
   return (
-    <div className="scroll-container">
-      <div className="board-map">
-        <div className="menu-bar">
-          <button
-            onClick={() => handleMenuClick("board")}
-            className={selectedMenu === "board" ? "active" : ""}
-          >
-            게시판
-          </button>
-          <button
-            onClick={() => handleMenuClick("applications")}
-            className={selectedMenu === "applications" ? "active" : ""}
-          >
-            작성글 목록
-          </button>
-          <button
-            onClick={() => handleMenuClick("recruitments")}
-            className={selectedMenu === "recruitments" ? "active" : ""}
-          >
-            신청 목록
-          </button>
-        </div>
-        <div className="board-content">
-          <div className="wrap1">
-            <div className="board-name">신청 내용</div>
+    <div className={styles.scrollContainer}>
+      <div className={styles.boardMap}>
+        <div className={styles.boardContent}>
+          <div className={styles.wrap1}>
+            <div className={styles.boardName}>신청 내용</div>
           </div>
-          <div className="contents-box">
+          <div className={styles.contentsBox}>
             {mockData.map((dataItem) => (
-              <Item_check key={dataItem.id} data={dataItem} />
+              <div key={dataItem.id} className={styles.item}>
+                <div className={styles.requirement}>
+                  <div>
+                    참여요건{dataItem.id}:{dataItem.condition}
+                  </div>
+                </div>
+                {renderInputLine(dataItem)}
+              </div>
             ))}
           </div>
-          <button className="approval">수락하기</button>
-          <button className="back">뒤로가기</button>
+          <button className={styles.back}>뒤로가기</button>
         </div>
       </div>
     </div>

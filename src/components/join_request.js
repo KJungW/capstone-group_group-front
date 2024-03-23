@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "styles/join_request.css";
+import styles from "styles/join_request.module.css";
 
 const mockData = [
   {
@@ -40,37 +40,37 @@ const Request = () => {
   const renderInputLine = (dataItem) => {
     if (dataItem.file) {
       return (
-        <div className="inputline">
-          <ul className="list">
+        <div className={styles.inputLine}>
+          <ul className={styles.list}>
             <li>
-              <button className="upload-button">파일 업로드</button>
+              <button className={styles.uploadButton}>파일 업로드</button>
             </li>
-            <li className="content-list">
-              <input type="text" className="input-content" />
+            <li className={styles.contentList}>
+              <input type="text" className={styles.inputContent} />
             </li>
           </ul>
         </div>
       );
     } else {
       return (
-        <div className="inputline">
-          <input type="text" className="input-content" />
+        <div className={styles.inputLine}>
+          <input type="text" className={styles.inputContent} />
         </div>
       );
     }
   };
 
   return (
-    <div className="scroll-container">
-      <div className="board-map">
-        <div className="board-content">
-          <div className="wrap1">
-            <div className="board-name">신청하기</div>
+    <div className={styles.scrollContainer}>
+      <div className={styles.boardMap}>
+        <div className={styles.boardContent}>
+          <div className={styles.wrap1}>
+            <div className={styles.boardName}>신청하기</div>
           </div>
-          <div className="contents-box">
+          <div className={styles.contentsBox}>
             {mockData.map((dataItem) => (
-              <div key={dataItem.id} className="Item">
-                <div className="requirement">
+              <div key={dataItem.id} className={styles.item}>
+                <div className={styles.requirement}>
                   <div>
                     참여요건{dataItem.id}:{dataItem.condition}
                   </div>
@@ -79,7 +79,7 @@ const Request = () => {
               </div>
             ))}
           </div>
-          <button className="save-button">저장하기</button>
+          <button className={styles.saveButton}>저장하기</button>{" "}
         </div>
       </div>
     </div>

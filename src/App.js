@@ -9,6 +9,7 @@ import Recruitments from "components/Recruitments";
 import Recruit from "components/Recruit";
 import RecruitDetail from "components/RecruitDetail";
 import Request from "components/join_request";
+import Check from "components/join_check";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/recruit" element={<Recruit />} />
           <Route path="/recruitdetail" element={<RecruitDetail />} />
           <Route path="/request" element={<Request />} />
+          <Route path="/check" element={<Check />} />
         </Routes>
       </div>
     </Router>
