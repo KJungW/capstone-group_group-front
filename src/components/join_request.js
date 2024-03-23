@@ -24,7 +24,7 @@ const mockData = [
 
   {
     id: 4,
-    condition: "간단한 코드",
+    condition: "간단한 자소서",
     file: true,
     content: "",
   },
@@ -62,7 +62,7 @@ const Request = () => {
 
   return (
     <div className={styles.scrollContainer}>
-      <div className={styles.boardMap}>
+      <div className={styles.requestcontent}>
         <div className={styles.boardContent}>
           <div className={styles.wrap1}>
             <div className={styles.boardName}>신청하기</div>
@@ -79,7 +79,7 @@ const Request = () => {
               </div>
             ))}
           </div>
-          <button className={styles.saveButton}>저장하기</button>{" "}
+          <button className={styles.saveButton}>저장하기</button>
         </div>
       </div>
     </div>
