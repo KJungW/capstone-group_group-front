@@ -22,6 +22,12 @@ const mockData = [
     file: false,
     content: "java,python",
   },
+  {
+    id: 4,
+    condition: "간단한 자소서",
+    file: true,
+    content: "이승민 자소서.hwp",
+  },
 ];
 
 const Check = () => {
@@ -65,7 +71,7 @@ const Check = () => {
 
   return (
     <div className={styles.scrollContainer}>
-      <div className={styles.boardMap}>
+      <div className={styles.checkcontent}>
         <div className={styles.boardContent}>
           <div className={styles.wrap1}>
             <div className={styles.boardName}>신청 내용</div>
@@ -75,7 +81,7 @@ const Check = () => {
               <div key={dataItem.id} className={styles.item}>
                 <div className={styles.requirement}>
                   <div>
-                    참여요건{dataItem.id}:{dataItem.condition}
+                    참여요건{dataItem.id}: {dataItem.condition}
                   </div>
                 </div>
                 {renderInputLine(dataItem)}
