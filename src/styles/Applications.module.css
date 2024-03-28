@@ -1,33 +1,122 @@
 .boardmap {
-  margin: 60px auto 0px auto;
+  margin: 0px auto;
   width: 70%;
   text-align: center;
   padding-bottom: 10px;
   min-width: 700px;
 }
 
-.menubar {
-  justify-content: center;
+.wrap1 {
   display: flex;
-  height: 50px;
-  background-color: rgb(238, 238, 238);
-  border-bottom: 4px solid navy;
+  justify-content: space-between;
 }
 
-.menubar button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0px 60px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.menubar button:hover {
-  background-color: rgb(191, 191, 191);
-}
-
-.menubar button.active {
+.boardname {
+  margin: 40px 0px 0px 20px;
   background-color: navy;
+  height: 25px;
   color: white;
+  width: 250px;
+  border-radius: 10px 10px 0px 0px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 8px;
+}
+
+.contentsbox {
+  background-color: white;
+  border-top: 1px solid navy;
+  min-height: 300px;
+  margin: 0px 20px 20px 20px;
+}
+
+
+.postsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.postsTable th,
+.postsTable td {
+  border-top: 1px solid navy;
+  border-bottom: 1px solid navy;
+  padding: 15px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.narrowDateColumn {
+  width: 20%;
+  text-align: right !important;
+}
+
+.applicationRow td {
+  padding: 0;
+  border: none;
+}
+
+.applicationContent {
+  width: 70%;
+  margin-left: auto;
+  border-left: 30px solid navy;
+  border-bottom: 1px solid navy;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.acceptButton {
+  background-color: #4CAF50; /* 녹색 계열 */
+  color: white;
+  border: none;
+  padding: 7px 15px;
+  margin-right: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.acceptButton:hover {
+  background-color: #45a049;
+}
+
+.rejectButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 7px 15px;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.rejectButton:hover {
+  background-color: #da190b;
+}
+
+.postsTable {
+  width: 100%;
+}
+
+.postsTable th {
+  background-color: #f2f2f2;
+}
+
+.lastApplication {
+  border-bottom: none;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.page a, .narrow a {
+  margin: 0 10px;
+  text-decoration: none;
 }
