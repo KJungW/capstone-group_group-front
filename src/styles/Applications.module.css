@@ -1,34 +1,33 @@
 .boardmap {
-    margin: 0px auto;
-    width: 70%;
-    text-align: center;
-    padding-bottom: 10px;
-    min-width: 700px;
-  }
-  
-  .wrap1 {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .boardname {
-    margin: 40px 0px 0px 20px;
-    background-color: navy;
-    height: 25px;
-    color: white;
-    width: 250px;
-    border-radius: 10px 10px 0px 0px;
-    font-weight: bold;
-    font-size: 18px;
-    padding-top: 8px;
-  }
-  
-  .contentsbox {
-    background-color: white;
-    border-radius: 0px 10px 10px 10px;
-    border-color: navy;
-    border: 2px solid navy;
-    min-height: 300px;
-    padding: 10px;
-    margin: 0px 20px 20px 20px;
-  }
+  margin: 60px auto 0px auto;
+  width: 70%;
+  text-align: center;
+  padding-bottom: 10px;
+  min-width: 700px;
+}
+
+.menubar {
+  justify-content: center;
+  display: flex;
+  height: 50px;
+  background-color: rgb(238, 238, 238);
+  border-bottom: 4px solid navy;
+}
+
+.menubar button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0px 60px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menubar button:hover {
+  background-color: rgb(191, 191, 191);
+}
+
+.menubar button.active {
+  background-color: navy;
+  color: white;
+}

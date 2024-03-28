@@ -40,10 +40,42 @@
 
 .contentsbox {
   background-color: white;
-  border-radius: 0px 10px 10px 10px;
-  border-color: navy;
-  border: 2px solid navy;
+  border-top: 1px solid navy;
   min-height: 300px;
-  padding: 10px;
   margin: 0px 20px 20px 20px;
+}
+
+.postsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.postsTable th,
+.postsTable td {
+  border-top: 1px solid navy;
+  border-bottom: 1px solid navy;
+  padding: 15px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.narrowDateColumn {
+  width: 20%;
+  text-align: center !important;
+}
+
+.postsTable th {
+  background-color: #f2f2f2;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.page a, .narrow a {
+  margin: 0 10px;
+  text-decoration: none;
 }
