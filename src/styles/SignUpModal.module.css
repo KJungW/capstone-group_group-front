@@ -1,0 +1,90 @@
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal {
+  width: 700px;
+  height: 800px;
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+.boardContent {
+  margin: 60px auto;
+  width: 700px;
+  height: 500px;
+  text-align: center;
+  padding-bottom: 10px;
+  min-width: 700px;
+}
+
+.boardName {
+  margin: -20px 0px 0px 20px;
+  background-color: navy;
+  height: 25px;
+  color: white;
+  width: 250px;
+  border-radius: 10px 10px 0px 0px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 8px;
+}
+
+.contentsBox {
+  width: 633px;
+  height: 500px;
+  background-color: white;
+  border-radius: 0px 10px 10px 10px;
+  border-color: navy;
+  border: 2px solid navy;
+  min-height: 300px;
+  padding: 20px;
+  margin: 0px 20px 20px 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+.inputLine {
+  background-color: rgb(220, 220, 220);
+  text-align: left;
+  border-radius: 10px;
+  border: none;
+  min-height: 25px;
+  min-width: calc(100% - 50px);
+  padding: 7px;
+  margin: 10px 20px 20px 20px;
+}
+
+.buttonSignUp {
+  width: 153px;
+  min-width: 153px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  padding: 6px;
+  margin-left: 20px;
+  background: #186ae5;
+  color: white;
+  font-style: bold;
+  font-size: 25px;
+  margin: auto;
+}
