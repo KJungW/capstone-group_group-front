@@ -39,10 +39,11 @@ const Recruitments = () => {
                     <tr key={post.id}>
                       <td>{post.title}</td>
                       <td className={styles.narrowDateColumn}>{post.timestamp}</td>
+                      <td className={styles.configColumn}><i className="fas fa-ellipsis-v"></i></td>
                     </tr>
                     {post.applications.map((app, index) => (
                         <tr key={app.applicationId} className={styles.applicationRow}>
-                          <td colSpan="2">
+                          <td colSpan="3">
                             <div className={`${styles.applicationContent} ${index === post.applications.length - 1 ? styles.lastApplication : ''}`}>
                               {app.applicantName}님의 신청
                               <div>
