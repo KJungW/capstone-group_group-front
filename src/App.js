@@ -9,11 +9,8 @@ import Applications from "components/Applications";
 import Recruitments from "components/Recruitments";
 import Recruit from "components/Recruit";
 import RecruitDetail from "components/RecruitDetail";
-import Request from "components/join_request";
-import Check from "components/join_check";
-import Login from "components/login";
-import SignUp from "components/SignUp";
-import Mail from "components/mail";
+import ApplicationForm from "components/ApplicationForm";
+import ApplicationReview from "components/ApplicationReview";
 
 function App() {
   return (
@@ -27,11 +24,8 @@ function App() {
           <Route path="/recruitments" element={<Recruitments />} />
           <Route path="/recruit" element={<Recruit />} />
           <Route path="/recruitdetail" element={<RecruitDetail />} />
-          <Route path="/request" element={<Request />} />
-          <Route path="/check" element={<Check />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign" element={<SignUp />} />
-          <Route path="/mail" element={<Mail />} />
+          <Route path="/apply" element={<ApplicationForm />} />
+          <Route path="/review" element={<ApplicationReview />} />
         </Routes>
       </div>
     </Router>
