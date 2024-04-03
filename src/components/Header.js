@@ -33,9 +33,9 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  const handleHomeClick = () => {
-    navigate("/");
-  };
+  // const handleHomeClick = () => {
+  //   navigate("/");
+  // };
 
   return (
     <div className={styles.headercontainer}>
@@ -45,7 +45,7 @@ const Header = () => {
             src="/assets/groupgroup_logo.png"
             alt="groupgroup"
             className={styles.logo}
-            onClick={handleHomeClick}
+            // onClick={handleHomeClick}
           />
         </div>
         <div className={styles.user}>
