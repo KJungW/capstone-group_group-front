@@ -39,7 +39,7 @@ const Recruitments = () => {
                     <tr key={post.id}>
                       <td>{post.title}</td>
                       <td className={styles.narrowDateColumn}>{post.timestamp}</td>
-                      <td className={styles.configColumn}><i className="fas fa-ellipsis-v">ㅇ</i></td>
+                      <td className={styles.configColumn}><i className="fas fa-ellipsis-v"></i></td>
                     </tr>
                     {post.applications.map((app, index) => (
                         <tr key={app.applicationId} className={styles.applicationRow}>
