@@ -42,7 +42,7 @@ const Nav = () => {
             신청 목록
           </button>
         </div>
-      </div>'
+      </div>
     </div>
   );
 };
