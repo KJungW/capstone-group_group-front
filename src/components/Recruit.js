@@ -55,7 +55,7 @@ function Recruit() {
 
     // 실제 API 호출
     alert('API 호출이 성공했습니다.');
-    navigate('/');
+    // navigate('/');
   };
 
   return (
@@ -125,7 +125,7 @@ function Recruit() {
           ))}
           <button className={styles.addbutton} onClick={addRequirement}>+</button>
         </div>
-        <button className={styles.postbutton} onClick={handlePostButtonClick}>등록하기</button>
+        <button className={styles.postbutton} /* onClick={handlePostButtonClick} */>등록하기</button>
       </div>
     </div>
   );

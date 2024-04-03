@@ -22,9 +22,9 @@ function RecruitDetail() {
     fetchPostDetail();
   }, [location.search]);
 
-  const handleHomeButtonClick = () => {
-    navigate('/');
-  };
+  // const handleHomeButtonClick = () => {
+  //   navigate('/');
+  // };
 
   if (!postData) {
     return <div>Loading...</div>;
@@ -65,7 +65,7 @@ function RecruitDetail() {
             </div>
           ))}
         </div>
-        <button className={styles.postbutton} onClick={handleHomeButtonClick}>신청하기</button>
+        <button className={styles.postbutton} /* onClick={handleHomeButtonClick} */>신청하기</button>
       </div>
     </div>
   );
