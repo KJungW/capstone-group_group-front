@@ -129,7 +129,7 @@
   padding: 0px 20px 0px 20px;
 }
 
-.saveButton :hover {
+.saveButton:hover {
   background-color: rgb(191, 191, 191);
   cursor: pointer;
 }

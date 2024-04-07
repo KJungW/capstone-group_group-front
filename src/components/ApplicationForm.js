@@ -114,7 +114,7 @@ const ApplicationForm = () => {
               <input
                 type="text"
                 className={styles.inputContent}
-                value={dataItem.content}
+                defaultValue={dataItem.content}
                 readOnly
               />
             </li>
@@ -128,7 +128,7 @@ const ApplicationForm = () => {
             type="text"
             maxLength="100"
             className={styles.inputContent}
-            // value={dataItem.content}
+            value={dataItem.content}
             onChange={(e) => handleTextChange(e, dataItem.id)}
           />
         </div>
@@ -144,7 +144,7 @@ const ApplicationForm = () => {
             <div className={styles.boardName}>신청하기</div>
           </div>
           <div className={styles.contentsBox}>
-            {mockData.map((dataItem) => (
+            {data.map((dataItem) => (
               <div key={dataItem.id} className={styles.item}>
                 <div className={styles.requirement}>
                   <div>
@@ -159,8 +159,7 @@ const ApplicationForm = () => {
             저장하기
           </button>
         </div>
-      </form>{" "}
-      {/* form 태그 닫기 */}
+      </form>
     </div>
   );
 };

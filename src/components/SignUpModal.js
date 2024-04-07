@@ -2,13 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "styles/SignUpModal.module.css";
 import ErrorModal from "./ErrorModal";
 
-const SignUpModal = ({ isOpen, onClose }) => {
+const SignUpModal = ({ isOpen, onClose, onSubmit }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const modalRef = useRef(null);
+  const boardRef = useRef(null);
 
   const validateForm = () => {
     if (!email || email.trim() === "" || email.length > 40) {
@@ -50,7 +50,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     if (validateForm()) {
       console.log("회원가입 정보:", email, username, password, confirmPassword);
-      onClose(); // 폼이 유효하면 모달 닫기
+      onSubmit(); // 폼이 유효하면 모달 닫기
       setError(""); // 에러 메시지 초기화
     } else {
       // 에러 메시지는 ErrorModal을 통해 표시
@@ -59,7 +59,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
   };
 
   const handleCloseModal = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
+    if (boardRef.current && !boardRef.current.contains(event.target)) {
       onClose();
     }
   };
@@ -80,8 +80,8 @@ const SignUpModal = ({ isOpen, onClose }) => {
 
   return (
     <div className={styles.modalOverlay}>
-      <div ref={modalRef} className={styles.modal}>
-        <div className={styles.boardContent}>
+      <div className={`${styles.modal} ${styles.scrollable}`}>
+        <div ref={boardRef} className={styles.boardContent}>
           <div className={styles.wrap1}>
             <div className={styles.boardName}>회원가입</div>
           </div>
