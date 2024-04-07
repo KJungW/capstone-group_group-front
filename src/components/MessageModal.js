@@ -30,8 +30,8 @@ const MessageModal = ({ isOpen, onClose }) => {
 
   return (
     <div className={styles.modalOverlay}>
-      <div ref={modalRef} className={styles.modal}>
-        <div className={styles.boardContent}>
+      <div className={`${styles.modal} ${styles.scrollable}`}>
+        <div ref={modalRef} className={styles.boardContent}>
           <div className={styles.wrap1}>
             <div className={styles.boardName}>회원가입</div>
           </div>

@@ -5,7 +5,7 @@ import ErrorModal from "./ErrorModal";
 const LoginModal = ({ isOpen, onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const modalRef = useRef(null);
+  const boardRef = useRef(null);
   const [errors, setErrors] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -25,6 +25,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       errors.username = "이메일을 입력해주세요.";
       showTemporaryAlert("이메일을 입력해주세요.");
       isValid = false;
+      return isValid;
     } else if (
       !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(username) ||
       username.length > 40
@@ -32,11 +33,14 @@ const LoginModal = ({ isOpen, onClose }) => {
       errors.username = "유효한 이메일 주소를 입력해주세요. (40자 이내)";
       showTemporaryAlert("유효한 이메일 주소를 입력해주세요. (40자 이내)");
       isValid = false;
+      return isValid;
     }
 
     if (!password || password.trim() === "") {
       errors.password = "비밀번호를 입력해주세요.";
+      showTemporaryAlert("비밀번호를 입력해주세요.");
       isValid = false;
+      return isValid;
     } else if (
       !/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/.test(password)
     ) {
@@ -46,6 +50,7 @@ const LoginModal = ({ isOpen, onClose }) => {
         "비밀번호는 8자 이상 15자 이내의 영문, 숫자, 특수문자를 포함해야 합니다."
       );
       isValid = false;
+      return isValid;
     }
 
     setErrors(errors);
@@ -63,7 +68,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   };
 
   const handleCloseModal = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
+    if (boardRef.current && !boardRef.current.contains(event.target)) {
       onClose();
     }
   };
@@ -84,8 +89,8 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   return (
     <div className={styles.modalOverlay}>
-      <div ref={modalRef} className={styles.modal}>
-        <div className={styles.boardContent}>
+      <div className={`${styles.modal} ${styles.scrollable}`}>
+        <div ref={boardRef} className={styles.boardContent}>
           <div className={styles.wrap1}>
             <div className={styles.boardName}>로그인</div>
           </div>

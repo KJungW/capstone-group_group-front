@@ -23,12 +23,16 @@ const Header = () => {
   };
 
   const handleCloseSignUpModal = () => {
-    setIsMessageModalOpen(true);
     setIsSignUpModalOpen(false); // 회원가입 모달 닫기 버튼 클릭 시 모달을 닫도록 상태 변경
   };
 
+  const handleSubmitSignUpModel = () => {
+    setIsMessageModalOpen(true);
+    setIsSignUpModalOpen(false);
+  };
+
   const handleCloseMsgModal = () => {
-    setIsMessageModalOpen(false); // 회원가입 모달 닫기 버튼 클릭 시 모달을 닫도록 상태 변경
+    setIsMessageModalOpen(false);
   };
 
   const navigate = useNavigate();
@@ -67,6 +71,7 @@ const Header = () => {
       <SignUpModal
         isOpen={isSignUpModalOpen}
         onClose={handleCloseSignUpModal}
+        onSubmit={handleSubmitSignUpModel}
       />
       <MessageModal isOpen={isMessageModalOpen} onClose={handleCloseMsgModal} />
     </div>
