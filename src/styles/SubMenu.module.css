@@ -1,0 +1,40 @@
+.subMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 110%;
+    z-index: 1;
+    left: 0;
+    width: 100%;
+    background-color: rgb(238, 238, 238);
+  }
+  
+  .subMenuItem {
+    margin-left: 30px;
+    margin-right: 50px;
+    font-size: 14px;
+  }
+  
+  .subMenuTitle {
+    font-weight: bold;
+    font-size: 18px;
+    color: navy;
+    cursor: default;
+  }
+  
+  .subSubMenu {
+    display: flex;
+    flex-direction: column;
+    color: black;
+  }
+  
+  .subSubMenuTitle {
+    padding: 5px 0;
+    cursor: pointer;
+  }
+
+  .subSubMenuTitle:hover {
+    background-color: rgb(191, 191, 191);
+    color: white;
+  }
