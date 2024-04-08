@@ -1,3 +1,4 @@
+
 .boardmap {
   margin: 0px auto;
   width: 70%;
@@ -12,22 +13,22 @@
 }
 
 .boardname {
-margin: 40px 0px 0px 20px;
-background-color: navy;
-height: 25px;
-color: white;
-width: 250px;
-border-radius: 10px 10px 0px 0px;
-font-weight: bold;
-font-size: 18px;
-padding-top: 8px;
+  margin: 40px 0px 0px 20px;
+  background-color: navy;
+  height: 25px;
+  color: white;
+  width: 250px;
+  border-radius: 10px 10px 0px 0px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 8px;
 }
 
 .contentsbox {
-background-color: white;
-border-top: 1px solid navy;
-min-height: 300px;
-margin: 0px 20px 20px 20px;
+  background-color: white;
+  border-top: 1px solid navy;
+  min-height: 300px;
+  margin: 0px 20px 20px 20px;
 }
 
 
@@ -53,6 +54,10 @@ margin: 0px 20px 20px 20px;
 .configColumn {
   width: 2%;
   text-align: center !important;
+  cursor: pointer;
+}
+
+.configColumn:hover {
   cursor: pointer;
 }
 
@@ -131,4 +136,28 @@ margin: 0px 20px 20px 20px;
 .page a, .narrow a {
   margin: 0 10px;
   text-decoration: none;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  z-index: 1;
+  min-width: 100px;
+  cursor: pointer;
+}
+
+.tooltipItem {
+  cursor: pointer;
+  padding: 4px;
+}
+
+.tooltipItem:hover {
+  background-color: #f0f0f0;
+}
+
+.configColumn {
+  cursor: pointer;
 }
