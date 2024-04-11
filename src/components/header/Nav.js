@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from "styles/Nav.module.css";
 import { useNavigate, useLocation } from 'react-router-dom';
-import SubMenu from './SubMenu';
+import SubMenu from 'components/header/SubMenu';
 
 const Nav = () => {
   const navigate = useNavigate();

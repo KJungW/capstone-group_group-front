@@ -1,16 +1,15 @@
 import React from "react";
 import "styles/App.module.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import Header from "components/Header";
-import Nav from "components/Nav";
-import Board from "components/Board";
-import Applications from "components/Applications";
-import Recruitments from "components/Recruitments";
-import Recruit from "components/Recruit";
-import RecruitDetail from "components/RecruitDetail";
-import ApplicationForm from "components/ApplicationForm";
-import ApplicationReview from "components/ApplicationReview";
+import Header from "components/header/Header";
+import Nav from "components/header/Nav";
+import Board from "components/board/Board";
+import Applications from "components/application/Applications";
+import Recruitments from "components/recruit/Recruitments";
+import Recruit from "components/recruit/Recruit";
+import RecruitDetail from "components/recruit/RecruitDetail";
+import ApplicationForm from "components/application/ApplicationForm";
+import ApplicationReview from "components/application/ApplicationReview";
 
 function App() {
   return (
