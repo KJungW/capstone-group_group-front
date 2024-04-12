@@ -53,3 +53,7 @@
   font-size: 1.1rem;
   color: white;
 }
+
+.sendBtn:disabled{
+  background-color: rgb(100, 100, 100);
+}

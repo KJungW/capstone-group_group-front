@@ -1,3 +1,4 @@
+import requestLoginApi from "hook/requestLoginApi";
 import { useState } from "react";
 import styles from "styles/LoginFormModal.module.css";
 
@@ -7,7 +8,7 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 
 
-const LoginFormModal = ({handleClose}) => {
+const LoginFormModal = ({completeLogin}) => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
@@ -47,12 +48,32 @@ const LoginFormModal = ({handleClose}) => {
     }
   }
 
-  // 로그임 버튼클릭 메서드
+  // 로그인 수행 메서드
+  const login = () => {
+    console.log("로그인 요청")
+    requestLoginApi(inputEmail, inputPw)
+      .then(res =>  {
+        console.log("로그인 성공");
+        localStorage.setItem("memberId", res.data.id);
+        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("campusId", res.data.campusId);
+        localStorage.setItem("nickName", res.data.nickName);
+        localStorage.setItem("jwtToken", res.data.jwtToken);
+        completeLogin();
+      })
+      .catch(error => {
+        console.log("로그인 실패")
+        console.log(error)
+        alert("로그인 실패 잠시후 다시 실행해주세요")
+      });
+  }
+
+
+  // 로그인 버튼클릭 메서드
   const clickLoginBtn = () => {
     let validateResult = validateInput()
     if(validateResult.isValid) {
-      console.log("로그인 수행")
-      handleClose();
+      login();
     } 
     else {
       setEmailErrorMsg(validateResult.emailErrorMsg);

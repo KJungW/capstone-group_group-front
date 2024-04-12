@@ -1,3 +1,4 @@
+import reqeustSignUpApi from "hook/requestSignUpApi";
 import { useState } from "react";
 import styles from "styles/SignUpFormModal.module.css";
 
@@ -17,6 +18,9 @@ const SignUpFormModal = ({moveNextModal}) => {
   const [nickNameErrorMsg, setNickNameErrorMsg] = useState("");
   const [pwErrorMsg, setPwErrorMsg] = useState("");
   const [pwCheckErrorMsg, setPwCheckErrorMsg] = useState("");
+
+  // 인증이메일 전송중인지 여부 
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
 
   // input 태그 입력 처리메소드
   const onChangeInputEmail = (e) => {setInputEmail(e.target.value);};
@@ -75,12 +79,36 @@ const SignUpFormModal = ({moveNextModal}) => {
     }
   }
 
+  // 회원가입 수행
+  const signUp = () => {
+    console.log("회원가입 수행");
+    reqeustSignUpApi(inputEmail, inputNickName, inputPw)
+    .then (res => {
+      console.log("회원가입 요청 성공");
+      moveNextModal(inputEmail, inputNickName, inputPw);
+    })
+    .catch (err => {
+      console.log("회원가입 요청 실패");
+      if(err.code === "ERR_BAD_REQUEST") {
+        console.log(err);
+        alert("이미 등록된 회원입니다.");
+      } 
+      else {
+        console.log(err);
+        alert("요청실패, 잠시후 다시 실행해주세요");
+      }
+    })
+    .finally(() => {
+      setIsSendingEmail(false);
+    })
+    setIsSendingEmail(true);
+  }
+
   // 회원가입 버튼클릭 메서드
   const clickSingUpBtn = () => {
     let validateResult = validateInput()
     if(validateResult.isValid) {
-      console.log("회원가입 수행")
-      moveNextModal(inputEmail, inputNickName, inputPw);
+      signUp();
     } 
     else {
       setEmailErrorMsg(validateResult.emailErrorMsg);
@@ -117,7 +145,9 @@ const SignUpFormModal = ({moveNextModal}) => {
           <input type="password" className={styles.textInput} onChange={onChangeInputPwCheck} value={inputPwCheck} maxLength={15}/>
           <div className={styles.errorMsg}>{pwCheckErrorMsg}</div>
         </div>
-        <button className={styles.signUpButton} onClick={clickSingUpBtn}>회원가입</button>
+        <button className={styles.signUpButton} onClick={clickSingUpBtn} disabled={isSendingEmail}>
+          {isSendingEmail?"진행중":"회원가입"}
+        </button>
       </div>
     </div>
   );

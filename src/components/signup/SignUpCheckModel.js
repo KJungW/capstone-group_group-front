@@ -1,9 +1,23 @@
+import reqeustSignUpApi from "hook/requestSignUpApi";
+import { useState } from "react";
 import styles from "styles/SignUpCheckModel.module.css";
 
 const SignUpCheckModel = ({ formData }) => {
+  const [isSendingEmail, setIsSendingEmail] = useState(false)
 
-  const onClickSendBtn = () => {
-    console.log("회원가입 요청 재전송")
+  const onClickSendBtn = () =>{
+    console.log("회원가입 요청 재전송");
+    reqeustSignUpApi(formData.email, formData.nickName, formData.pw)
+    .then(res => {
+      console.log("회원가입 요청 재전송 성공");
+    })
+    .catch(err => {
+      console.log("회원가입 요청 재전송 실패");
+    })
+    .finally(() => {
+      setIsSendingEmail(false);
+    })
+    setIsSendingEmail(true);
   }
 
   return (
@@ -20,7 +34,9 @@ const SignUpCheckModel = ({ formData }) => {
               이메일을 전송하는데 1~2분가량 걸릴 수 있습니다.<br/>
               이메일이 오지않는다면 재전송 버튼을 눌러주세요.
           </div>
-        <button className={styles.sendBtn} onClick={onClickSendBtn}>재전송</button>
+        <button className={styles.sendBtn} onClick={onClickSendBtn} disabled={isSendingEmail}>
+            {isSendingEmail ? "진행중" : "재전송"}
+        </button>
       </div>
     </div>
   )
