@@ -12,68 +12,21 @@ const LoginStateEnum = {
   OK_LOGIN: "OK_LOGIN"
 }
 
-
-// 헤더 내의 로그인 파트 컴포넌트
-const LoginPartInHeader = ({loginState, setLoginState}) => {
-   // 로그인/회원가입 모달창이 띄워져있는지 여부
-   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-
-    // 로그인 처리 메서드
-  const handleLoginButtonClick = () => {
-    setIsLoginModalOpen(true);
-  };
-  const handleCloseLoginModal = () => {
-    setIsLoginModalOpen(false);
-  };
-  const completeLogin = () => {
-    setLoginState(LoginStateEnum.OK_LOGIN);
-    setIsLoginModalOpen(false);
-  }
-
-  // 회원가입 처리 메서드
-  const handleSignButtonClick = () => {
-    setIsSignUpModalOpen(true);
-  };
-  const handleCloseSignUpModal = () => {
-    setIsSignUpModalOpen(false); 
-  };
-
-  // 로그아웃 클릭 메서드
-  const handleLogoutButtonClick = () => {
-    localStorage.clear();
-    setLoginState(LoginStateEnum.NOT_LOGIN);
-  }
-
-  return (
-    <>
-      <div className={styles.user}>
-        {
-          loginState === LoginStateEnum.NOT_LOGIN &&
-          <button className={styles.loginbutton} onClick={handleLoginButtonClick}>로그인</button>
-        }
-        {
-          loginState === LoginStateEnum.NOT_LOGIN &&
-          <button className={styles.signinbutton}  onClick={handleSignButtonClick}>회원가입</button>
-        }
-        {
-          loginState === LoginStateEnum.OK_LOGIN &&
-          <button className={styles.loginbutton} onClick={handleLogoutButtonClick}>로그아웃</button> 
-        }
-      </div>
-      {isLoginModalOpen && <LoginModalPage handleClose={handleCloseLoginModal} completeLogin={completeLogin}/>}
-      {isSignUpModalOpen && <SignUpModalPage handleClose={handleCloseSignUpModal}/>}
-    </>
-  )
-}
-
 // 헤더 컴포넌트
 const Header = () => {
-  // 로그인 완료되어 있는지 여부
+  // 로그인 여부
   const [loginState, setLoginState] = useState(LoginStateEnum.NOT_CHECKED);
 
-  const handleLoginState = (loginStateInput) => {
-    setLoginState(loginStateInput);
+  // 로그인모달창 
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const handleLoginModalOpen = (isOpen) => {
+    setIsLoginModalOpen(isOpen);
+  }
+
+  // 회원가입 모달창 관련
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const handleSignModalOpen = (isOpen) => {
+    setIsSignUpModalOpen(isOpen);
   }
 
   // 홈버튼 클릭 처리
@@ -112,6 +65,13 @@ const Header = () => {
     }
   }, []);
 
+    // 로그아웃 클릭 메서드
+  const handleLogoutButtonClick = () => {
+    localStorage.clear();
+    setLoginState(LoginStateEnum.NOT_LOGIN);
+    window.location.reload();
+  }
+
   return (
     <div className={styles.headercontainer}>
       <div className={styles.headercontents}>
@@ -123,7 +83,22 @@ const Header = () => {
             onClick={handleHomeClick}
           />
         </div>
-        {!loginState!==LoginStateEnum.NOT_CHECKED && <LoginPartInHeader loginState={loginState} setLoginState={handleLoginState}/>}
+        <div className={styles.user}>
+          {
+            loginState === LoginStateEnum.NOT_LOGIN &&
+            <button className={styles.loginbutton} onClick={()=>handleLoginModalOpen(true)}>로그인</button>
+          }
+          {
+            loginState === LoginStateEnum.NOT_LOGIN &&
+            <button className={styles.signinbutton} onClick={()=>handleSignModalOpen(true)}>회원가입</button>
+          }
+          {
+            loginState === LoginStateEnum.OK_LOGIN &&
+            <button className={styles.loginbutton} onClick={handleLogoutButtonClick}>로그아웃</button> 
+          }
+        </div>
+        <LoginModalPage isOpen={isLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen}/>
+        <SignUpModalPage isOpen={isSignUpModalOpen} handleSignModalOpen={handleSignModalOpen}/> 
       </div>
     </div>
   );

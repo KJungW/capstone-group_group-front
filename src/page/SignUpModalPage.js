@@ -3,10 +3,9 @@ import SignUpFormModal from "components/signup/SignUpFormModal";
 import ModalBackground from "components/common/ModalBackground";
 import SignUpCheckModel from "components/signup/SignUpCheckModel";
 
-const SignUpModalPage = ({handleClose}) => {
-    
-    const [singUpFormData, setSignUpFormData] = useState();
+const SignUpModalPage = ({isOpen, handleSignModalOpen}) => {
     const [isCompletFormInput, setIsCompleteFormInput] = useState(false);
+    const [singUpFormData, setSignUpFormData] = useState();
 
     const moveNextModal = (email, nickName, pw) => {
         setSignUpFormData({email:email, nickName:nickName, pw:pw});
@@ -15,9 +14,9 @@ const SignUpModalPage = ({handleClose}) => {
 
     return (
         <>
-            <ModalBackground handleClose={handleClose}/>
-            {!isCompletFormInput && <SignUpFormModal moveNextModal={moveNextModal}/>}
-            {isCompletFormInput && <SignUpCheckModel formData={singUpFormData}/>}
+            {isOpen && <ModalBackground handleClose={()=>handleSignModalOpen(false)}/>}
+            {isOpen && !isCompletFormInput && <SignUpFormModal moveNextModal={moveNextModal}/>}
+            {isOpen && isCompletFormInput && <SignUpCheckModel formData={singUpFormData}/>}
         </>
     )
 }
