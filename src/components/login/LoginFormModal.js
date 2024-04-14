@@ -64,10 +64,14 @@ const LoginFormModal = ({completeLogin}) => {
       .catch(error => {
         console.log("로그인 실패")
         console.log(error)
-        alert("로그인 실패 잠시후 다시 실행해주세요")
+        if(error.code === "ERR_BAD_REQUEST") {
+            alert("이메일과 비밀번호가 맞지않습니다.");
+        }
+        else {
+          alert("로그인 실패 잠시후 다시 실행해주세요")
+        }
       });
   }
-
 
   // 로그인 버튼클릭 메서드
   const clickLoginBtn = () => {
@@ -75,11 +79,8 @@ const LoginFormModal = ({completeLogin}) => {
     if(validateResult.isValid) {
       login();
     } 
-    else {
-      setEmailErrorMsg(validateResult.emailErrorMsg);
-      setPwErrorMsg(validateResult.pwErrorMsg);
-    }
-
+    setEmailErrorMsg(validateResult.emailErrorMsg);
+    setPwErrorMsg(validateResult.pwErrorMsg);
   }
 
   return (

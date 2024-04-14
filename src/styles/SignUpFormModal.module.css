@@ -62,10 +62,12 @@
   background-color: #007bff;
   color: white;
   margin: auto 0rem;
+  cursor: pointer;
 }
 
 .signUpButton:disabled {
   background-color: rgb(100, 100, 100);
+  cursor: default;
 }
 
 .errorMsg {

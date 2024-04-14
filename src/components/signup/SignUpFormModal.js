@@ -89,12 +89,11 @@ const SignUpFormModal = ({moveNextModal}) => {
     })
     .catch (err => {
       console.log("회원가입 요청 실패");
+      console.log(err);
       if(err.code === "ERR_BAD_REQUEST") {
-        console.log(err);
         alert("이미 등록된 회원입니다.");
       } 
       else {
-        console.log(err);
         alert("요청실패, 잠시후 다시 실행해주세요");
       }
     })
@@ -110,12 +109,10 @@ const SignUpFormModal = ({moveNextModal}) => {
     if(validateResult.isValid) {
       signUp();
     } 
-    else {
-      setEmailErrorMsg(validateResult.emailErrorMsg);
-      setNickNameErrorMsg(validateResult.nickNameErrorMsg);
-      setPwErrorMsg(validateResult.pwErrorMsg);
-      setPwCheckErrorMsg(validateResult.pwCheckErrorMsg);
-    }
+    setEmailErrorMsg(validateResult.emailErrorMsg);
+    setNickNameErrorMsg(validateResult.nickNameErrorMsg);
+    setPwErrorMsg(validateResult.pwErrorMsg);
+    setPwCheckErrorMsg(validateResult.pwCheckErrorMsg);
 
   }
 

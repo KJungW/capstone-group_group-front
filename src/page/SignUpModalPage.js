@@ -7,6 +7,11 @@ const SignUpModalPage = ({isOpen, handleSignModalOpen}) => {
     const [isCompletFormInput, setIsCompleteFormInput] = useState(false);
     const [singUpFormData, setSignUpFormData] = useState();
 
+    const handleClose = () => {
+        setIsCompleteFormInput(false);
+        handleSignModalOpen(false);
+    }
+
     const moveNextModal = (email, nickName, pw) => {
         setSignUpFormData({email:email, nickName:nickName, pw:pw});
         setIsCompleteFormInput(true);
@@ -14,9 +19,9 @@ const SignUpModalPage = ({isOpen, handleSignModalOpen}) => {
 
     return (
         <>
-            {isOpen && <ModalBackground handleClose={()=>handleSignModalOpen(false)}/>}
+            {isOpen && <ModalBackground handleClose={handleClose}/>}
             {isOpen && !isCompletFormInput && <SignUpFormModal moveNextModal={moveNextModal}/>}
-            {isOpen && isCompletFormInput && <SignUpCheckModel formData={singUpFormData}/>}
+            {isOpen && isCompletFormInput && <SignUpCheckModel formData={singUpFormData}  handleClose={()=>handleSignModalOpen(false)}/>}
         </>
     )
 }

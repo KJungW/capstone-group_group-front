@@ -52,8 +52,10 @@
   background-color: #007bff;
   font-size: 1.1rem;
   color: white;
+  cursor: pointer;
 }
 
 .sendBtn:disabled{
   background-color: rgb(100, 100, 100);
+  cursor: default;
 }
