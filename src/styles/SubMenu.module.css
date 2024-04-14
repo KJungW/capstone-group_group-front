@@ -10,31 +10,32 @@
     background-color: rgb(238, 238, 238);
   }
   
-  .subMenuItem {
-    margin-left: 30px;
-    margin-right: 50px;
-    font-size: 14px;
-  }
-  
-  .subMenuTitle {
-    font-weight: bold;
-    font-size: 18px;
-    color: navy;
-    cursor: default;
-  }
-  
-  .subSubMenu {
-    display: flex;
-    flex-direction: column;
-    color: black;
-  }
-  
-  .subSubMenuTitle {
-    padding: 5px 0;
-    cursor: pointer;
-  }
+.subMenuItem {
+  margin-left: 30px;
+  margin-right: 50px;
+  font-size: 14px;
+}
 
-  .subSubMenuTitle:hover {
-    background-color: rgb(191, 191, 191);
-    color: white;
-  }
+.subMenuTitle {
+  font-weight: bold;
+  font-size: 20px;
+  color: navy;
+  cursor: default;
+}
+
+.subSubMenu {
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.subSubMenuTitle {
+  padding: 5px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subSubMenuTitle:hover {
+  background-color: rgb(191, 191, 191);
+  color: white;
+}

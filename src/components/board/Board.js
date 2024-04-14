@@ -1,10 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/Board.module.css";
 
 const Board = () => {
-  const navigate = useNavigate();
+  let {boardId} = useParams();
+  if(!boardId) {boardId=sessionStorage.getItem("defaultBoardID")}
+  console.log(boardId);
 
+  const navigate = useNavigate();
   const handleWriteButtonClick = () => {
     navigate('/recruit');
   };
