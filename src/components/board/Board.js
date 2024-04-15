@@ -8,9 +8,6 @@ const Board = () => {
    // ULR에서 가져온 boardId를 적용하는 코드
    let {boardId} = useParams();
    if(!boardId) {boardId=sessionStorage.getItem("defaultBoardID")}
-   useEffect(() => {
-    setBoardIdValue(boardId);
-  });
 
   // 페이지 요청에 필요한 상태값들
   const [boardIdValue, setBoardIdValue] = useState(boardId);
@@ -81,9 +78,8 @@ const Board = () => {
   //글쓰기 버튼 클릭 메서드
   const navigate = useNavigate();
   const handleWriteButtonClick = () => {
-    console.log("sdfsd);")
     if(localStorage.getItem("jwtToken"))
-      navigate('/recruit');
+      navigate(`/recruit/${boardId}`);
     else 
       handleLoginModalOpen(true);
   };

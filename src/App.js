@@ -22,7 +22,7 @@ function App() {
           <Route path="/:boardId" element={<Board />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/recruitments" element={<Recruitments />} />
-          <Route path="/recruit" element={<Recruit />} />
+          <Route path="/recruit/:boardId" element={<Recruit />} />
           <Route path="/recruitdetail" element={<RecruitDetail />} />
           <Route path="/apply" element={<ApplicationForm />} />
           <Route path="/review" element={<ApplicationReview />} />
