@@ -23,7 +23,7 @@ function Recruit() {
   // ULR에서 가져온 boardId를 적용하는 코드
    let {boardId} = useParams();
    if(!boardId) {boardId=sessionStorage.getItem("defaultBoardID")}
-
+   
   // 폼데이터 입력값 상태
   const [selectedBoardId, setSelectedBoardId] = useState(boardId);
   const [postTitle, setPostTitle] = useState('');
