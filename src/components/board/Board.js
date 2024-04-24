@@ -5,6 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/Board.module.css";
 
 const Board = () => {
+  const navigate = useNavigate();
+
    // ULR에서 가져온 boardId를 적용하는 코드
    let {boardId} = useParams();
    if(!boardId) {boardId=sessionStorage.getItem("defaultBoardID")}
@@ -32,7 +34,6 @@ const Board = () => {
 
   // 페이지 요청 결과를 적용하는 메서드
   const applyApiResult = (apiResult) => {
-    console.log(apiResult);
     setBoardTitle(apiResult.boardTitle.split("$")[0].trim());
     setTotalPageSize(apiResult.totalPages);
     setIsFirstPage(apiResult.firstPage);
@@ -59,6 +60,11 @@ const Board = () => {
     })
   }, [boardIdValue, currentPageNumber, postCountInPage]);
 
+  // 모집글 클릭 메서드
+  const onClickRecruit = (postId) => {
+    navigate(`/recruitdetail/${postId}`);
+  }
+
   // 페이지번호 버튼 클릭 메서드
   const onclickPageBtn = (i) => {
     setCurrentPageNumber(i);
@@ -79,7 +85,6 @@ const Board = () => {
   }
 
   //글쓰기 버튼 클릭 메서드
-  const navigate = useNavigate();
   const handleWriteButtonClick = () => {
     if(localStorage.getItem("jwtToken"))
       navigate(`/recruit/${boardId}`);
@@ -113,7 +118,7 @@ const Board = () => {
               <table className={styles.postsTable}>
                 <tbody>
                 {postListInPage.map((post) => (
-                    <tr className={styles.postsTableRow} key={post.id}>
+                    <tr className={styles.postsTableRow} key={post.id} onClick={()=>{onClickRecruit(post.id)}}>
                       <td>{post.title}</td>
                       <td className={styles.narrowDateColumn}>{post.createDate}</td>
                     </tr>

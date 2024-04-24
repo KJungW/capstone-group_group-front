@@ -1,30 +1,33 @@
+import reqeustFindPostDetail from 'hook/requestFindPostDetail';
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/RecruitDetail.module.css";
 
 function RecruitDetail() {
   const navigate = useNavigate();
-  const location = useLocation();
+
+  let {postId} = useParams();
+  const [currentPostId, setCurrentPostId] = useState(postId);
   const [postData, setPostData] = useState(null);
 
+  // 모집글 세부정보 요청 API
   useEffect(() => {
-    const fetchPostDetail = async () => {
-      try {
-        // API 호출
-        const response = await fetch(`http://localhost:8080/post?postId=${location.search}`);
-        const data = await response.json();
-        setPostData(data);
-      } catch (error) {
-        console.error('Error fetching post detail:', error);
-      }
-    };
+    console.log("RecruitDetail : 모집글 세부정보 요청 시도")
+    reqeustFindPostDetail(currentPostId)
+    .then(res => {
+      console.log("RecruitDetail : 모집글 세부정보 요청 성공");
+      setPostData(res.data)
+    })
+    .catch(err=>{
+      console.log("RecruitDetail : 모집글 세부정보 요청 실패");
+      console.log(err);
+    })
+  }, [currentPostId]);
 
-    fetchPostDetail();
-  }, [location.search]);
-
-  // const handleHomeButtonClick = () => {
-  //   navigate('/');
-  // };
+  // 신청하기 버튼 클릭
+  const onClickRequestBtn = () => {
+    navigate(`/apply/${currentPostId}`);
+  }
 
   if (!postData) {
     return <div>Loading...</div>;
@@ -35,7 +38,7 @@ function RecruitDetail() {
       <div className={styles.recruitcontent}>
         <div className={styles.wrap1}>
           <div className={styles.boardname}>
-            {postData.boardName} 게시판
+            {postData.boardName.split("$")[0]}
           </div>
         </div>
         <div className={styles.rcontentsbox}>
@@ -65,7 +68,7 @@ function RecruitDetail() {
             </div>
           ))}
         </div>
-        <button className={styles.postbutton} /* onClick={handleHomeButtonClick} */>신청하기</button>
+        <button className={styles.postbutton} onClick={onClickRequestBtn}>신청하기</button>
       </div>
     </div>
   );

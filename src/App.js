@@ -23,8 +23,8 @@ function App() {
           <Route path="/applications" element={<Applications />} />
           <Route path="/recruitments" element={<Recruitments />} />
           <Route path="/recruit/:boardId" element={<Recruit />} />
-          <Route path="/recruitdetail" element={<RecruitDetail />} />
-          <Route path="/apply" element={<ApplicationForm />} />
+          <Route path="/recruitdetail/:postId" element={<RecruitDetail />} />
+          <Route path="/apply/:postId" element={<ApplicationForm />} />
           <Route path="/review" element={<ApplicationReview />} />
         </Routes>
       </div>
