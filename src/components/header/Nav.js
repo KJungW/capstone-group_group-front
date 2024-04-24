@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from "styles/Nav.module.css";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SubMenu from 'components/header/SubMenu';
-import requestFindBoardSubApi from 'hook/requestFindBoardSubApi';
+import { useSelector } from "react-redux";
 
 // Navigator 요소중 어떤 것이 선택되었는지 나타내는 상태타입(enum 대용으로 사용)
 const navStateEnum = {
@@ -13,7 +13,7 @@ const navStateEnum = {
 }
 
 const Nav = () => {
-  const [subMenuData, setSubMenuData] = useState();
+  const subMenuData = useSelector(state => state.boardListData)
   const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
   const [navState, setNavState] = useState(navStateEnum.BOARD)
 
@@ -37,45 +37,9 @@ const Nav = () => {
     }
   };
 
-  // 게시판 데이터 조회 API요청에 대한 결과를 사용가능한 형태으로 변경하는 메서드
-  const convertApiResult = (content) => {
-    // API요청 결과를 {id, mainMenu, subMenu} 리스트 형태로 변경
-    const fullList = content.map((board) => {
-      const title = board.boardTitle.trim().split("$")
-      return {id:board.boardId, mainMenu: title[0].trim(), subMenu: title[1].trim()};
-    })
-    // 모든 mainMenu 종류 리스트를 생성
-    const mainMenuList = [...new Set(fullList.map(board => board.mainMenu))];
-    // mainMunu별로 fullList를 그룹핑
-    const result = mainMenuList.map(mainMenu => {
-      const groupingData =
-       fullList.filter(board => board.mainMenu === mainMenu)
-               .map(board => ({id:board.id, subMenu:board.subMenu}));
-      return {mainMenu:mainMenu, data:groupingData};
-    })
-    return result;
-  }
-
-  // 게시판 데이터 조회 API 요청
-  useEffect(() => {
-    const campusId = localStorage.getItem("campusId");
-    console.log("게시판 조회 시작");
-    requestFindBoardSubApi(campusId)
-    .then((res) => {
-      console.log("게시판 조회 성공");
-      const convertData = convertApiResult(res.data.content);
-      sessionStorage.setItem("defaultBoardID", convertData[0].data[0].id);
-      setSubMenuData(convertData);
-    })
-    .catch((err) => {
-      console.log("게시판 조회 실패");
-      console.log(err);
-    })
-  }, []);
-
-  // 메뉴의 경로와 현재 경로가 일치하는지 확인하는 함수
-  const location = useLocation();
-  const isActive = (path) => location.pathname === path;
+  // // 메뉴의 경로와 현재 경로가 일치하는지 확인하는 함수
+  // const location = useLocation();
+  // const isActive = (path) => location.pathname === path;
 
   return (
     <div className={styles.scrollcontainer}>

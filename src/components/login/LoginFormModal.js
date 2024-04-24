@@ -54,10 +54,6 @@ const LoginFormModal = ({completeLogin}) => {
     requestLoginApi(inputEmail, inputPw)
       .then(res =>  {
         console.log("로그인 성공");
-        localStorage.setItem("memberId", res.data.id);
-        localStorage.setItem("email", res.data.email);
-        localStorage.setItem("campusId", res.data.campusId);
-        localStorage.setItem("nickName", res.data.nickName);
         localStorage.setItem("jwtToken", res.data.jwtToken);
         completeLogin();
       })

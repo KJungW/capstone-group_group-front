@@ -48,14 +48,14 @@ const Board = () => {
 
   // 페이지 요청 API
   useEffect(() => {
-    console.log("게시판 목록요청")
+    console.log("Board : 모집글 목록요청")
     requestPostsInBoard(boardIdValue, currentPageNumber, postCountInPage)
     .then(res => {
-      console.log("게시판 목록요청 성공");
+      console.log("Board : 모집글 목록요청 성공");
       applyApiResult(res.data)
     })
     .catch(err=>{
-      console.log("게시판 목록요청 실패");
+      console.log("Board : 모집글 목록요청 실패");
       console.log(err);
     })
   }, [boardIdValue, currentPageNumber, postCountInPage]);

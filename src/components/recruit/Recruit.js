@@ -1,9 +1,8 @@
-import requestFindBoardSubApi from 'hook/requestFindBoardSubApi';
 import requestSavePostApi from 'hook/requestSavePostApi';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/Recruit.module.css";
-import convertFindBoardSubApiResult from 'util/convertFindBoardSubApiResult';
+import { useSelector } from "react-redux";
 
 function MenuComponentInSelect({mainMenuData}) {
   return (
@@ -44,7 +43,7 @@ function Recruit() {
   const [requirementsTypeErrMsg, setrequirementsTypeErrMsg] = useState([""]);
 
   // 모집글을 작성할 수 있는 게시판 리스트
-  const [boardList, setBoardList] = useState([]);
+  const boardList = useSelector(state => state.boardListData)
 
   // 모집글 등록버튼 활성화여부
   const [saveBtnActive, setSaveBtnActive] = useState(true);
@@ -145,26 +144,9 @@ function Recruit() {
     }
   }
 
-  // 게시판 선택 버튼의 서브메뉴를 위한 게시판 조회 요청
-  useEffect(() => {
-    const campusId = localStorage.getItem("campusId");
-    console.log("Recurit : 게시판 조회 시작");
-    requestFindBoardSubApi(campusId)
-    .then((res) => {
-      console.log("Recurit : 게시판 조회 성공");
-      setBoardList(convertFindBoardSubApiResult(res.data.content));
-    })
-    .catch((err) => {
-      console.log("Recurit : 게시판 조회 실패");
-      console.log(err);
-      alert("잠시후에 다시 시도해주세요")
-      navigate(`/${selectedBoardId}`);
-    })
-  }, []);
-
   // 모집글 저장 요청
   const savePost = () => {
-    console.log("모집글 저장 요청 시작")
+    console.log("Recurit : 모집글 저장 요청 시작")
     setSaveBtnActive(false);
     requestSavePostApi({
       boardId : selectedBoardId,
@@ -177,12 +159,11 @@ function Recruit() {
       requirementList : requirements.map(item=>({ title: item.title, resultType: item.resultType })),
     })
     .then(res => {
-      console.log("모집글 저장 요청 성공")
-      console.log("Recurit : 게시판 조회 성공");
+      console.log("Recurit : 모집글 저장 요청 성공")
       navigate(`/${selectedBoardId}`);
     })
     .catch(err => {
-      console.log("모집글 저장 요청 실패")
+      console.log("Recurit : 모집글 저장 요청 실패")
       console.log(err);
       alert("잠시후에 다시 시도해주세요")
     })
@@ -205,6 +186,10 @@ function Recruit() {
     setOpenChatUrlErrMsg(validateResult.requirementsDescError);
     setRequirementsDescErrMsg(validateResult.requirementsDescError);
     setrequirementsTypeErrMsg(validateResult.requirementsTypeError);
+  }
+
+  if(!boardList || !selectedBoardId){
+    return <div>loading</div>
   }
   
   return (

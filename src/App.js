@@ -10,11 +10,19 @@ import Recruit from "components/recruit/Recruit";
 import RecruitDetail from "components/recruit/RecruitDetail";
 import ApplicationForm from "components/application/ApplicationForm";
 import ApplicationReview from "components/application/ApplicationReview";
+import { legacy_createStore as createStore } from "redux";
+import { Provider } from "react-redux";
+import mainReducerInStore from "store/aboutStore";
+import InitEarlyData from "components/header/InitEarlyData";
+
+// 전역상태 저장소 생성
+const store = createStore(mainReducerInStore);
 
 function App() {
   return (
     <Router>
-      <div>
+      <Provider store={store}>
+        <InitEarlyData/>
         <Header />
         <Nav />
         <Routes>
@@ -27,7 +35,7 @@ function App() {
           <Route path="/apply/:postId" element={<ApplicationForm />} />
           <Route path="/review" element={<ApplicationReview />} />
         </Routes>
-      </div>
+      </Provider>
     </Router>
   );
 }
