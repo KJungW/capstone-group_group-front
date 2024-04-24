@@ -6,13 +6,8 @@ import styles from "styles/Board.module.css";
 
 const Board = () => {
   const navigate = useNavigate();
-
    // ULR에서 가져온 boardId를 적용하는 코드
    let {boardId} = useParams();
-   if(!boardId) {boardId=sessionStorage.getItem("defaultBoardID")}
-   useEffect(() => {
-    setBoardIdValue(boardId);
-  });
 
   // 페이지 요청에 필요한 상태값들
   const [boardIdValue, setBoardIdValue] = useState(boardId);
@@ -102,6 +97,10 @@ const Board = () => {
     return isToday
     ? `${targetDate.getHours()}:${targetDate.getMinutes()}` 
     : `${targetDate.getFullYear()}-${targetDate.getMonth()+1}-${targetDate.getDate()}`;
+  }
+
+  if(!boardIdValue) {
+    return <div>loading</div>
   }
 
   return (

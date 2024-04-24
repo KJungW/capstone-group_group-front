@@ -14,6 +14,7 @@ import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
 import mainReducerInStore from "store/aboutStore";
 import InitEarlyData from "components/header/InitEarlyData";
+import HomeComponent from "components/board/Home";
 
 // 전역상태 저장소 생성
 const store = createStore(mainReducerInStore);
@@ -26,7 +27,7 @@ function App() {
         <Header />
         <Nav />
         <Routes>
-          <Route path="/" element={<Board />} />
+          <Route path="/" element={<HomeComponent />} />
           <Route path="/:boardId" element={<Board />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/recruitments" element={<Recruitments />} />
