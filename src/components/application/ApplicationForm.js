@@ -1,165 +1,224 @@
-import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import reqeustFindPostDetail from "hook/requestFindPostDetailApi";
+import requestSaveApplicationApi from "hook/requestSaveApplicationApi";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "styles/ApplicationForm.module.css";
 
-const mockData = [
-  {
-    id: 1,
-    condition: "github 주소",
-    file: false,
-    content: "",
-  },
-  {
-    id: 2,
-    condition: "학점 인증사진",
-    file: true,
-    content: "",
-  },
-  {
-    id: 3,
-    condition: "자신있는 언어",
-    file: false,
-    content: "",
-  },
+// 텍스트 타입의 참여요건폼 
+const TextRequireForm = ({ix, title, setInput, error}) => {
+  const [textInput, setTextInput] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  {
-    id: 4,
-    condition: "간단한 자소서",
-    file: true,
-    content: "",
-  },
-];
-
-const ApplicationForm = () => {
-  const [selectedMenu, setSelectedMenu] = useState("board");
-  const [boardName, setBoardName] = useState("신청하기");
-  const [showWriteButton, setShowWriteButton] = useState(true);
-  const [data, setData] = useState(mockData);
-  const navigate = useNavigate();
-  const fileInputRef = React.useRef(null);
-
-  const handleFileChange = (file, id) => {
-    if (
-      file &&
-      !["image/jpeg", "image/png", "application/pdf"].includes(file.type)
-    ) {
-      alert("jpg, jpeg, png, pdf 확장자만 허용됩니다.");
-      return;
-    }
-    if (file && file.size > 3145728) {
-      alert("파일 용량은 3MB 이하이어야 합니다.");
-      return;
-    }
-    const newData = data.map((item) =>
-      item.id === id ? { ...item, content: file ? file.name : "" } : item
-    );
-    setData(newData);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    for (const item of data) {
-      if (!item.file) {
-        if (!item.content.trim()) {
-          alert(`${item.condition}은(는) 필수입니다.`);
-          return; // 검증 실패시 제출 중단
-        }
-        if (item.content.trim().length > 100) {
-          alert(`${item.condition}은(는) 100자를 초과할 수 없습니다.`);
-          return; // 검증 실패시 제출 중단
-        }
-      } else if (item.file) {
-        if (!item.content.trim()) {
-          alert(`${item.condition}파일은(는) 필수입니다.`);
-          return; // 검증 실패시 제출 중단
-        }
-      }
-    }
-
-    console.log(data); // 일단 임시로 콘솔에 현재 상태 출력하여 확인
-    // 여기에 데이터 처리 로직 추가 예정
-    // navigate("/");  전송 완료 후 이동할 페이지
-  };
-
-  const renderInputLine = (dataItem) => {
-    const handleTextChange = (e, id) => {
-      const newData = data.map((item) =>
-        item.id === id ? { ...item, content: e.target.value } : item
-      );
-      setData(newData);
-    };
-
-    if (dataItem.file) {
-      return (
-        <div className={styles.inputLine}>
-          <ul className={styles.list}>
-            <li>
-              <label
-                className={styles.uploadButton}
-                htmlFor={`file-input-${dataItem.id}`}
-              >
-                파일 업로드
-              </label>
-              <input
-                id={`file-input-${dataItem.id}`}
-                type="file"
-                onChange={(e) =>
-                  handleFileChange(e.target.files[0], dataItem.id)
-                }
-                accept=".jpg, .jpeg, .png, .pdf"
-                style={{ display: "none" }}
-              />
-            </li>
-            <li className={styles.contentList}>
-              <input
-                type="text"
-                className={styles.inputContent}
-                defaultValue={dataItem.content}
-                readOnly
-              />
-            </li>
-          </ul>
-        </div>
-      );
-    } else {
-      return (
-        <div className={styles.inputLine}>
-          <input
-            type="text"
-            maxLength="100"
-            className={styles.inputContent}
-            value={dataItem.content}
-            onChange={(e) => handleTextChange(e, dataItem.id)}
-          />
-        </div>
-      );
-    }
-  };
+  // 신청요청 전에 검증과정에서 발생한 에러메세지 출력
+  useEffect(() => {
+    setErrorMsg(error);
+  }, [error])
 
   return (
-    <div className={styles.scrollContainer}>
-      <form onSubmit={handleSubmit} className={styles.requestcontent}>
-        <div className={styles.boardContent}>
-          <div className={styles.wrap1}>
-            <div className={styles.boardName}>신청하기</div>
-          </div>
-          <div className={styles.contentsBox}>
-            {data.map((dataItem) => (
-              <div key={dataItem.id} className={styles.item}>
-                <div className={styles.requirement}>
-                  <div>
-                    참여요건{dataItem.id}:{dataItem.condition}
-                  </div>
-                </div>
-                {renderInputLine(dataItem)}
-              </div>
-            ))}
-          </div>
-          <button type="submit" className={styles.saveButton}>
-            저장하기
-          </button>
+    <div className={styles.requirementBox}>
+      <div className={styles.requirementTitle}>{title}</div>
+      <div className={styles.requirementTextBox}>
+        <input 
+          type="text" maxLength={100}
+          onChange={(e) => setTextInput(e.target.value)}
+          onBlur={(e) => setInput(ix, textInput)}
+        ></input>
+      </div>
+      <div className={styles.error}>{errorMsg}</div>
+    </div>
+  )
+}
+
+// 파일 타입의 참여요건폼 
+const FileRequireForm = ({ix, title, setInput, error}) => {
+  const [inputFileName, setinputFileName] = useState("");
+  const [errorMsg, setErrorMsg] = useState(error);
+
+  // 파일업로드 처리 메서드
+  const handleFileChange = (e) => {   
+    // 선택된 파일이 없을 경우 처리
+    if(e.target.files.length <= 0) return;
+
+    // 확장자가 맞지않을 경우 처리
+    const inputFile = e.target.files[0];
+    if(!inputFile.type.includes("jpg") && !inputFile.type.includes("jpeg") &&
+       !inputFile.type.includes("png") && !inputFile.type.includes("pdf")) {
+        setErrorMsg("파일의 확장자는 (png, jpg, jpeg, pdf)이어야 합니다.")
+        return;
+    }
+
+    // 파일 사이즈가 3MB이상일 경우 처리
+    if(inputFile.size > 3 * 1024 * 1024) {
+      setErrorMsg("파일의 크기가 3MB이하이어야 합니다.")
+      return;
+    }
+
+    // 파일업로드 수행
+    setErrorMsg("");
+    setinputFileName(inputFile.name);
+    setInput(ix, inputFile);
+  };
+
+  // 신청요청 전에 검증과정에서 발생한 에러메세지 출력
+  useEffect(() => {
+    setErrorMsg(error);
+  }, [error])
+
+  return (
+    <div className={styles.requirementBox}>
+      <div className={styles.requirementTitle}>{title}</div>
+      <div className={styles.requirementFileBox}>
+        <input className={styles.fileUploadInput} id="upload" type="file" onChange={handleFileChange}></input>
+        <label htmlFor="upload">
+          <div className={styles.fileUploadBtn}>파일 업로드</div>
+        </label>
+        <div className={styles.fileUpdateDesc}>{inputFileName}</div>
+      </div>
+      <div className={styles.error}>{errorMsg}</div>
+    </div>
+  )
+}
+
+const ApplicationForm = () => {
+  const {postId} = useParams();
+  const navigate = useNavigate();
+
+  const loginData = useSelector(state => state.loginData);
+  const [postIdValue, setPostIdValue] = useState(postId);
+  const [requirementList, setRequirementList] = useState();
+  const [inputList, setInputList] = useState([]);
+  const [errorList, setErrorList] = useState([]);
+
+  const [appBtnIsActive, setAppBtnIsActive] = useState([]);
+
+  // 참여요건 리스트 조회 API 메서드
+  const requestRequirementList = async () => {
+    try {
+      console.log("ApplicationForm : 모집글 세부내용 조회 시작")
+      const postDetail = (await reqeustFindPostDetail(postIdValue)).data
+      
+      console.log("ApplicationForm : 모집글 세부내용 조회 성공")
+      setRequirementList(postDetail.requirementList)
+      setInputList(new Array(postDetail.requirementList.length))
+      setErrorList((new Array(postDetail.requirementList.length)).map(()=>""))
+    } 
+    catch {
+      console.log("ApplicationForm : 모집글 세부내용 조회 실패")
+      alert("잠시후 다시 시작해주세요")
+      navigate("/")
+    }
+  }
+
+  // 신청하기 API 메서드
+  const requestSaveApplication =  () => {
+
+    // API 요청에 필요한 데이터 준비
+    const requirementResults = requirementList.map((requirement, ix) => ({
+      requirementId : requirement.id,
+      type : requirement.resultType,
+      content : (requirement.resultType==="TEXT")?inputList[ix]:inputList[ix].name
+    }))
+    let inputfiles = []
+    requirementList.map((requirement, ix) => {
+      if(requirement.resultType === "FILE")
+        inputfiles.push(inputList[ix]);
+    })
+
+    // Api요청 보내기
+    setAppBtnIsActive(false);
+    console.log("ApplicationForm : 신청 요청 시작");
+    requestSaveApplicationApi(postIdValue, loginData.memberId, requirementResults, inputfiles)
+    .then(res => {
+      console.log("ApplicationForm : 신청 요청 성공");
+      console.log(res.data);
+      navigate("/applications");
+      setAppBtnIsActive(true);
+    })
+    .catch(err => {
+      console.log("ApplicationForm : 신청 요청 실패");
+      console.log(err);
+      if(err.response.data.code === "UNAUTHORIZED") {
+        alert("로그인을 먼저 진행해주세요");
+        navigate("/");
+        setAppBtnIsActive(true);
+      } else {
+        alert("잠시후에 다시 진행해주세요");
+        setAppBtnIsActive(true);
+      }
+    })
+
+  }
+
+  // 입력값을 inputList상태에 등록하는 메서드
+  const setInput = (ix, content) => {
+    let newInputList = [...inputList];
+    newInputList[ix] = content;
+    setInputList(newInputList);
+  }
+
+  // inputList를 검증하는 메서드
+  const validateInputList = () => {
+    let newErrorList = [...errorList]
+
+    requirementList.map((requirement, ix) => {
+      // 텍스트 제출물을 요구하는 참여요건일 경우 검증
+      if(requirement.resultType === "TEXT") {
+        // 입력값이 비어있는지 체크
+        if(!inputList[ix] || inputList[ix].trim() === "")
+          newErrorList[ix] = "신청요건에 대한 답을 작성해주세요";
+        else 
+        newErrorList[ix] = "";
+      } 
+      // 파일 제출물을 요구하는 참여요건일 경우 검증
+      else {
+        // 입력값이 비어있는지 체크
+        if(!inputList[ix])
+          newErrorList[ix] = "신청요건에 대한 답을 작성해주세요";
+        else 
+          newErrorList[ix] = "";
+      }
+    })
+    setErrorList(newErrorList);
+    return (newErrorList.filter(err => (err !== "")).length === 0)
+  }
+
+  // 신청하기 버튼 클릭 메서드
+  const onClickApplicationBtn = () => {
+    if(validateInputList())
+      requestSaveApplication();
+  }
+
+  // 참여요건 리스트 조회 API 수행
+  useEffect(() => {
+    requestRequirementList();
+  }, [])
+
+
+  // 로딩중일 경우
+  if(!requirementList) {
+    return <></>;
+  }
+
+  return (
+    <div className={styles.scrollcontainer}>
+      <div className={styles.recruitcontent}>
+        <div className={styles.wrap1}>
+          <div className={styles.boardname}>신청하기</div>
         </div>
-      </form>
+        <div className={styles.rcontentsbox}>
+          {
+            requirementList.map((requirement, ix) => {
+              if(requirement.resultType === "TEXT")
+                return <TextRequireForm ix={ix} title={requirement.title} setInput={setInput} error={errorList[ix]} key={ix} />
+              else {
+                return <FileRequireForm ix={ix} title={requirement.title} setInput={setInput} error={errorList[ix]} key={ix} />
+              }
+            })
+          }
+        </div>
+        <button className={styles.applicationBtn} onClick={onClickApplicationBtn} disabled={!appBtnIsActive}>신청하기</button>
+      </div>
     </div>
   );
 };

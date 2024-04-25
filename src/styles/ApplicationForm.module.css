@@ -1,8 +1,11 @@
-.requestcontent {
+.scrollcontainer *{
+  box-sizing:border-box;
+}
+
+.recruitcontent {
   margin: 60px auto;
   width: 70%;
   text-align: center;
-  padding-bottom: 10px;
   min-width: 700px;
 }
 
@@ -11,34 +14,20 @@
   justify-content: space-between;
 }
 
-.writeButton {
-  background-color: rgb(238, 238, 238);
-  height: 30px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  padding: 7px 15px 10px 15px;
-  margin: 40px 20px 0px 0px;
-}
 
-.writeButton:hover {
-  background-color: rgb(191, 191, 191);
-}
-
-.boardName {
+.boardname {
   margin: -20px 0px 0px 20px;
   background-color: navy;
-  height: 25px;
+  height: 33px;
   color: white;
   width: 250px;
   border-radius: 10px 10px 0px 0px;
   font-weight: bold;
   font-size: 18px;
-  padding-top: 8px;
+  line-height: 35px;
 }
 
-.contentsBox {
+.rcontentsbox {
   text-align: left;
   background-color: white;
   border-radius: 0px 10px 10px 10px;
@@ -49,77 +38,78 @@
   margin: 0px 20px 20px 20px;
 }
 
-.item {
-  position: relative;
+.requirementBox {
+  padding: 0px 20px 0px 20px;
+  margin-bottom: 20px;
 }
 
-.inputContent {
-  flex-grow: 1;
-  position: absolute;
+.requirementTitle {
+  font-size: 16px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.requirementTextBox{
+  height: 36px;
+
+}
+
+.requirementTextBox input[type="text"] {
   background-color: rgb(220, 220, 220);
   text-align: left;
   border-radius: 10px;
   border: none;
-  min-height: 20px;
-  min-width: calc(100% - 50px);
   width: 100%;
-  padding: 7px;
-  margin: 10px 20px 20px 20px;
-  position: relative;
+  height: 100%;
+  padding-left: 10px;
   font-size: 13px;
+  font-weight: bold;
 }
 
-.item .requirement {
-  font-size: 16px;
-  font-weight: bolder;
-  margin-left: 20px;
+.requirementFileBox{
+  height: 36px;
   display: flex;
-  width: 100%;
-  margin-right: auto;
+  flex: row;
+  align-items: center;
 }
 
-.inputLine {
-  position: relative;
-  width: 100%;
+.fileUploadInput {
+  display:none;
+}
+
+.fileUploadBtn {
+  width: 100px;
+  height: 30px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  background-color: #007bff;
+  border-radius: 5px;
+  color: #ffffff;
+  margin-right: 12px;
 }
 
-.uploadButton {
-  width: 153px;
-  min-width: 153px;
-  cursor: pointer;
+.fileUpdateDesc {
+  background-color: rgb(220, 220, 220);
+  border-radius: 10px;
   border: none;
-  border-radius: 15px;
-  padding: 8px;
-  margin-left: 20px;
-  background: #186ae5;
-  color: white;
-  font-style: bold;
-  font-size: 13px;
-  margin-top: 10px;
-  margin-left: 20px;
-  text-align: center;
-}
-
-.list {
-  display: flex; /* 요소들을 가로로 배치하기 위해 Flexbox 사용 */
-  list-style: none; /* 리스트 스타일 제거 */
-  padding: 0;
   width: 100%;
-  margin-right: 20px;
-  margin-top: -3px;
-  margin-bottom: -3px;
+  height: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
 }
 
-.contentList {
-  flex-grow: 1;
-  margin-right: 30px;
-  margin-left: -10px;
+.error {
+  margin-top: 3px;
+  padding-left : 8px;
+  font-size: 12px;
+  color: red;
 }
 
-.saveButton {
+.applicationBtn {
   background-color: rgb(238, 238, 238);
   height: 50px;
   border: none;
@@ -128,8 +118,7 @@
   font-size: 16px;
   padding: 0px 20px 0px 20px;
 }
-
-.saveButton:hover {
-  background-color: rgb(191, 191, 191);
-  cursor: pointer;
-}
+  .applicationBtn:hover {
+      background-color: rgb(191, 191, 191);
+      cursor: pointer;
+  }
