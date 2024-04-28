@@ -34,7 +34,7 @@ function App() {
           <Route path="/recruit/:boardId" element={<Recruit />} />
           <Route path="/recruitdetail/:postId" element={<RecruitDetail />} />
           <Route path="/apply/:postId" element={<ApplicationForm />} />
-          <Route path="/review" element={<ApplicationReview />} />
+          <Route path="/review/:applicationId" element={<ApplicationReview />} />
         </Routes>
       </Provider>
     </Router>
