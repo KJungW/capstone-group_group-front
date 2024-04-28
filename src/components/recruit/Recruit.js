@@ -42,7 +42,8 @@ function Recruit() {
   const [requirementsDescErrMsg, setRequirementsDescErrMsg] = useState([""]);
   const [requirementsTypeErrMsg, setrequirementsTypeErrMsg] = useState([""]);
 
-  // 모집글을 작성할 수 있는 게시판 리스트
+  // 전역상태 가져오기
+  const loginData = useSelector(state => state.loginData)
   const boardList = useSelector(state => state.boardListData)
 
   // 모집글 등록버튼 활성화여부
@@ -150,7 +151,7 @@ function Recruit() {
     setSaveBtnActive(false);
     requestSavePostApi({
       boardId : selectedBoardId,
-      writerId : localStorage.getItem("memberId"),
+      writerId : loginData.memberId,
       title : postTitle,
       activityDetail : activityDetail,
       passionSize : passionSize,
