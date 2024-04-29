@@ -2,10 +2,10 @@ import axios from "axios"
 
 async function requestFindBoardSubApi(campusId) {
     if(campusId === null || campusId === undefined) {
-        return axios.get(`http://localhost:8080/campus/boards`)
+        return axios.get(`${process.env.REACT_APP_BACKEND_ADDRESS}/campus/boards`)
     }
     else {
-        return axios.get(`http://localhost:8080/campus/boards?campusId=${campusId}`)
+        return axios.get(`${process.env.REACT_APP_BACKEND_HOST}/campus/boards?campusId=${campusId}`)
     }
 }
 

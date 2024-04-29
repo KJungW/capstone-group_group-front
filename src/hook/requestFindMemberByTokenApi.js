@@ -7,7 +7,7 @@ async function requestFindMemberByToken(jwtToken) {
 
     // API 요청
     return axios.post(
-        'http://localhost:8080/member/token',
+        `${process.env.REACT_APP_BACKEND_ADDRESS}/member/token`,
         tokenDataJson,
         {headers: {'Content-Type': 'application/json'}}
     )

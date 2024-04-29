@@ -12,7 +12,7 @@ async function reqeustSignUpApi(email, nickName, pw) {
 
     // API 요청
     return axios.post(
-        'http://localhost:8080/member/signup',
+        `${process.env.REACT_APP_BACKEND_ADDRESS}/member/signup`,
         signUpDataJson,
         {headers: {'Content-Type': 'application/json'}}
     )

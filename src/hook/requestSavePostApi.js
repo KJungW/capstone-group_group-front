@@ -18,7 +18,7 @@ async function requestSavePostApi({
 
     // API 요청
     return axios.post(
-        'http://localhost:8080/post',
+        `${process.env.REACT_APP_BACKEND_ADDRESS}/post`,
         postDataJson,
         {headers: {
             'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ async function requestSaveApplicationApi(
 
     // API 요청
     return axios.post(
-        'http://localhost:8080/application',
+        `${process.env.REACT_APP_BACKEND_ADDRESS}/application`,
         formData,
         {headers: {'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${localStorage.getItem("jwtToken")}`}}
     );

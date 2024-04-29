@@ -7,7 +7,7 @@ async function requestLoginApi(email, pw) {
 
     // API 요청
     return axios.post(
-        'http://localhost:8080/auth/login',
+        `${process.env.REACT_APP_BACKEND_ADDRESS}/auth/login`,
         loginDataJson,
         {headers: {'Content-Type': 'application/json'}}
     )
