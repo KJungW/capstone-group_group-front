@@ -10,6 +10,9 @@ const SubMenu = ({ subMenuData }) => {
     navigate(`/${boardId}`);
   };
 
+  if(subMenuData === undefined)
+    return (<></>);
+
   return (
     <div className={styles.subMenu}>
       {subMenuData.map((item, index) => (

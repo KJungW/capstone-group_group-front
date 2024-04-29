@@ -23,7 +23,7 @@ const Nav = () => {
     switch (menu) {
       case navStateEnum.BOARD:
         setNavState(navStateEnum.BOARD);
-        navigate('/'+subMenuData[0].data[0].id);
+        navigate('/');
         break;
       case navStateEnum.RECURITMENTS:
         setNavState(navStateEnum.RECURITMENTS);
