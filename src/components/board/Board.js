@@ -6,8 +6,8 @@ import styles from "styles/Board.module.css";
 
 const Board = () => {
   const navigate = useNavigate();
-   // ULR에서 가져온 boardId를 적용하는 코드
-   let {boardId} = useParams();
+   // URL에서 가져온 boardId를 적용하는 코드
+   const {boardId} = useParams();
 
   // 페이지 요청에 필요한 상태값들
   const [boardIdValue, setBoardIdValue] = useState(boardId);
@@ -26,6 +26,12 @@ const Board = () => {
    const handleLoginModalOpen = (isOpen) => {
      setIsLoginModalOpen(isOpen);
    }
+
+   // URL의 boardId가 변경될 경우, 이를 적용하는 파트
+   useEffect(()=> {
+    if(boardIdValue != boardId)
+      setBoardIdValue(boardId);
+   })
 
   // 페이지 요청 결과를 적용하는 메서드
   const applyApiResult = (apiResult) => {
