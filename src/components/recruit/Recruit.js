@@ -81,11 +81,13 @@ function Recruit() {
 
   // 검증 메서드
   const validateInput = () => {
+    let validateResult = true;
 
     // 게시판 ID 검증
     let boardIdError;
     if(!selectedBoardId || selectedBoardId.trim() === "") {
       boardIdError="게시판을 선택해주세요";
+      validateResult = false;
     } else {
       boardIdError="";
     }
@@ -94,6 +96,7 @@ function Recruit() {
     let postTitleError;
     if(!postTitle || postTitle.trim() === "") {
       postTitleError="모집글 제목을 입력해주세요";
+      validateResult = false;
     } else {
       postTitleError="";
     }
@@ -102,6 +105,7 @@ function Recruit() {
     let activityDetailError;
     if(!activityDetail || activityDetail.trim() === "") {
       activityDetailError="활동내용을 입력해주세요";
+      validateResult = false;
     } else {
       activityDetailError="";
     }
@@ -110,6 +114,7 @@ function Recruit() {
     let passionSizeError
     if(!passionSize || passionSize.trim() === "") {
       passionSizeError="팀성향을 선택해주세요";
+      validateResult = false;
     } else {
       passionSizeError="";
     }
@@ -118,6 +123,7 @@ function Recruit() {
     let openChatUrlError
     if(!openChatUrl || openChatUrl.trim() === "") {
       openChatUrlError="오픈채팅방 주소를 입력해주세요";
+      validateResult = false;
     } else {
       openChatUrlError="";
     }
@@ -126,15 +132,19 @@ function Recruit() {
     let requirementsDescError = [... new Array(requirements.length)]
     let requirementsTypeError = [... new Array(requirements.length)]
     requirements.map((item, ix) => {
-      if(!item.title || item.title.trim() === "")
+      if(!item.title || item.title.trim() === "") {
         requirementsDescError[ix] = "참여요건을 입력해주세요";
-      if(!item.resultType || item.resultType.trim() === "")
+        validateResult = false;
+      }
+      if(!item.resultType || item.resultType.trim() === "") {
         requirementsTypeError[ix] = "참여요건에 대한 제출물 타입을 입력해주세요";
+        validateResult = false;
+      }
     })
 
     // 검증 결과처리
     return {
-      isValid : (boardIdError==="" && postTitleError==="" && activityDetailError==="" && passionSizeError==="" && openChatUrlError==""),
+      isValid : validateResult,
       boardIdError : boardIdError,
       postTitleError : postTitleError,
       activityDetailError : activityDetailError,
@@ -184,7 +194,7 @@ function Recruit() {
     setPostTitleErrMsg(validateResult.postTitleError);
     setActivityDetailErrMsg(validateResult.activityDetailError);
     setPassionSizeErrMsg(validateResult.passionSizeError);
-    setOpenChatUrlErrMsg(validateResult.requirementsDescError);
+    setOpenChatUrlErrMsg(validateResult.openChatUrlError);
     setRequirementsDescErrMsg(validateResult.requirementsDescError);
     setrequirementsTypeErrMsg(validateResult.requirementsTypeError);
   }
