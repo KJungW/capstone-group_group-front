@@ -30,6 +30,7 @@ const Header = () => {
   // 로그아웃 클릭 메서드
   const handleLogoutButtonClick = () => {
     localStorage.clear();
+    navigate("/");
     window.location.reload();
   }
 
