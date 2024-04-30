@@ -3,7 +3,7 @@ import styles from "styles/Nav.module.css";
 import { useNavigate } from 'react-router-dom';
 import SubMenu from 'components/header/SubMenu';
 import { useSelector } from "react-redux";
-import LoginModalPage from 'page/LoginModalPage';
+import LoginModalPage from 'components/login/LoginModalPage';
 
 // Navigator 요소중 어떤 것이 선택되었는지 나타내는 상태타입(enum 대용으로 사용)
 const navStateEnum = {

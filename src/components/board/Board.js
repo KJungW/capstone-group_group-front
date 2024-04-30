@@ -1,5 +1,5 @@
 import requestPostsInBoard from 'hook/requestPostsInBoardApi';
-import LoginModalPage from 'page/LoginModalPage';
+import LoginModalPage from 'components/login/LoginModalPage';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/Board.module.css";

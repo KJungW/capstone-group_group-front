@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginModalPage from "page/LoginModalPage";
+import LoginModalPage from "components/login/LoginModalPage";
 import styles from "styles/Header.module.css";
-import SignUpModalPage from "page/SignUpModalPage";
+import SignUpModalPage from "components/signup/SignUpModalPage";
 import { useSelector } from "react-redux";
 
 // 헤더 컴포넌트
