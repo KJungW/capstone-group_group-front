@@ -1,25 +1,102 @@
-import React, { useState } from 'react';
+import requestFindApplicationListApi from 'hook/requestFindApplicationListApi';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from "styles/Applications.module.css";
 
-const Applications = () => {
+const ApplicationTableRow = ({application}) => {
+  const navigate = useNavigate();
 
-  // example data
-  const posts = [
-    {
-      id: 1,
-      title: '웹 개발 하실 팀원 모집합니다2',
-      confirm: true,
-      applications: [
-        { applicantName: '오픈채팅방: ~~~~' }
-      ]
-    },
-    {
-      id: 2,
-      title: '웹 개발 하실 팀원 모집합니다1',
-      confirm: false,
-      applications: [] // 신청서 없음
-    },
-  ];
+  // 신청서 관련 Row 컴포넌트 생성 메서드
+  const maekApplicationReusltComp = (state) => {
+    if(state === "ACCEPT")
+      return <button className={styles.acceptButton}>수락</button>
+    else if (state === "REJECT")
+      return <button className={styles.rejectButton}>거부</button>
+    else
+      return <button className={styles.yetButton}>대기</button>
+  }
+
+  // 오픈채팅방주소 관련 Row 컴포넌트 생성 메서드
+  const makeOpenChatComp = (state, openChatUrl) => {
+    if(state === "ACCEPT") {
+      return ( 
+        <td>
+          <div className={`${styles.applicationContent}`}>
+            {openChatUrl}
+          </div>
+        </td>
+      )
+    }
+  }
+
+  // 신청서 관련 Row 컴포넌트 클릭 메서드
+  const onClickRow = (applicationId) => {
+    navigate(`/review/${applicationId}`);
+  }
+
+  return (
+    <>
+      <tr onClick={()=>onClickRow(application.applicationId)}>
+        <td>{`<${application.postTitle}> 신청서`}</td>
+        <td className={styles.narrowDateColumn}>
+          {maekApplicationReusltComp(application.applicationState)}
+        </td>
+      </tr>
+      <tr className={styles.applicationRow}>
+          {makeOpenChatComp(application.applicationState, application.openChatUrl)}
+      </tr>
+    </>
+  )
+}
+
+
+const Applications = () => {
+  const [applicationList, setApplicationList] = useState([]);
+
+  const [pageSize, setPageSize] = useState(10);
+  const [tatolPageCount, setTotalPageCount] = useState(0);
+  const [currentPageNum, setCurrentPageNum] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
+  const [isFirstPage, setIsFirstPage] = useState(true);
+
+  // 신청 리스트 조회
+  const requestApplicationList = ({pageNum}) => {
+    console.log("Applications : 신청 리스트 조회 시도");
+    requestFindApplicationListApi({pageNumber: pageNum, pageSize: pageSize})
+    .then(res => {
+      console.log("Applications : 신청 리스트 조회 성공");
+      const result = res.data;
+      console.log(res.data);
+      setApplicationList(result.applicationAndResult);
+      setTotalPageCount(result.totalPages);
+      setCurrentPageNum(result.currentPageNumber);
+      setIsLastPage(result.lastPage);
+      setIsFirstPage(result.firstPage);
+    })
+    .catch(err => {
+      console.log("Applications : 신청 리스트 조회 실패");
+      console.log(err);
+    })
+  }
+
+  // 초기에 신청 리스트를 받아와서 페이지에 적용
+  useEffect(() => {
+    requestApplicationList({pageNum:currentPageNum});
+  }, [currentPageNum]);
+
+  // 페이지네이션 관련 메서드
+  const onClickPageNum = (pageNum) => {
+    setCurrentPageNum(pageNum);
+  }
+  const onClickBackPage = () => {
+    if(!isFirstPage) setCurrentPageNum(currentPageNum-1);
+  }
+  const onClickNextPage = () => {
+    if(!isLastPage)setCurrentPageNum(currentPageNum+1);
+  }
+
+  if(applicationList == undefined)
+    return;
 
   return (
     <div className={styles.scrollcontainer}>
@@ -31,45 +108,20 @@ const Applications = () => {
             </div>
           </div>
           <div className={styles.contentsbox}>
-            <table className={styles.postsTable}>
+            <table className={styles.applicationTable}>
               <tbody>
-              {posts.map((post) => (
-                  <>
-                    <tr key={post.id}>
-                      <td>{post.title}</td>
-                      <td className={styles.narrowDateColumn}>
-                        {
-                          post.confirm ?
-                              <button className={styles.acceptButton}>수락</button> :
-                              <button className={styles.rejectButton}>거부</button>
-                        }
-                      </td>
-                    </tr>
-                    {post.applications.map((app, index) => (
-                        <tr key={app.applicationId} className={styles.applicationRow}>
-                          <td colSpan="2">
-                            <div className={`${styles.applicationContent} ${index === post.applications.length - 1 ? styles.lastApplication : ''}`}>
-                              {app.applicantName}
-                            </div>
-                          </td>
-                        </tr>
-                    ))}
-                  </>
+              {applicationList.map((application, ix) => (
+                  <ApplicationTableRow application={application} key={ix}/>
               ))}
-
               </tbody>
             </table>
           </div>
           <div className={styles.navigation}>
-            <div className={styles.narrow}>
-              <a href="#">&lt;</a>
-            </div>
-            <div className={styles.page}>
-              <a href="#">1</a>
-            </div>
-            <div className={styles.narrow}>
-              <a href="#">&gt;</a>
-            </div>
+            <div className={styles.narrow}onClick={onClickBackPage}>&lt;</div>
+            {[... new Array(tatolPageCount)].map((_, i) => 
+                  <div className={`${styles.pageNum} ${ i==currentPageNum?styles.current_page:''}`} key={i} onClick={()=>onClickPageNum(i)}>{i+1}</div>
+            )}
+            <div className={styles.narrow} onClick={onClickNextPage}>&gt;</div>
           </div>
         </div>
       </div>

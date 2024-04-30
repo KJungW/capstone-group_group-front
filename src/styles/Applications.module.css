@@ -31,14 +31,16 @@
 }
 
 
-.postsTable {
+.applicationTable {
   width: 100%;
   border-collapse: collapse;
+  border-top: 2px solid navy;
+  border-bottom: 2px solid navy;
+  cursor: pointer;
 }
 
-.postsTable th,
-.postsTable td {
-  border-top: 1px solid navy;
+.applicationTable th,
+.applicationTable td {
   border-bottom: 1px solid navy;
   padding: 15px;
   font-size: 16px;
@@ -50,6 +52,10 @@
   text-align: right !important;
 }
 
+.applicationRow {
+  border-bottom: 1px solid navy;
+}
+
 .applicationRow td {
   padding: 0;
   border: none;
@@ -59,54 +65,45 @@
   width: 70%;
   margin-left: auto;
   border-left: 30px solid navy;
-  border-bottom: 1px solid navy;
   padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-
-.acceptButton {
-  background-color: #4CAF50; /* 녹색 계열 */
+.yetButton {
+  background-color: #8d8d8d;
   color: white;
   border: none;
-  padding: 7px 15px;
-  margin-right: 5px;
+  width: 52px;
+  height: 30px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.acceptButton:hover {
-  background-color: #45a049;
+.acceptButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  width: 52px;
+  height: 30px;
+  border-radius: 5px;
 }
 
 .rejectButton {
   background-color: #f44336;
   color: white;
   border: none;
-  padding: 7px 15px;
-  margin-left: 5px;
+  width: 52px;
+  height: 30px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.rejectButton:hover {
-  background-color: #da190b;
-}
-
-.postsTable {
+.applicationTabel {
   width: 100%;
 }
 
-.postsTable th {
+.applicationTabel th {
   background-color: #f2f2f2;
-}
-
-.lastApplication {
-  border-bottom: none;
 }
 
 .navigation {
@@ -116,7 +113,13 @@
   margin-top: 20px;
 }
 
-.page a, .narrow a {
-  margin: 0 10px;
+.pageNum, .narrow{
+  width:25px;
   text-decoration: none;
+  color:rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.current_page{
+  color:rgb(105, 151, 252);
 }

@@ -3,6 +3,7 @@ import styles from "styles/Nav.module.css";
 import { useNavigate } from 'react-router-dom';
 import SubMenu from 'components/header/SubMenu';
 import { useSelector } from "react-redux";
+import LoginModalPage from 'page/LoginModalPage';
 
 // Navigator 요소중 어떤 것이 선택되었는지 나타내는 상태타입(enum 대용으로 사용)
 const navStateEnum = {
@@ -13,9 +14,16 @@ const navStateEnum = {
 }
 
 const Nav = () => {
+  const loginData = useSelector(state => state.loginData)
   const subMenuData = useSelector(state => state.boardListData)
   const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
   const [navState, setNavState] = useState(navStateEnum.BOARD)
+
+   // 로그인모달창 관련
+   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+   const handleLoginModalOpen = (isOpen) => {
+     setIsLoginModalOpen(isOpen);
+   }
 
   // Nav 항목별 라우팅 설정
   const navigate = useNavigate();
@@ -26,20 +34,26 @@ const Nav = () => {
         navigate('/');
         break;
       case navStateEnum.RECURITMENTS:
-        setNavState(navStateEnum.RECURITMENTS);
-        navigate('/recruitments');
+        if(loginData && loginData.memberId) {
+          setNavState(navStateEnum.RECURITMENTS);
+          navigate('/recruitments');
+        }
+        else {
+          handleLoginModalOpen(true);
+        }
         break;
       case navStateEnum.APPLICATIONS:
-        setNavState(navStateEnum.APPLICATIONS);
-        navigate('/applications');
+        if(loginData && loginData.memberId) {
+          setNavState(navStateEnum.APPLICATIONS);
+          navigate('/applications');
+        }
+        else {
+          handleLoginModalOpen(true);
+        }
         break;
       default:
     }
   };
-
-  // // 메뉴의 경로와 현재 경로가 일치하는지 확인하는 함수
-  // const location = useLocation();
-  // const isActive = (path) => location.pathname === path;
 
   return (
     <div className={styles.scrollcontainer}>
@@ -61,6 +75,7 @@ const Nav = () => {
           </button>
         </div>
       </div>
+      <LoginModalPage isOpen={isLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen}/>
     </div>
   );
 };
