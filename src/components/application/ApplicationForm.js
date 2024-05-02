@@ -69,8 +69,8 @@ const FileRequireForm = ({ix, title, setInput, error}) => {
     <div className={styles.requirementBox}>
       <div className={styles.requirementTitle}>{title}</div>
       <div className={styles.requirementFileBox}>
-        <input className={styles.fileUploadInput} id="upload" type="file" onChange={handleFileChange}></input>
-        <label htmlFor="upload">
+        <input className={styles.fileUploadInput} id={`upload_${ix}`} type="file" onChange={handleFileChange}></input>
+        <label htmlFor={`upload_${ix}`}>
           <div className={styles.fileUploadBtn}>파일 업로드</div>
         </label>
         <div className={styles.fileUpdateDesc}>{inputFileName}</div>
