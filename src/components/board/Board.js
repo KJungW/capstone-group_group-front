@@ -1,6 +1,6 @@
 import requestPostsInBoard from 'hook/requestPostsInBoardApi';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { openLoginModal } from 'store/aboutStore';
 import styles from "styles/Board.module.css";
@@ -9,11 +9,8 @@ const Board = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-   // URL에서 가져온 boardId를 적용하는 코드
-   const {boardId} = useParams();
-
   // 페이지 요청에 필요한 상태값들
-  const [boardIdValue, setBoardIdValue] = useState(boardId);
+  const boardId = useSelector(state => state.currentBoardId);
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
   const [postCountInPage, setPostCountInPage] = useState(10);
 
@@ -24,15 +21,10 @@ const Board = () => {
   const [isFirstPage, setIsFirstPage] = useState(true);
   const [isLastPage, setIsLastPage] = useState(true);
 
-   // URL의 boardId가 변경될 경우, 이를 적용하는 파트
-   useEffect(()=> {
-    if(boardIdValue != boardId)
-      setBoardIdValue(boardId);
-   })
-
   // 페이지 요청 결과를 적용하는 메서드
   const applyApiResult = (apiResult) => {
-    setBoardTitle(apiResult.boardTitle.split("$")[0].trim());
+    console.log(apiResult);
+    setBoardTitle(apiResult.boardTitle.replace("$", " - "));
     setTotalPageSize(apiResult.totalPages);
     setIsFirstPage(apiResult.firstPage);
     setIsLastPage(apiResult.lastPage);
@@ -47,7 +39,7 @@ const Board = () => {
   // 페이지 요청 API
   useEffect(() => {
     console.log("Board : 모집글 목록요청")
-    requestPostsInBoard(boardIdValue, currentPageNumber, postCountInPage)
+    requestPostsInBoard(boardId, currentPageNumber, postCountInPage)
     .then(res => {
       console.log("Board : 모집글 목록요청 성공");
       applyApiResult(res.data)
@@ -58,7 +50,7 @@ const Board = () => {
       if(!err.response)
         alert("접속이 원할하지 않습니다. 잠시후에 다시 접속해주세요");
     })
-  }, [boardIdValue, currentPageNumber, postCountInPage]);
+  }, [boardId, currentPageNumber, postCountInPage]);
 
   // 모집글 클릭 메서드
   const onClickRecruit = (postId) => {
@@ -104,7 +96,7 @@ const Board = () => {
     : `${targetDate.getFullYear()}-${targetDate.getMonth()+1}-${targetDate.getDate()}`;
   }
 
-  if(!boardIdValue || !postListInPage || postListInPage.length==0) {
+  if(!boardId || !postListInPage || postListInPage.length==0) {
     return (
       <div className={styles.scrollcontainer}>
       <div className={styles.boardmap}>

@@ -2,7 +2,7 @@ import requestFindBoardSubApi from "hook/requestFindBoardSubApi";
 import requestFindMemberByToken from "hook/requestFindMemberByTokenApi";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBoardListData, updateLoginData } from "store/aboutStore";
+import { updateBoardListData, updateCurrentBoardId, updateLoginData } from "store/aboutStore";
 import convertFindBoardSubApiResult from "util/convertFindBoardSubApiResult";
 
 const InitEarlyData = () => {
@@ -48,6 +48,7 @@ const InitEarlyData = () => {
             console.log("InitEarlyData : 게시판 리스트 조회 성공");
             const boardList = convertFindBoardSubApiResult(boardListRaw.content);
             dispatch(updateBoardListData(boardList));
+            dispatch(updateCurrentBoardId(boardList[0].data[0].id))
         } catch {
             console.log("InitEarlyData : 게시판 리스트 조회 실패");
         }

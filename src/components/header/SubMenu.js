@@ -1,13 +1,17 @@
 import React from 'react';
 import styles from "styles/SubMenu.module.css";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateCurrentBoardId } from 'store/aboutStore';
 
 const SubMenu = ({ subMenuData }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 서브메뉴 클릭 처리메서드
   const handleSubMenuClick = (boardId) => {
-    navigate(`/${boardId}`);
+    dispatch(updateCurrentBoardId(boardId))
+    navigate(`/`);
   };
 
   if(subMenuData === undefined)
