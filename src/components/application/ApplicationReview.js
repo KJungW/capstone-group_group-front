@@ -70,11 +70,17 @@ const ApplicationReview = () => {
     .catch (err => {
       console.log("ApplicationReview : 신청 세부 데이터 조회 실패");
       console.log(err);
-      if(err.response.status === 400)
+      if (err.response && err.response.data.code === 'UNAUTHORIZED') {
+        alert("로그인 유효기간이 만료되었거나 로그인을 하지않았습니다. 로그인을 먼저 진행해주세요!");
+        navigate(-1);
+      } 
+      else if(err.response && err.response.status === 400) {
         alert("데이터가 존재하지 않습니다.");
-      else
-        alert("잠시후 다시 접속해주세요");
-      navigate(-1);
+        navigate(-1);
+      }
+      else {
+        alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
+      }
     })
   }
 

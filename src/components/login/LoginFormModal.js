@@ -60,11 +60,11 @@ const LoginFormModal = ({completeLogin}) => {
       .catch(error => {
         console.log("로그인 실패")
         console.log(error)
-        if(error.code === "ERR_BAD_REQUEST") {
-            alert("이메일과 비밀번호가 맞지않습니다.");
+        if(error.response && error.response.data.code === 'BAD_INPUT') {
+          alert("이메일과 비밀번호가 맞지않습니다.");
         }
         else {
-          alert("로그인 실패 잠시후 다시 실행해주세요")
+          alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
         }
       });
   }

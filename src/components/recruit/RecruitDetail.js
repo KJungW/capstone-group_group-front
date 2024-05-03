@@ -25,6 +25,7 @@ function RecruitDetail() {
     .catch(err=>{
       console.log("RecruitDetail : 모집글 세부정보 요청 실패");
       console.log(err);
+      alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
     })
   }, [currentPostId]);
 

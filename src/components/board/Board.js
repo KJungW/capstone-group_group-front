@@ -55,6 +55,7 @@ const Board = () => {
     .catch(err=>{
       console.log("Board : 모집글 목록요청 실패");
       console.log(err);
+      alert("접속이 원할하지 않습니다. 잠시후에 다시 접속해주세요");
     })
   }, [boardIdValue, currentPageNumber, postCountInPage]);
 

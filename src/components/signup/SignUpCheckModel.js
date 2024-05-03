@@ -13,6 +13,7 @@ const SignUpCheckModel = ({ formData }) => {
     })
     .catch(err => {
       console.log("회원가입 요청 재전송 실패");
+      alert("접속이 원할하지 않습니다. 잠시후 다시 실행해주세요");
     })
     .finally(() => {
       setIsSendingEmail(false);

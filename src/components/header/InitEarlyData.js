@@ -31,6 +31,7 @@ const InitEarlyData = () => {
             console.log("InitEarlyData : 초기 로그인 데이터 조회 실패")
             localStorage.clear();
             dispatch(updateLoginData(undefined));
+            alert("접속이 원할하지 않습니다. 잠시후 다시 실행해주세요")
         }
     }
 
@@ -50,6 +51,7 @@ const InitEarlyData = () => {
             dispatch(updateBoardListData(boardList));
         } catch {
             console.log("InitEarlyData : 게시판 리스트 조회 실패");
+            alert("접속이 원할하지 않습니다. 잠시후 다시 실행해주세요")
         }
     }
 

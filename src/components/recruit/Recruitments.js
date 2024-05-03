@@ -182,11 +182,11 @@ const Recruitments = () => {
     .catch(err => {
       console.log("Recruitments : 작성한 모집글 리스트 조회 실패");
       console.log(err);
-      if (err.response.data.code === 'UNAUTHORIZED') {
+      if (err.response && err.response.data.code === 'UNAUTHORIZED') {
         alert("로그인 유효기간이 만료되었거나 로그인을 하지않았습니다. 로그인을 먼저 진행해주세요!");
-        navigate("/");
+        navigate(-1);
       } else {
-        alert("잠시후 다시 접속해주세요");
+        alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
       }
     })
   }

@@ -90,11 +90,11 @@ const SignUpFormModal = ({moveNextModal}) => {
     .catch (err => {
       console.log("회원가입 요청 실패");
       console.log(err);
-      if(err.code === "ERR_BAD_REQUEST") {
+      if(err.response && err.response.data.code === 'BAD_INPUT') {
         alert("이미 등록된 회원입니다.");
       } 
       else {
-        alert("요청실패, 잠시후 다시 실행해주세요");
+        alert("접속이 원할하지 않습니다. 잠시후 다시 실행해주세요");
       }
     })
     .finally(() => {
