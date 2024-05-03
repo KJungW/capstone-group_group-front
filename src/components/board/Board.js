@@ -103,8 +103,30 @@ const Board = () => {
     : `${targetDate.getFullYear()}-${targetDate.getMonth()+1}-${targetDate.getDate()}`;
   }
 
-  if(!boardIdValue) {
-    return <div>loading</div>
+  if(!boardIdValue || !postListInPage || postListInPage.length==0) {
+    return (
+      <div className={styles.scrollcontainer}>
+      <div className={styles.boardmap}>
+        <div className={styles.boardcontent}>
+          <div className={styles.wrap1}>
+            <div className={styles.boardname}>
+              {boardTitle}
+            </div>
+            <button className={styles.writebutton} onClick={handleWriteButtonClick}>글쓰기</button>
+          </div>
+          <div className={styles.contentsbox}>
+            <table className={styles.postsTable}>
+              <tbody>
+                <tr><td>
+                  <div className={styles.blankTableContent}>모집글이 존재하지 않습니다.</div>  
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    )
   }
 
   return (

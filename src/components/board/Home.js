@@ -9,6 +9,8 @@ const HomeComponent = () => {
     useEffect(()=> {
         if(boardListData) {
             navigate(`/${boardListData[0].data[0].id}`)
+        } else {
+            navigate(`/0`)
         }
       }, [boardListData])
     
