@@ -97,7 +97,10 @@ const ApplicationForm = () => {
     try {
       console.log("ApplicationForm : 모집글 세부내용 조회 시작")
       const postDetail = (await reqeustFindPostDetail(postIdValue)).data
-      
+      if(postDetail.writerId === loginData.memberId) {
+        alert("자신이 작성한 모집글에는 신청할 수 없습니다.");
+        navigate(-1);
+      }
       console.log("ApplicationForm : 모집글 세부내용 조회 성공")
       setRequirementList(postDetail.requirementList)
       setInputList(new Array(postDetail.requirementList.length))
@@ -141,7 +144,13 @@ const ApplicationForm = () => {
         alert("로그인 유효기간이 만료되었거나 로그인을 하지않았습니다. 로그인을 먼저 진행해주세요!");
         navigate(-1);
         setAppBtnIsActive(true);
-      } else {
+      }
+      else if (err.response && err.response.data.code === 'BAD_INPUT') {
+        alert("잘못된 신청입니다.");
+        navigate(-1);
+        setAppBtnIsActive(true);
+      }
+      else {
         alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
         setAppBtnIsActive(true);
       }

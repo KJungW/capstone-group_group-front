@@ -29,6 +29,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Board />} />
+          <Route path="/:boardId" element={<Board />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/recruitments" element={<Recruitments />} />
           <Route path="/recruit/:boardId" element={<Recruit />} />

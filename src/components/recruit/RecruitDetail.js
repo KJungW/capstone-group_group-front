@@ -3,7 +3,7 @@ import LoginModalPage from 'components/login/LoginModalPage';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/RecruitDetail.module.css";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openLoginModal } from 'store/aboutStore';
 
 function RecruitDetail() {
@@ -11,8 +11,10 @@ function RecruitDetail() {
   const dispatch = useDispatch();
 
   let {postId} = useParams();
+  const loginData = useSelector(state => state.loginData);
   const [currentPostId, setCurrentPostId] = useState(postId);
   const [postData, setPostData] = useState(null);
+  const [activeBtn, setActiveBtn] = useState(true);
 
   // 모집글 세부정보 요청 API
   useEffect(() => {
@@ -28,6 +30,13 @@ function RecruitDetail() {
       alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
     })
   }, [currentPostId]);
+
+  useEffect(() => {
+    if(loginData && postData) {
+      if(loginData.memberId === postData.writerId)
+        setActiveBtn(false);
+    }
+  }, [loginData, postData])
 
   // 신청하기 버튼 클릭
   const onClickRequestBtn = () => {
@@ -76,7 +85,7 @@ function RecruitDetail() {
             </div>
           ))}
         </div>
-        <button className={styles.postbutton} onClick={onClickRequestBtn}>신청하기</button>
+        {activeBtn?<button className={styles.postbutton} onClick={onClickRequestBtn}>신청하기</button>:''}
       </div>
     </div>
   );
