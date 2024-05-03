@@ -2,7 +2,8 @@ import requestSavePostApi from 'hook/requestSavePostApi';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/Recruit.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCurrentBoardId } from 'store/aboutStore';
 
 function MenuComponentInSelect({mainMenuData}) {
   return (
@@ -21,7 +22,6 @@ function Recruit() {
 
   // ULR에서 가져온 boardId를 적용하는 코드
    let {boardId} = useParams();
-   if(!boardId) {boardId=sessionStorage.getItem("defaultBoardID")}
    
   // 폼데이터 입력값 상태
   const [selectedBoardId, setSelectedBoardId] = useState(boardId);
@@ -45,6 +45,7 @@ function Recruit() {
   // 전역상태 가져오기
   const loginData = useSelector(state => state.loginData)
   const boardList = useSelector(state => state.boardListData)
+  const dispatch = useDispatch()
 
   // 모집글 등록버튼 활성화여부
   const [saveBtnActive, setSaveBtnActive] = useState(true);
@@ -171,7 +172,8 @@ function Recruit() {
     })
     .then(res => {
       console.log("Recurit : 모집글 저장 요청 성공")
-      navigate(`/${selectedBoardId}`);
+      dispatch(updateCurrentBoardId(selectedBoardId))
+      navigate(`/`);
     })
     .catch(err => {
       console.log("Recurit : 모집글 저장 요청 실패")

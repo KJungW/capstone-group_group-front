@@ -23,7 +23,6 @@ const Board = () => {
 
   // 페이지 요청 결과를 적용하는 메서드
   const applyApiResult = (apiResult) => {
-    console.log(apiResult);
     setBoardTitle(apiResult.boardTitle.replace("$", " - "));
     setTotalPageSize(apiResult.totalPages);
     setIsFirstPage(apiResult.firstPage);
@@ -38,6 +37,7 @@ const Board = () => {
 
   // 페이지 요청 API
   useEffect(() => {
+    if(!boardId) return;
     console.log("Board : 모집글 목록요청")
     requestPostsInBoard(boardId, currentPageNumber, postCountInPage)
     .then(res => {
