@@ -174,6 +174,7 @@ const Recruitments = () => {
     requestFindPostListApi(currentPageNum, 10)
     .then(res => {
       console.log("Recruitments : 작성한 모집글 리스트 조회 성공");
+      console.log(res.data)
       setPostList(res.data.postAndApplicationsOverviews);
       setTotalPageCount(res.data.totalPages);
       setIsLastPage(res.data.lastPage);
@@ -227,7 +228,26 @@ const Recruitments = () => {
     setPostList(newPostList);
   }
 
-  if(!postList) return;
+  if(!postList || postList.length == 0) {
+    return (
+      <div className={styles.scrollcontainer}>
+        <div className={styles.boardmap}>
+          <div className={styles.boardcontent}>
+            <div className={styles.wrap1}>
+              <div className={styles.boardname}>
+                작성글 목록
+              </div>
+            </div>
+            <div className={styles.contentsbox}>
+              <div className={styles.applicationTable}>
+                <div className={styles.blankTableContent}>작성글이 존재하지 않습니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={styles.scrollcontainer}>
