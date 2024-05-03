@@ -131,7 +131,6 @@ const ApplicationForm = () => {
     requestSaveApplicationApi(postIdValue, loginData.memberId, requirementResults, inputfiles)
     .then(res => {
       console.log("ApplicationForm : 신청 요청 성공");
-      console.log(res.data);
       navigate("/applications");
       setAppBtnIsActive(true);
     })
