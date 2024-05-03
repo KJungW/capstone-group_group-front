@@ -66,7 +66,6 @@ const Applications = () => {
     .then(res => {
       console.log("Applications : 신청 리스트 조회 성공");
       const result = res.data;
-      console.log(res.data);
       setApplicationList(result.applicationAndResult);
       setTotalPageCount(result.totalPages);
       setCurrentPageNum(result.currentPageNumber);

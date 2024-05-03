@@ -1,4 +1,6 @@
-
+.scrollcontainer *{
+  box-sizing: border-box;
+}
 .boardmap {
   margin: 0px auto;
   width: 70%;
@@ -15,7 +17,7 @@
 .boardname {
   margin: 40px 0px 0px 20px;
   background-color: navy;
-  height: 25px;
+  height: 33px;
   color: white;
   width: 250px;
   border-radius: 10px 10px 0px 0px;
@@ -31,121 +33,162 @@
   margin: 0px 20px 20px 20px;
 }
 
-
-.postsTable {
+.applicationTable {
   width: 100%;
   border-collapse: collapse;
+  border-top: 2px solid navy;
+  border-bottom: 2px solid navy;
 }
 
-.postsTable th,
-.postsTable td {
-  border-top: 1px solid navy;
+.postRow {
+  height: 60px;
   border-bottom: 1px solid navy;
-  padding: 15px;
-  font-size: 16px;
-  text-align: left;
-}
-
-.narrowDateColumn {
-  width: 20%;
-  text-align: center !important;
-}
-
-.configColumn {
-  width: 2%;
-  text-align: center !important;
-  cursor: pointer;
-}
-
-.configColumn:hover {
-  cursor: pointer;
-}
-
-.configColumn i {
-  line-height: 19px !important;
-  font-size: 14px !important;
-  font-weight: 800 !important;
-}
-
-.applicationRow td {
-  padding: 0;
-  border: none;
-}
-
-.applicationContent {
-  width: 70%;
-  margin-left: auto;
-  border-left: 30px solid navy;
-  border-bottom: 1px solid navy;
-  padding: 15px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.postRowTitle {
+  width: calc(100% - 170px);
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 15px;
+  font-size: 16px;
+}
+
+.postRowTime {
+  width: 130px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.postRowEllipsis{
+  width: 40px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.applicationRow {
+  height: 50px;
+  border-bottom: 1px solid navy;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 
+.applicationRowBar {
+  width: 30px;
+  height: 100%;
+  background-color: navy;
+}
 
-.acceptButton {
-  background-color: #4CAF50; /* 녹색 계열 */
+.applicationRowTitle{
+  width: calc(78% - 120px);
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.applicationRowBtnBox{
+  width: 120px;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.yetButton {
+  background-color: #8d8d8d;
   color: white;
   border: none;
-  padding: 7px 15px;
-  margin-right: 5px;
+  width: 52px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.acceptButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  width: 52px;
+  height: 30px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .acceptButton:hover {
-  background-color: #45a049;
+  background-color: #38833b;
+}
+
+.acceptSavedButton {
+  background-color: #75d478;
+  color: white;
+  border: none;
+  width: 52px;
+  height: 30px;
+  border-radius: 5px;
 }
 
 .rejectButton {
   background-color: #f44336;
   color: white;
   border: none;
-  padding: 7px 15px;
-  margin-left: 5px;
+  width: 52px;
+  height: 30px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+
 }
 
 .rejectButton:hover {
   background-color: #da190b;
 }
 
-.postsTable {
-  width: 100%;
+.rejectSavedButton {
+  background-color: #f37a71;
+  color: white;
+  border: none;
+  width: 52px;
+  height: 30px;
+  border-radius: 5px;
 }
 
-.postsTable th {
-  background-color: #f2f2f2;
-}
-
-.lastApplication {
-  border-bottom: none;
-}
-
-.navigation {
+.requestBtn {
+  background-color: #646464;
+  color: white;
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 20px;
-}
-
-.page a, .narrow a {
-  margin: 0 10px;
-  text-decoration: none;
+  justify-content: center;
+  font-size : 12px;
 }
 
 .tooltip {
   position: absolute;
+  left:20px;
+  top:20px;
+  width:100px;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 8px;
-  z-index: 1;
-  min-width: 100px;
+  z-index: 10;
   cursor: pointer;
 }
 
@@ -158,6 +201,20 @@
   background-color: #f0f0f0;
 }
 
-.configColumn {
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pageNum, .narrow{
+  width:25px;
+  text-decoration: none;
+  color:rgb(0, 0, 0);
   cursor: pointer;
+}
+
+.current_page{
+  color:rgb(105, 151, 252);
 }
