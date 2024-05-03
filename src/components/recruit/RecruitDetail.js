@@ -38,7 +38,7 @@ function RecruitDetail() {
   }
 
   if (!postData) {
-    return <div>Loading...</div>;
+    return <></>
   }
 
   return (

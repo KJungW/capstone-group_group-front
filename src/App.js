@@ -14,7 +14,6 @@ import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
 import mainReducerInStore from "store/aboutStore";
 import InitEarlyData from "components/header/InitEarlyData";
-import HomeComponent from "components/board/Home";
 import LoginModalPage from "components/login/LoginModalPage";
 import SignUpModalPage from "components/signup/SignUpModalPage";
 

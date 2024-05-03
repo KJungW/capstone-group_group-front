@@ -101,9 +101,6 @@ const Applications = () => {
     if(!isLastPage)setCurrentPageNum(currentPageNum+1);
   }
 
-  if(applicationList == undefined)
-    return;
-
   if(!applicationList || applicationList.length == 0) {
     return (
       <div className={styles.scrollcontainer}>

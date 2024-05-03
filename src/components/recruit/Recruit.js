@@ -205,7 +205,7 @@ function Recruit() {
   }
 
   if(!boardList || !selectedBoardId){
-    return <div>loading</div>
+    return <></>
   }
   
   return (
