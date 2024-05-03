@@ -2,14 +2,18 @@ import { useState } from "react";
 import SignUpFormModal from "components/signup/SignUpFormModal";
 import ModalBackground from "components/common/ModalBackground";
 import SignUpCheckModel from "components/signup/SignUpCheckModel";
+import { useDispatch, useSelector } from "react-redux";
+import { closeSignupModal } from "store/aboutStore";
 
-const SignUpModalPage = ({isOpen, handleSignModalOpen}) => {
+const SignUpModalPage = () => {
+    const dispatch = useDispatch();
+    const activeLoginModal = useSelector(state => state.activeSignupModal);
     const [isCompletFormInput, setIsCompleteFormInput] = useState(false);
     const [singUpFormData, setSignUpFormData] = useState();
 
     const handleClose = () => {
         setIsCompleteFormInput(false);
-        handleSignModalOpen(false);
+        dispatch(closeSignupModal());
     }
 
     const moveNextModal = (email, nickName, pw) => {
@@ -19,9 +23,9 @@ const SignUpModalPage = ({isOpen, handleSignModalOpen}) => {
 
     return (
         <>
-            {isOpen && <ModalBackground handleClose={handleClose}/>}
-            {isOpen && !isCompletFormInput && <SignUpFormModal moveNextModal={moveNextModal}/>}
-            {isOpen && isCompletFormInput && <SignUpCheckModel formData={singUpFormData}  handleClose={()=>handleSignModalOpen(false)}/>}
+            {activeLoginModal && <ModalBackground handleClose={handleClose}/>}
+            {activeLoginModal && !isCompletFormInput && <SignUpFormModal moveNextModal={moveNextModal}/>}
+            {activeLoginModal && isCompletFormInput && <SignUpCheckModel formData={singUpFormData}  handleClose={handleClose}/>}
         </>
     )
 }

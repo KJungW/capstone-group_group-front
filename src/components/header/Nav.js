@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styles from "styles/Nav.module.css";
 import { useNavigate } from 'react-router-dom';
 import SubMenu from 'components/header/SubMenu';
-import { useSelector } from "react-redux";
-import LoginModalPage from 'components/login/LoginModalPage';
+import { useDispatch, useSelector } from "react-redux";
+import { openLoginModal } from 'store/aboutStore';
 
 // Navigator 요소중 어떤 것이 선택되었는지 나타내는 상태타입(enum 대용으로 사용)
 const navStateEnum = {
@@ -14,16 +14,11 @@ const navStateEnum = {
 }
 
 const Nav = () => {
+  const dispatch = useDispatch();
   const loginData = useSelector(state => state.loginData)
   const subMenuData = useSelector(state => state.boardListData)
   const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
   const [navState, setNavState] = useState(navStateEnum.BOARD)
-
-   // 로그인모달창 관련
-   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-   const handleLoginModalOpen = (isOpen) => {
-     setIsLoginModalOpen(isOpen);
-   }
 
   // Nav 항목별 라우팅 설정
   const navigate = useNavigate();
@@ -39,7 +34,7 @@ const Nav = () => {
           navigate('/recruitments');
         }
         else {
-          handleLoginModalOpen(true);
+          dispatch(openLoginModal());
         }
         break;
       case navStateEnum.APPLICATIONS:
@@ -48,7 +43,7 @@ const Nav = () => {
           navigate('/applications');
         }
         else {
-          handleLoginModalOpen(true);
+          dispatch(openLoginModal());
         }
         break;
       default:
@@ -75,7 +70,6 @@ const Nav = () => {
           </button>
         </div>
       </div>
-      <LoginModalPage isOpen={isLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen}/>
     </div>
   );
 };

@@ -1,27 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginModalPage from "components/login/LoginModalPage";
 import styles from "styles/Header.module.css";
-import SignUpModalPage from "components/signup/SignUpModalPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { openLoginModal, openSignupModal } from "store/aboutStore";
 
 // 헤더 컴포넌트
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 로그인 데이터
   const loginData = useSelector(state => state.loginData);
-  
-  // 로그인모달창 
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const handleLoginModalOpen = (isOpen) => {
-    setIsLoginModalOpen(isOpen);
+
+  const onClickLoginBtn = () => {
+    dispatch(openLoginModal());
   }
 
   // 회원가입 모달창 관련
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const handleSignModalOpen = (isOpen) => {
-    setIsSignUpModalOpen(isOpen);
+  const onClickSiginupBtn = () => {
+    dispatch(openSignupModal());
   }
 
   // 홈버튼 클릭 처리
@@ -48,19 +45,17 @@ const Header = () => {
         <div className={styles.user}>
           {
             loginData===undefined &&
-            <button className={styles.loginbutton} onClick={()=>handleLoginModalOpen(true)}>로그인</button>
+            <button className={styles.loginbutton} onClick={onClickLoginBtn}>로그인</button>
           }
           {
             loginData===undefined &&
-            <button className={styles.signinbutton} onClick={()=>handleSignModalOpen(true)}>회원가입</button>
+            <button className={styles.signinbutton} onClick={onClickSiginupBtn}>회원가입</button>
           }
           {
             loginData!==undefined && 
             <button className={styles.loginbutton} onClick={handleLogoutButtonClick}>로그아웃</button> 
           }
         </div>
-        <LoginModalPage isOpen={isLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen}/>
-        <SignUpModalPage isOpen={isSignUpModalOpen} handleSignModalOpen={handleSignModalOpen}/> 
       </div>
     </div>
   );

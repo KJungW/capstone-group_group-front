@@ -1,11 +1,14 @@
 import requestPostsInBoard from 'hook/requestPostsInBoardApi';
-import LoginModalPage from 'components/login/LoginModalPage';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { openLoginModal } from 'store/aboutStore';
 import styles from "styles/Board.module.css";
 
 const Board = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
    // URL에서 가져온 boardId를 적용하는 코드
    const {boardId} = useParams();
 
@@ -20,12 +23,6 @@ const Board = () => {
   const [postListInPage, setPostListInPage] = useState([]);
   const [isFirstPage, setIsFirstPage] = useState(true);
   const [isLastPage, setIsLastPage] = useState(true);
-
-   // 로그인모달창 관련
-   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-   const handleLoginModalOpen = (isOpen) => {
-     setIsLoginModalOpen(isOpen);
-   }
 
    // URL의 boardId가 변경될 경우, 이를 적용하는 파트
    useEffect(()=> {
@@ -90,7 +87,7 @@ const Board = () => {
     if(localStorage.getItem("jwtToken"))
       navigate(`/recruit/${boardId}`);
     else 
-      handleLoginModalOpen(true);
+      dispatch(openLoginModal());
   };
 
   // 작성일자 데이터를 적절히 변형하는 메서드
@@ -144,7 +141,6 @@ const Board = () => {
             </div>
           </div>
         </div>
-        <LoginModalPage isOpen={isLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen}/>
       </div>
   );
 };

@@ -3,19 +3,16 @@ import LoginModalPage from 'components/login/LoginModalPage';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/RecruitDetail.module.css";
+import { useDispatch } from 'react-redux';
+import { openLoginModal } from 'store/aboutStore';
 
 function RecruitDetail() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   let {postId} = useParams();
   const [currentPostId, setCurrentPostId] = useState(postId);
   const [postData, setPostData] = useState(null);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
-  // 로그인 모달창 on/off 메서드
-  const handleLoginModalOpen = (isOpen) => {
-    setIsLoginModalOpen(isOpen);
-  }
 
   // 모집글 세부정보 요청 API
   useEffect(() => {
@@ -36,7 +33,7 @@ function RecruitDetail() {
     if(localStorage.getItem("jwtToken"))
       navigate(`/apply/${currentPostId}`);
     else 
-      handleLoginModalOpen(true);
+    dispatch(openLoginModal());
   }
 
   if (!postData) {
@@ -80,7 +77,6 @@ function RecruitDetail() {
         </div>
         <button className={styles.postbutton} onClick={onClickRequestBtn}>신청하기</button>
       </div>
-      <LoginModalPage isOpen={isLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen}/>
     </div>
   );
 }
