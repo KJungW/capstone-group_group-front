@@ -104,6 +104,29 @@ const Applications = () => {
   if(applicationList == undefined)
     return;
 
+  if(!applicationList || applicationList.length == 0) {
+    return (
+      <div className={styles.scrollcontainer}>
+      <div className={styles.boardmap}>
+        <div className={styles.boardcontent}>
+          <div className={styles.wrap1}>
+            <div className={styles.boardname}>
+              신청 목록
+            </div>
+          </div>
+          <div className={styles.contentsbox}>
+            <table className={styles.applicationTable}>
+              <tr><td>
+                <div className={styles.blankTableContent}>신청데이터가 존재하지 않습니다.</div>
+              </td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    )
+  }
+
   return (
     <div className={styles.scrollcontainer}>
       <div className={styles.boardmap}>
