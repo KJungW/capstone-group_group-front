@@ -174,7 +174,6 @@ const Recruitments = () => {
     requestFindPostListApi(currentPageNum, 10)
     .then(res => {
       console.log("Recruitments : 작성한 모집글 리스트 조회 성공");
-      console.log(res.data)
       setPostList(res.data.postAndApplicationsOverviews);
       setTotalPageCount(res.data.totalPages);
       setIsLastPage(res.data.lastPage);

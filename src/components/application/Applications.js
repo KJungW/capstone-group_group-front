@@ -112,11 +112,9 @@ const Applications = () => {
             </div>
           </div>
           <div className={styles.contentsbox}>
-            <table className={styles.applicationTable}>
-              <tr><td>
-                <div className={styles.blankTableContent}>신청데이터가 존재하지 않습니다.</div>
-              </td></tr>
-            </table>
+            <div className={styles.applicationTable}>
+              <div className={styles.blankTableContent}>신청데이터가 존재하지 않습니다.</div>
+            </div>
           </div>
         </div>
       </div>
