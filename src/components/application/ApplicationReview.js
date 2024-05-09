@@ -111,7 +111,7 @@ const ApplicationReview = () => {
             })
           }
         </div>
-        <button className={styles.applicationBtn} onClick={onClickBackPage}>이전 페이지로 되돌아가기</button>
+        <button className={styles.applicationBtn} onClick={onClickBackPage}>목록보기</button>
       </div>
     </div>
   );
