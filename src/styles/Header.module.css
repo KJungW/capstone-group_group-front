@@ -27,6 +27,12 @@
     margin-top: 2px;
 }
 
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .signinbutton, .loginbutton {
     padding: 10px 15px;
     background-color: #ffffffac;
@@ -34,13 +40,14 @@
     border: none;
     border-radius: 20px;
     cursor: pointer;
+    margin-left: 15px;
 }
-
-.loginbutton { margin-right: 15px; }
-
-.signinbutton { margin-left: auto; }
 
 .signinbutton:hover, .loginbutton:hover {
     background-color: white;
     color: rgb(68, 68, 68);
+}
+
+.nickName {
+    color: white;
 }

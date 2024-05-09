@@ -52,6 +52,10 @@ const Header = () => {
           }
           {
             loginData!==undefined && 
+            <div className={styles.nickName}>{loginData.nickName} 님</div>
+          }
+          {
+            loginData!==undefined && 
             <button className={styles.loginbutton} onClick={handleLogoutButtonClick}>로그아웃</button> 
           }
         </div>
