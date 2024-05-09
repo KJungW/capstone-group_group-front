@@ -2,7 +2,7 @@ import requestFindBoardSubApi from "hook/requestFindBoardSubApi";
 import requestFindMemberByToken from "hook/requestFindMemberByTokenApi";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBoardListData, updateCurrentBoardId, updateLoginData } from "store/aboutStore";
+import { updateBoardListData, updateCurrentBoardId, updateInitDataComplete, updateLoginData } from "store/aboutStore";
 import convertFindBoardSubApiResult from "util/convertFindBoardSubApiResult";
 
 const InitEarlyData = () => {
@@ -58,6 +58,7 @@ const InitEarlyData = () => {
     const setEarlyDataInStore = async () => {
         await setEarlyLoginDataInStore();
         await setEarlyBoardListDataInStore();
+        dispatch(updateInitDataComplete());
     }
 
     useEffect(() => {
