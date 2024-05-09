@@ -10,6 +10,7 @@ function RecruitDetail() {
   const dispatch = useDispatch();
 
   let {postId} = useParams();
+  const initDataComplete = useSelector(state => state.initDataComplete)
   const loginData = useSelector(state => state.loginData);
   const [currentPostId, setCurrentPostId] = useState(postId);
   const [postData, setPostData] = useState(null);
@@ -17,7 +18,7 @@ function RecruitDetail() {
 
   // 모집글 세부정보 요청 API
   useEffect(() => {
-    if(loginData === undefined) return;
+    if(!initDataComplete) return;
     console.log("RecruitDetail : 모집글 세부정보 요청 시도")
     reqeustFindPostDetail(currentPostId, loginData?loginData.memberId:"")
     .then(res => {
@@ -29,7 +30,7 @@ function RecruitDetail() {
       console.log(err);
       alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
     })
-  }, [currentPostId, loginData]);
+  }, [currentPostId, loginData, initDataComplete]);
 
   useEffect(() => {
     if(loginData && postData) {
