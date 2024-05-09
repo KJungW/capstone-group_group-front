@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/Recruit.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentBoardId } from 'store/aboutStore';
+import makeUuidV4 from 'util/makeUuidV4';
 
 function MenuComponentInSelect({mainMenuData}) {
   return (
@@ -30,7 +31,7 @@ function Recruit() {
   const [passionSize, setPassionSize] = useState('');
   const [additionalWriting, setAdditionalWriting] = useState('');
   const [openChatUrl, setOpenChatUrl] = useState('');
-  const [requirements, setRequirements] = useState([{ id: 1, title: '', resultType: '' }]);
+  const [requirements, setRequirements] = useState([{ id: makeUuidV4(), title: '', resultType: '' }]);
 
   // 검증에 따른 에러메세지
   const [boardIdErrMsg, setBoardIdErrMsg] = useState("");
@@ -66,10 +67,12 @@ function Recruit() {
 
   // 추가요건 추가/제거 메서드
   const addRequirement = () => {
-    const newRequirement = { id: requirements.length + 1, title: '', resultType: '' };
+    const newRequirement = { id: makeUuidV4(), title: '', resultType: '' };
+    console.log([...requirements, newRequirement])
     setRequirements([...requirements, newRequirement]);
   };
   const deleteRequirement = (id) => {
+    console.log(requirements.filter((requirement) => requirement.id !== id))
     setRequirements(requirements.filter((requirement) => requirement.id !== id));
   };
 
@@ -268,7 +271,7 @@ function Recruit() {
                     updatedRequirements[index].title = value;
                     setRequirements(updatedRequirements);
                   }, 100)} />
-                {index > 0 && <button className={styles.deletebutton} onClick={() => deleteRequirement(requirement.id)}>X</button>}
+                {requirements.length > 1 && <button className={styles.deletebutton} onClick={() => deleteRequirement(requirement.id)}>X</button>}
               </div>
               <div className={styles.errorInRequirement}>{requirementsDescErrMsg[index]}</div>
               {/*참여요건 제출물 타입*/}
