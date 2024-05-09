@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "styles/Nav.module.css";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SubMenu from 'components/header/SubMenu';
 import { useDispatch, useSelector } from "react-redux";
 import { openLoginModal } from 'store/aboutStore';
@@ -15,10 +15,25 @@ const navStateEnum = {
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const loginData = useSelector(state => state.loginData)
-  const subMenuData = useSelector(state => state.boardListData)
+  const location = useLocation();
+  const loginData = useSelector(state => state.loginData);
+  const subMenuData = useSelector(state => state.boardListData);
   const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
-  const [navState, setNavState] = useState(navStateEnum.BOARD)
+  const [navState, setNavState] = useState(navStateEnum.NONE);
+
+  useEffect(() => {
+    if(location.pathname === "/") {
+      setNavState(navStateEnum.BOARD);
+    }
+    else if(location.pathname.includes("/recruitments")) {
+      setNavState(navStateEnum.RECURITMENTS);
+    }
+    else if(location.pathname.includes("/applications")) {
+      setNavState(navStateEnum.APPLICATIONS);
+    } else {
+      setNavState(navStateEnum.NONE); 
+    }
+  }, [location]);
 
   // Nav 항목별 라우팅 설정
   const navigate = useNavigate();
