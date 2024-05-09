@@ -25,27 +25,17 @@
 
 .contentsbox {
   background-color: white;
-  border-top: 1px solid navy;
+  border-top: 3px solid navy;
   min-height: 300px;
   margin: 0px 20px 20px 20px;
 }
 
-
 .applicationTable {
   width: 100%;
   border-collapse: collapse;
-  border-top: 2px solid navy;
-  border-bottom: 2px solid navy;
-  cursor: pointer;
+  border-bottom: 1px solid navy;
 }
 
-.applicationTable th,
-.applicationTable td {
-  border-bottom: 1px solid navy;
-  padding: 15px;
-  font-size: 16px;
-  text-align: left;
-}
 
 .blankTableContent {
   width: 100%;
@@ -55,28 +45,65 @@
   align-items: center;
 }
 
-.narrowDateColumn {
-  width: 20%;
-  text-align: right !important;
-}
-
 .applicationRow {
+  height: 60px;
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
   border-bottom: 1px solid navy;
 }
 
-.applicationRow td {
-  padding: 0;
-  border: none;
+.titleInRow {
+  width: calc(100% - 100px - 70px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  padding-left: 10px;
 }
 
-.applicationContent {
-  width: 70%;
+.dateInRow{
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stateInRow {
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.openchatRow {
+  font-size: 15px;
+  border-bottom: 1px solid navy;
+}
+
+.openchatRowContent {
+  width: 75%;
   margin-left: auto;
   border-left: 30px solid navy;
   padding: 15px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.urlTitleInRow{
+  width: 120px;
+  margin-right: 10px;
+}
+
+.urlInRow{
+  width: calc(100% - 120px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
 }
 
 .yetButton {

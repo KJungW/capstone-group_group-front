@@ -2,6 +2,7 @@ import requestFindApplicationListApi from 'hook/requestFindApplicationListApi';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "styles/Applications.module.css";
+import convertDate from 'util/convertDate';
 
 const ApplicationTableRow = ({application}) => {
   const navigate = useNavigate();
@@ -20,11 +21,12 @@ const ApplicationTableRow = ({application}) => {
   const makeOpenChatComp = (state, openChatUrl) => {
     if(state === "ACCEPT") {
       return ( 
-        <td>
-          <div className={`${styles.applicationContent}`}>
-            {openChatUrl}
+        <div className={styles.openchatRow}>
+          <div className={`${styles.openchatRowContent}`}>
+            <div className={`${styles.urlTitleInRow}`}>오픈채팅방 접속:</div>
+            <a className={`${styles.urlInRow}`} href={openChatUrl}>{openChatUrl}</a>
           </div>
-        </td>
+        </div>
       )
     }
   }
@@ -36,15 +38,12 @@ const ApplicationTableRow = ({application}) => {
 
   return (
     <>
-      <tr onClick={()=>onClickRow(application.applicationId)}>
-        <td>{`<${application.postTitle}> 신청서`}</td>
-        <td className={styles.narrowDateColumn}>
-          {maekApplicationReusltComp(application.applicationState)}
-        </td>
-      </tr>
-      <tr className={styles.applicationRow}>
-          {makeOpenChatComp(application.applicationState, application.openChatUrl)}
-      </tr>
+      <div className={styles.applicationRow} onClick={()=>onClickRow(application.applicationId)}>
+        <div className={styles.titleInRow}>{`<${application.postTitle}> 신청서`}</div>
+        <div className={styles.dateInRow}>{application.createdTime}</div>
+        <div className={styles.stateInRow}>{maekApplicationReusltComp(application.applicationState)}</div>
+      </div>
+      {makeOpenChatComp(application.applicationState, application.openChatUrl)}
     </>
   )
 }
@@ -67,7 +66,8 @@ const Applications = () => {
     .then(res => {
       console.log("Applications : 신청 리스트 조회 성공");
       const result = res.data;
-      setApplicationList(result.applicationAndResult);
+      setApplicationList(
+        result.applicationAndResult.map(app => ({...app, createdTime:convertDate(app.createdTime)})));
       setTotalPageCount(result.totalPages);
       setCurrentPageNum(result.currentPageNumber);
       setIsLastPage(result.lastPage);
@@ -132,13 +132,11 @@ const Applications = () => {
             </div>
           </div>
           <div className={styles.contentsbox}>
-            <table className={styles.applicationTable}>
-              <tbody>
+            <div className={styles.applicationTable}>
               {applicationList.map((application, ix) => (
                   <ApplicationTableRow application={application} key={ix}/>
               ))}
-              </tbody>
-            </table>
+            </div>
           </div>
           <div className={styles.navigation}>
             <div className={styles.narrow}onClick={onClickBackPage}>&lt;</div>
