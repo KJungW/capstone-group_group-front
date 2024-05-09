@@ -40,23 +40,14 @@
 
 .contentsbox {
   background-color: white;
-  border-top: 1px solid navy;
+  border-top: 3px solid navy;
   min-height: 300px;
   margin: 0px 20px 20px 20px;
 }
 
 .postsTable {
   width: 100%;
-  border-collapse: collapse;
-}
-
-.postsTable th,
-.postsTable td {
-  border-top: 1px solid navy;
   border-bottom: 1px solid navy;
-  padding: 15px;
-  font-size: 16px;
-  text-align: left;
 }
 
 .blankTableContent {
@@ -67,17 +58,37 @@
   align-items: center;
 }
 
-.narrowDateColumn {
-  width: 20%;
-  text-align: center !important;
-}
-
 .postsTableRow {
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   cursor: pointer;
+  font-size: 15px;
+  border-bottom: 1px solid navy;
 }
 
-.postsTable th {
-  background-color: #f2f2f2;
+.titleInRow {
+  width: calc(100% - 20% - 110px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.nicknameInRow {
+  width: 20%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dateInRow {
+  width: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navigation {

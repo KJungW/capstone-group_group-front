@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { openLoginModal } from 'store/aboutStore';
 import styles from "styles/Board.module.css";
+import convertDate from 'util/convertDate';
 
 const Board = () => {
   const navigate = useNavigate();
@@ -84,18 +85,6 @@ const Board = () => {
       dispatch(openLoginModal());
   };
 
-  // 작성일자 데이터를 적절히 변형하는 메서드
-  const convertDate = (date) => {
-    const currentDate = new Date();
-    const targetDate = new Date(date);
-    const isToday = targetDate.getDate() === currentDate.getDate() &&
-                    targetDate.getMonth() === currentDate.getMonth() &&
-                    targetDate.getFullYear() === currentDate.getFullYear();
-    return isToday
-    ? `${targetDate.getHours()}:${targetDate.getMinutes()}` 
-    : `${targetDate.getFullYear()}-${targetDate.getMonth()+1}-${targetDate.getDate()}`;
-  }
-
   if(!boardId || !postListInPage || postListInPage.length==0) {
     return (
       <div className={styles.scrollcontainer}>
@@ -133,16 +122,17 @@ const Board = () => {
               <button className={styles.writebutton} onClick={handleWriteButtonClick}>글쓰기</button>
             </div>
             <div className={styles.contentsbox}>
-              <table className={styles.postsTable}>
-                <tbody>
+              <div className={styles.postsTable}>
+                <div>
                 {postListInPage.map((post) => (
-                    <tr className={styles.postsTableRow} key={post.id} onClick={()=>{onClickRecruit(post.id)}}>
-                      <td>{post.title}</td>
-                      <td className={styles.narrowDateColumn}>{post.createDate}</td>
-                    </tr>
+                    <div className={styles.postsTableRow} key={post.id} onClick={()=>{onClickRecruit(post.id)}}>
+                      <div className={styles.titleInRow}>{post.title}</div>
+                      <div className={styles.nicknameInRow}>{post.writerNickName}</div>
+                      <div className={styles.dateInRow}>{post.createDate}</div>
+                    </div>
                 ))}
-                </tbody>
-              </table>
+                </div>
+              </div>
             </div>
             <div className={styles.navigation}>
               <div className={styles.narrow}>
