@@ -1,5 +1,4 @@
 import reqeustFindPostDetail from 'hook/requestFindPostDetailApi';
-import LoginModalPage from 'components/login/LoginModalPage';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/RecruitDetail.module.css";
@@ -18,8 +17,9 @@ function RecruitDetail() {
 
   // 모집글 세부정보 요청 API
   useEffect(() => {
+    if(loginData === undefined) return;
     console.log("RecruitDetail : 모집글 세부정보 요청 시도")
-    reqeustFindPostDetail(currentPostId)
+    reqeustFindPostDetail(currentPostId, loginData?loginData.memberId:"")
     .then(res => {
       console.log("RecruitDetail : 모집글 세부정보 요청 성공");
       setPostData(res.data)
@@ -29,7 +29,7 @@ function RecruitDetail() {
       console.log(err);
       alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
     })
-  }, [currentPostId]);
+  }, [currentPostId, loginData]);
 
   useEffect(() => {
     if(loginData && postData) {
@@ -46,6 +46,10 @@ function RecruitDetail() {
     dispatch(openLoginModal());
   }
 
+  const onClickShowListBtn = () => {
+    navigate(-1);
+  }
+
   if (!postData) {
     return <></>
   }
@@ -55,10 +59,12 @@ function RecruitDetail() {
       <div className={styles.recruitcontent}>
         <div className={styles.wrap1}>
           <div className={styles.boardname}>
-            {postData.boardName.split("$")[0]}
+            {postData.boardName.replace("$", " - ")}
           </div>
         </div>
         <div className={styles.rcontentsbox}>
+          <div className={styles.text1}>작성자 :</div>
+          <div className={styles.text3}>{postData.writerNickname}</div>
           <div className={styles.text1}>제목 :</div>
           <div className={styles.text3}>{postData.title}</div>
           <div className={styles.text1}>활동내용 :</div>
@@ -71,6 +77,13 @@ function RecruitDetail() {
           </div>
           <div className={styles.text1}>하고싶은 말 :</div>
           <div className={styles.text3}>{postData.additionalWriting}</div>
+          {
+            postData.openChatUrl? <>
+                                    <div className={styles.text1}>오픈채팅방 주소 :</div>
+                                    <div className={styles.text3}>{postData.openChatUrl}</div>
+                                  </>
+                                : ""
+          }
           <div className={styles.text1}>참여요건</div>
           {postData.requirementList.map((requirement, index) => (
             <div key={index} className={styles.requirementdetailcontainer}>
@@ -85,7 +98,9 @@ function RecruitDetail() {
             </div>
           ))}
         </div>
-        {activeBtn?<button className={styles.postbutton} onClick={onClickRequestBtn}>신청하기</button>:''}
+        {
+          activeBtn?<button className={styles.postbutton} onClick={onClickRequestBtn}>신청하기</button>
+                    :<button className={styles.postbutton} onClick={onClickShowListBtn}>목록보기</button>}
       </div>
     </div>
   );

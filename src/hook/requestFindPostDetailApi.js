@@ -1,8 +1,10 @@
 import axios from "axios"
 
-async function reqeustFindPostDetail(postId) {
-    // API 요청
-    return axios.get(`${process.env.REACT_APP_BACKEND_ADDRESS}/post?postId=${postId}`)
+async function reqeustFindPostDetail(postId, memberId) {
+    if(memberId)
+        return axios.get(`${process.env.REACT_APP_BACKEND_ADDRESS}/post?postId=${postId}&memberId=${memberId}`)
+    else
+        return axios.get(`${process.env.REACT_APP_BACKEND_ADDRESS}/post?postId=${postId}`)
 }
 
 export default reqeustFindPostDetail;
