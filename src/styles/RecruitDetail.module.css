@@ -208,3 +208,15 @@
     font-size: 13px;
     max-width: 380px;
 }
+
+.textArea {
+    background-color: rgb(220, 220, 220);
+    text-align: left;
+    border-radius: 10px;
+    border: none;
+    min-width: calc(100% - 50px);
+    padding: 10px 7px 5px 10px;
+    margin: 10px 20px 20px 20px;
+    font-size: 13px;
+    resize: none;
+}

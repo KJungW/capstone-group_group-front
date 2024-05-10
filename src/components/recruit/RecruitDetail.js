@@ -1,5 +1,5 @@
 import reqeustFindPostDetail from 'hook/requestFindPostDetailApi';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/RecruitDetail.module.css";
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,21 @@ function RecruitDetail() {
   const [currentPostId, setCurrentPostId] = useState(postId);
   const [postData, setPostData] = useState(null);
   const [activeBtn, setActiveBtn] = useState(true);
+
+  // textarea 참조
+  const activityDetailAreaRef = useRef(null);
+  const additionalWritingAreaRef = useRef(null);
+
+  // textarea 관리
+  useEffect(()=> {
+    if(!activityDetailAreaRef || !activityDetailAreaRef.current) return;
+    if(!additionalWritingAreaRef || !additionalWritingAreaRef.current) return;
+    activityDetailAreaRef.current.style.height = "36px";
+    activityDetailAreaRef.current.style.height = activityDetailAreaRef.current.scrollHeight + "px";
+    additionalWritingAreaRef.current.style.height = "36px";
+    additionalWritingAreaRef.current.style.height = additionalWritingAreaRef.current.scrollHeight + "px";
+  }, [postData])
+
 
   // 모집글 세부정보 요청 API
   useEffect(() => {
@@ -47,6 +62,7 @@ function RecruitDetail() {
     dispatch(openLoginModal());
   }
 
+  // 목록보기 버튼 클릭
   const onClickShowListBtn = () => {
     navigate(-1);
   }
@@ -69,7 +85,7 @@ function RecruitDetail() {
           <div className={styles.text1}>제목 :</div>
           <div className={styles.text3}>{postData.title}</div>
           <div className={styles.text1}>활동내용 :</div>
-          <div className={styles.text3}>{postData.activityDetail}</div>
+          <textarea ref={activityDetailAreaRef} className={styles.textArea} value={postData.activityDetail} disabled={true}></textarea>
           <div className={styles.text1}>팀성향 :</div>
           <div className={styles.text3}>
             {postData.passionSize === 'BIG' && '1등이 목표입니다!'}
@@ -77,7 +93,7 @@ function RecruitDetail() {
             {postData.passionSize === 'SMALL' && '제출만 하면 돼요!'}
           </div>
           <div className={styles.text1}>하고싶은 말 :</div>
-          <div className={styles.text3}>{postData.additionalWriting}</div>
+          <textarea ref={additionalWritingAreaRef} className={styles.textArea} value={postData.additionalWriting} disabled={true}></textarea>
           {
             postData.openChatUrl? <>
                                     <div className={styles.text1}>오픈채팅방 주소 :</div>
