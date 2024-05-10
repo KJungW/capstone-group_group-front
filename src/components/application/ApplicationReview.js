@@ -1,15 +1,22 @@
 import requestFindApplicationDetailApi from "hook/requestFindApplicationDetailApi";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "styles/ApplicationReview.module.css";
 import axios from "axios";
 
 const TextRequirement = ({title, content}) => {
+  const textContentRef = useRef(null);
+
+  useEffect(()=> {
+    textContentRef.current.style.height = "36px";
+    textContentRef.current.style.height = textContentRef.current.scrollHeight + "px";
+  })
+
   return (
     <div className={styles.requirementBox}>
       <div className={styles.requirementTitle}>{title}</div>
       <div className={styles.requirementTextBox}>
-        <input type="text" value={content} disabled={true}></input>
+        <textarea ref={textContentRef} value={content} disabled={true}></textarea>
       </div>
     </div>
   )
@@ -57,6 +64,7 @@ const ApplicationReview = () => {
     console.log("ApplicationReview : 신청 세부 데이터 조회 시작");
     requestFindApplicationDetailApi(applicationId)
     .then (res => {
+      console.log(res.data);
       console.log("ApplicationReview : 신청 세부 데이터 조회 성공");
       const result = res.data.requirementDataList;
       result.map(item => {
