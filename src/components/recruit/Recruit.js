@@ -1,5 +1,5 @@
 import requestSavePostApi from 'hook/requestSavePostApi';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/Recruit.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +31,13 @@ function Recruit() {
   const [passionSize, setPassionSize] = useState('');
   const [additionalWriting, setAdditionalWriting] = useState('');
   const [openChatUrl, setOpenChatUrl] = useState('');
-  const [requirements, setRequirements] = useState([{ id: makeUuidV4(), title: '', resultType: '' }]);
+  const [requirements, setRequirements] = useState([{ id:makeUuidV4(), title: '', resultType: '' }]);
+
+  // 글자수 상태
+  const [titleCount, setTitleCount] = useState(0);
+  const [activityDetailCount, setActivityDetailCount] = useState(0);
+  const [openChatUrlCount, setOpenChatUrlCount] = useState(0);
+  const [additionalWritingCount, setAdditionalWritingCount] = useState(0);
 
   // 검증에 따른 에러메세지
   const [boardIdErrMsg, setBoardIdErrMsg] = useState("");
@@ -51,11 +57,33 @@ function Recruit() {
   // 모집글 등록버튼 활성화여부
   const [saveBtnActive, setSaveBtnActive] = useState(true);
 
+  // textarea 참조
+  const activityDetailAreaRef = useRef(null);
+  const additionalWritingAreaRef = useRef(null);
+
   // 텍스트 입력폼의 입력처리 메서드
-  const handleInputChange = (event, setState, maxLength) => {
+  const handleInputChange = (event, setInputState, setWordCountState, maxLength) => {
     const { value } = event.target;
     if (value.length <= maxLength) {
-      setState(value);
+      setInputState(value);
+      setWordCountState(value.length);
+    }
+  };
+  const handleTextAreaChange = (event, textareaRef, setInputState, setWordCountState, maxLength) => {
+    const { value } = event.target;
+    if (value.length <= maxLength) {
+      setInputState(value);
+      setWordCountState(value.length);
+      if (textareaRef && textareaRef.current) {
+        textareaRef.current.style.height = "0px";
+        textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+      }
+    }
+  };
+  const handleRequirementTitleChange = (event, setInputState, maxLength) => {
+    const { value } = event.target;
+    if (value.length <= maxLength) {
+      setInputState(value);
     }
   };
 
@@ -68,11 +96,9 @@ function Recruit() {
   // 추가요건 추가/제거 메서드
   const addRequirement = () => {
     const newRequirement = { id: makeUuidV4(), title: '', resultType: '' };
-    console.log([...requirements, newRequirement])
     setRequirements([...requirements, newRequirement]);
   };
   const deleteRequirement = (id) => {
-    console.log(requirements.filter((requirement) => requirement.id !== id))
     setRequirements(requirements.filter((requirement) => requirement.id !== id));
   };
 
@@ -226,15 +252,23 @@ function Recruit() {
         </div>
         <div className={styles.rcontentsbox}>
           {/*모집글 제목 입력칸*/}
-          <div className={styles.text1}>제목 :</div>
-          <input type="text" name="input" value={postTitle} onChange={(e) => handleInputChange(e, setPostTitle, 30)} />
+          <div className={styles.header}>
+            <div className={styles.text1}>제목 :</div>
+            <div className={styles.wordCounter}>{`(${titleCount}/30)`}</div>
+          </div>
+          <input type="text" name="input" value={postTitle} onChange={(e) => handleInputChange(e, setPostTitle, setTitleCount, 30)} />
           <div className={styles.error}>{postTitleErrMsg}</div>
           {/*활동내용 입력칸*/}
-          <div className={styles.text1}>활동내용 :</div>
-          <textarea name="activity" value={activityDetail} onChange={(e) => handleInputChange(e, setActivityDetail, 100)} />
+          <div className={styles.header}>
+            <div className={styles.text1}>활동내용 :</div>
+            <div className={styles.wordCounter}>{`(${activityDetailCount}/100)`}</div>
+          </div>
+          <textarea name="activity" value={activityDetail}  ref={activityDetailAreaRef} onChange={(e) => handleTextAreaChange(e, activityDetailAreaRef, setActivityDetail, setActivityDetailCount, 100)} />
           <div className={styles.error}>{activityDetailErrMsg}</div>
           {/*팀성향 입력칸 radio*/}
-          <div className={styles.text1}>팀성향 :</div>
+          <div className={styles.header}>
+            <div className={styles.text1}>팀성향 :</div>
+          </div>
           <div className={styles.teambuttons}>
             <label>
               <input type="radio" name="team-preference" value="BIG" checked={passionSize === 'BIG'} onChange={() => setPassionSize('BIG')} />
@@ -251,21 +285,29 @@ function Recruit() {
           </div>
           <div className={styles.error}>{passionSizeErrMsg}</div>
           {/*오픈채팅방 주소 입력값*/}
-          <div className={styles.text1}>오픈채팅방 주소 :</div>
-          <input type="text" name="input" value={openChatUrl} onChange={(e) => handleInputChange(e, setOpenChatUrl, 100)} />
+          <div className={styles.header}>
+            <div className={styles.text1}>오픈채팅방 주소 :</div>
+            <div className={styles.wordCounter}>{`(${openChatUrlCount}/100)`}</div>
+          </div>
+          <input type="text" name="input" value={openChatUrl} onChange={(e) => handleInputChange(e, setOpenChatUrl, setOpenChatUrlCount, 100)} />
           <div className={styles.error}>{openChatUrlErrMsg}</div>
           {/*추가로 하고싶은말 입력값*/}
-          <div className={styles.text1}>하고싶은 말 :</div>
-          <textarea name="additionalComments" value={additionalWriting} onChange={(e) => handleInputChange(e, setAdditionalWriting, 100)} />
+          <div className={styles.header}>
+            <div className={styles.text1}>하고싶은 말 :</div>
+            <div className={styles.wordCounter}>{`(${additionalWritingCount}/100)`}</div>
+          </div>
+          <textarea name="additionalComments" value={additionalWriting} ref={additionalWritingAreaRef} onChange={(e) => handleTextAreaChange(e, additionalWritingAreaRef, setAdditionalWriting, setAdditionalWritingCount, 100)} />
           <div className={styles.error}>{additionalWritingErrMsg}</div>
           {/*참여요건 입력 박스*/}
-          <div className={styles.text1}>참여요건</div>
+          <div className={styles.header}>
+            <div className={styles.text1}>참여요건</div>
+          </div>
           {requirements.map((requirement, index) => (
             <div key={requirement.id} className={styles.requirementcontainer}>
               {/*참여요건 설명 입력*/}
               <div className={styles.requirement}>
                 <div className={styles.text2}>참여요건 :</div>
-                <input type="text" name="input" value={requirement.title} onChange={(e) => handleInputChange(
+                <input type="text" name="input" value={requirement.title} onChange={(e) => handleRequirementTitleChange(
                   e, (value) => {
                     const updatedRequirements = [...requirements];
                     updatedRequirements[index].title = value;
