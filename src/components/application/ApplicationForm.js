@@ -1,6 +1,7 @@
 import reqeustFindPostDetail from "hook/requestFindPostDetailApi";
 import requestSaveApplicationApi from "hook/requestSaveApplicationApi";
 import React, { useState, useEffect } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "styles/ApplicationForm.module.css";
@@ -8,7 +9,21 @@ import styles from "styles/ApplicationForm.module.css";
 // 텍스트 타입의 참여요건폼 
 const TextRequireForm = ({ix, title, setInput, error}) => {
   const [textInput, setTextInput] = useState("");
+  const [textCount, setTextCount] = useState(0);
   const [errorMsg, setErrorMsg] = useState("");
+  const textInputArea = useRef(null);
+
+  // 텍스트 입력 처리메서드
+  const onChangeTextInput = (input) => {
+    if(input.length <= 100) {
+      setTextInput(input);
+      setTextCount(input.length);
+      if (textInputArea && textInputArea.current) {
+        textInputArea.current.style.height = "36px";
+        textInputArea.current.style.height = textInputArea.current.scrollHeight + "px";
+      }
+    }
+  }
 
   // 신청요청 전에 검증과정에서 발생한 에러메세지 출력
   useEffect(() => {
@@ -17,13 +32,17 @@ const TextRequireForm = ({ix, title, setInput, error}) => {
 
   return (
     <div className={styles.requirementBox}>
-      <div className={styles.requirementTitle}>{title}</div>
+      <div className={styles.requirementTextTitleBox}>
+        <div className={styles.requirementTextTitle}>{title}</div>
+        <div className={styles.wordCounter}>{`(${textCount}/100)`}</div>
+      </div>
       <div className={styles.requirementTextBox}>
-        <input 
-          type="text" maxLength={100}
-          onChange={(e) => setTextInput(e.target.value)}
+        <textarea 
+          ref={textInputArea}
+          maxLength={100}
+          onChange={(e) => onChangeTextInput(e.target.value)}
           onBlur={(e) => setInput(ix, textInput)}
-        ></input>
+        ></textarea>
       </div>
       <div className={styles.error}>{errorMsg}</div>
     </div>
@@ -67,7 +86,7 @@ const FileRequireForm = ({ix, title, setInput, error}) => {
 
   return (
     <div className={styles.requirementBox}>
-      <div className={styles.requirementTitle}>{title}</div>
+      <div className={styles.requirementFileTitle}>{title}</div>
       <div className={styles.requirementFileBox}>
         <input className={styles.fileUploadInput} id={`upload_${ix}`} type="file" onChange={handleFileChange}></input>
         <label htmlFor={`upload_${ix}`}>
@@ -84,6 +103,7 @@ const ApplicationForm = () => {
   const {postId} = useParams();
   const navigate = useNavigate();
 
+  const initDataComplete = useSelector(state => state.initDataComplete)
   const loginData = useSelector(state => state.loginData);
   const [postIdValue, setPostIdValue] = useState(postId);
   const [requirementList, setRequirementList] = useState();
@@ -199,8 +219,9 @@ const ApplicationForm = () => {
 
   // 참여요건 리스트 조회 API 수행
   useEffect(() => {
-    requestRequirementList();
-  }, [])
+    if(initDataComplete)
+      requestRequirementList();
+  }, [initDataComplete])
 
 
   // 로딩중일 경우
