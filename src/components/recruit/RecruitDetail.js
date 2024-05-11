@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from "styles/RecruitDetail.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { openLoginModal } from 'store/aboutStore';
+import requestVarifyApplicationApi from 'hook/reqeustVerifyApplicationApi';
 
 function RecruitDetail() {
   const navigate = useNavigate();
@@ -48,11 +49,25 @@ function RecruitDetail() {
   }, [currentPostId, loginData, initDataComplete]);
 
   useEffect(() => {
-    if(loginData && postData) {
-      if(loginData.memberId === postData.writerId)
-        setActiveBtn(false);
+    if(!currentPostId) return;
+    if(!initDataComplete) return;
+    if(!loginData) {
+      setActiveBtn(true);
+      return;
     }
-  }, [loginData, postData])
+    console.log("RecruitDetail : 해당 모집글에 대해 신청가능 여부를 조회 시도");
+    requestVarifyApplicationApi(currentPostId)
+    .then(res => {
+      console.log("RecruitDetail : 해당 모집글에 대해 신청가능 여부를 조회 성공");
+      setActiveBtn(res.data);
+    })
+    .catch(err => {
+      console.log("RecruitDetail : 해당 모집글에 대해 신청가능 여부를 조회 실패");
+      console.log(err);
+      alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
+    })
+
+  }, [currentPostId, initDataComplete])
 
   // 신청하기 버튼 클릭
   const onClickRequestBtn = () => {
