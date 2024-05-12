@@ -1,6 +1,7 @@
 import requestLoginApi from "hook/requestLoginApi";
 import { useState } from "react";
 import styles from "styles/LoginFormModal.module.css";
+import handleApiReqeustError from "util/handleApiReqeustError";
 
 
 // 검증을 위한 정규표현식
@@ -57,15 +58,14 @@ const LoginFormModal = ({completeLogin}) => {
         localStorage.setItem("jwtToken", res.data.jwtToken);
         completeLogin();
       })
-      .catch(error => {
+      .catch(err => {
         console.log("로그인 실패")
-        console.log(error)
-        if(error.response && error.response.data.code === 'BAD_INPUT') {
-          alert("이메일 또는 비밀번호가 맞지않습니다.");
-        }
-        else {
-          alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
-        }
+        handleApiReqeustError({
+          err:err,
+          handleBadInput: () => {
+            alert("이메일 또는 비밀번호가 맞지않습니다.");
+          }
+        })
       });
   }
 

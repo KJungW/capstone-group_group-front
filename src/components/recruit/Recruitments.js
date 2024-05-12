@@ -4,6 +4,7 @@ import requestFindPostListApi from 'hook/requestFindPostListApi';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "styles/Recruitments.module.css";
+import handleApiReqeustError from 'util/handleApiReqeustError';
 
 const ApplicationRow = ({postId, applicationData, changeAppState}) => {
   const navigate = useNavigate();
@@ -22,13 +23,7 @@ const ApplicationRow = ({postId, applicationData, changeAppState}) => {
     .catch(err => {
       setIsRequest(false)
       console.log("Recruitments: 신청 상태변경 요청 실패") 
-      console.log(err)
-      if (err.response.data.code === 'UNAUTHORIZED') {
-        alert("로그인 유효기간이 만료되었거나 로그인을 하지않았습니다. 로그인을 먼저 진행해주세요!");
-        navigate("/");
-      } else {
-        alert("잠시후 다시 실행해주세요");
-      }
+      handleApiReqeustError({err:err})
     })
   }
 

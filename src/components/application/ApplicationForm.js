@@ -1,3 +1,4 @@
+import { COMMON_BAD_INPUT_ERROR_MSG, COMMON_SERVER_ERROR_MSG, COMMON_UNAUTHORIZED_ERROR_MSG } from "constData/ErrorMessage";
 import reqeustFindPostDetail from "hook/requestFindPostDetailApi";
 import requestSaveApplicationApi from "hook/requestSaveApplicationApi";
 import React, { useState, useEffect } from "react";
@@ -5,6 +6,7 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "styles/ApplicationForm.module.css";
+import handleApiReqeustError from "util/handleApiReqeustError";
 
 // 텍스트 타입의 참여요건폼 
 const TextRequireForm = ({ix, title, setInput, error}) => {
@@ -128,8 +130,7 @@ const ApplicationForm = () => {
     } 
     catch (err) {
       console.log("ApplicationForm : 모집글 세부내용 조회 실패")
-      console.log(err)
-      alert("접속이 원할하지 않습니다. 잠시후 다시 시작해주세요")
+      handleApiReqeustError({err:err});
     }
   }
 
@@ -159,23 +160,23 @@ const ApplicationForm = () => {
     })
     .catch(err => {
       console.log("ApplicationForm : 신청 요청 실패");
-      console.log(err);
-      if (err.response && err.response.data.code === 'UNAUTHORIZED') {
-        alert("로그인 유효기간이 만료되었거나 로그인을 하지않았습니다. 로그인을 먼저 진행해주세요!");
-        navigate(-1);
-        setAppBtnIsActive(true);
-      }
-      else if (err.response && err.response.data.code === 'BAD_INPUT') {
-        alert("잘못된 신청입니다.");
-        navigate(-1);
-        setAppBtnIsActive(true);
-      }
-      else {
-        alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
-        setAppBtnIsActive(true);
-      }
-    })
-
+      handleApiReqeustError({
+        err:err,
+        handleUnAuthRized: () => {
+          alert(COMMON_UNAUTHORIZED_ERROR_MSG);
+          setAppBtnIsActive(true);
+        },
+        handleBadInput: () => {
+          alert(COMMON_BAD_INPUT_ERROR_MSG);
+          navigate(-1);
+          setAppBtnIsActive(true);
+        },
+        handleElse: () => {
+          alert(COMMON_SERVER_ERROR_MSG);
+          setAppBtnIsActive(true);
+        }
+      });
+    });
   }
 
   // 입력값을 inputList상태에 등록하는 메서드

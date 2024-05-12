@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBoardListData, updateCurrentBoardId, updateInitDataComplete, updateLoginData } from "store/aboutStore";
 import convertFindBoardSubApiResult from "util/convertFindBoardSubApiResult";
+import handleApiReqeustError from "util/handleApiReqeustError";
 
 const InitEarlyData = () => {
     const dispatch = useDispatch();
@@ -27,10 +28,11 @@ const InitEarlyData = () => {
                 nickName : memberData.nickName,
                 campusId : memberData.campusId
             }));
-        } catch {
+        } catch (err) {
             console.log("InitEarlyData : 초기 로그인 데이터 조회 실패")
             localStorage.clear();
             dispatch(updateLoginData(undefined));
+            handleApiReqeustError({err:err});
         }
     }
 
@@ -49,8 +51,9 @@ const InitEarlyData = () => {
             const boardList = convertFindBoardSubApiResult(boardListRaw.content);
             dispatch(updateBoardListData(boardList));
             dispatch(updateCurrentBoardId(boardList[0].data[0].id))
-        } catch {
+        } catch (err) {
             console.log("InitEarlyData : 게시판 리스트 조회 실패");
+            handleApiReqeustError({err:err});
         }
     }
 

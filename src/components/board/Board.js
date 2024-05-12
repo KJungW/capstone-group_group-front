@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { openLoginModal } from 'store/aboutStore';
 import styles from "styles/Board.module.css";
 import convertDate from 'util/convertDate';
+import handleApiReqeustError from 'util/handleApiReqeustError';
 
 const Board = () => {
   const navigate = useNavigate();
@@ -47,9 +48,7 @@ const Board = () => {
     })
     .catch(err=>{
       console.log("Board : 모집글 목록요청 실패");
-      console.log(err);
-      if(!err.response)
-        alert("접속이 원할하지 않습니다. 잠시후에 다시 접속해주세요");
+      handleApiReqeustError({err:err});
     })
   }, [boardId, currentPageNumber, postCountInPage]);
 

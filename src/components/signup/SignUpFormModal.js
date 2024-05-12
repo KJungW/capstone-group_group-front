@@ -1,6 +1,7 @@
 import reqeustSignUpApi from "hook/requestSignUpApi";
 import { useState } from "react";
 import styles from "styles/SignUpFormModal.module.css";
+import handleApiReqeustError from "util/handleApiReqeustError";
 
 // 검증을 위한 정규표현식
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -89,13 +90,12 @@ const SignUpFormModal = ({moveNextModal}) => {
     })
     .catch (err => {
       console.log("회원가입 요청 실패");
-      console.log(err);
-      if(err.response && err.response.data.code === 'BAD_INPUT') {
-        alert("이미 등록된 회원입니다.");
-      } 
-      else {
-        alert("접속이 원할하지 않습니다. 잠시후 다시 실행해주세요");
-      }
+      handleApiReqeustError({
+        err:err,
+        handleBadInput: () => {
+          alert("이미 등록된 회원입니다.");
+        }
+      })
     })
     .finally(() => {
       setIsSendingEmail(false);

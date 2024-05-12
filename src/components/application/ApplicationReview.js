@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "styles/ApplicationReview.module.css";
 import axios from "axios";
+import handleApiReqeustError from "util/handleApiReqeustError";
+import { COMMON_BAD_INPUT_ERROR_MSG } from "constData/ErrorMessage";
 
 const TextRequirement = ({title, content}) => {
   const textContentRef = useRef(null);
@@ -77,18 +79,13 @@ const ApplicationReview = () => {
     })
     .catch (err => {
       console.log("ApplicationReview : 신청 세부 데이터 조회 실패");
-      console.log(err);
-      if (err.response && err.response.data.code === 'UNAUTHORIZED') {
-        alert("로그인 유효기간이 만료되었거나 로그인을 하지않았습니다. 로그인을 먼저 진행해주세요!");
-        navigate(-1);
-      } 
-      else if(err.response && err.response.status === 400) {
-        alert("데이터가 존재하지 않습니다.");
-        navigate(-1);
-      }
-      else {
-        alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
-      }
+      handleApiReqeustError({
+        err:err,
+        handleBadInput: () => {
+          alert(COMMON_BAD_INPUT_ERROR_MSG);
+          navigate(-1);
+        },
+      });
     })
   }
 

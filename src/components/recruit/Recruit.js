@@ -5,6 +5,7 @@ import styles from "styles/Recruit.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentBoardId } from 'store/aboutStore';
 import makeUuidV4 from 'util/makeUuidV4';
+import handleApiReqeustError from 'util/handleApiReqeustError';
 
 function MenuComponentInSelect({mainMenuData}) {
   return (
@@ -206,13 +207,7 @@ function Recruit() {
     })
     .catch(err => {
       console.log("Recurit : 모집글 저장 요청 실패")
-      console.log(err);
-      if (err.response && err.response.data.code === 'UNAUTHORIZED') {
-        alert("로그인 유효기간이 만료되었거나 로그인을 하지않았습니다. 로그인을 먼저 진행해주세요!");
-        navigate(-1);
-      } else {
-        alert("접속이 원할하지 않습니다. 잠시후 다시 접속해주세요");
-      }
+      handleApiReqeustError({err:err});
     })
     .finally(() => {
       setSaveBtnActive(true);

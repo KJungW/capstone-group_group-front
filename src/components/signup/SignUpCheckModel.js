@@ -1,6 +1,7 @@
 import reqeustSignUpApi from "hook/requestSignUpApi";
 import { useState } from "react";
 import styles from "styles/SignUpCheckModel.module.css";
+import handleApiReqeustError from "util/handleApiReqeustError";
 
 const SignUpCheckModel = ({ formData }) => {
   const [isSendingEmail, setIsSendingEmail] = useState(false)
@@ -13,7 +14,7 @@ const SignUpCheckModel = ({ formData }) => {
     })
     .catch(err => {
       console.log("회원가입 요청 재전송 실패");
-      alert("접속이 원할하지 않습니다. 잠시후 다시 실행해주세요");
+      handleApiReqeustError({err:err})
     })
     .finally(() => {
       setIsSendingEmail(false);
