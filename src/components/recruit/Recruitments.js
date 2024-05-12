@@ -141,9 +141,9 @@ const PostTableRow = ({postData, deletePost, changeAppState}) => {
   return (
     <>
       <div className={styles.postRow}>
-        <div className={styles.postRowTitle} onClick={onClickPostRow}>{postData.postTitle}</div>
-        <div className={styles.postRowTime} onClick={onClickPostRow}>{convertDate(postData.postCreateTime)}</div>
-        <div className={styles.postRowEllipsis} onClick={openSubMenu}>
+        <div className={styles.titleInRow} onClick={onClickPostRow}>{postData.postTitle}</div>
+        <div className={styles.dateInRow} onClick={onClickPostRow}>{convertDate(postData.postCreateTime)}</div>
+        <div className={styles.ellipsisInRow} onClick={openSubMenu}>
           <i className="fas fa-ellipsis-v"></i>
           {isSubMenuOpen?<SubMenu closeSubMenu={closeSubMenu} onClickDeleteInSubMenu={(e) => onClickDeleteInSubMenu(e, postData.postId)}/>:''}
         </div>
@@ -169,6 +169,7 @@ const Recruitments = () => {
     requestFindPostListApi(currentPageNum, 10)
     .then(res => {
       console.log("Recruitments : 작성한 모집글 리스트 조회 성공");
+      console.log(res.data);
       setPostList(res.data.postAndApplicationsOverviews);
       setTotalPageCount(res.data.totalPages);
       setIsLastPage(res.data.lastPage);
