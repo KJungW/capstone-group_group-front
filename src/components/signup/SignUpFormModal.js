@@ -45,7 +45,7 @@ const SignUpFormModal = ({moveNextModal}) => {
     // 닉네임 검증
     let nickNameError;
     if(!inputNickName || inputNickName.trim() === "") {
-      nickNameError="이메일을 입력해주세요";
+      nickNameError="닉네임을 입력해주세요";
     } else {
       nickNameError="";
     }
