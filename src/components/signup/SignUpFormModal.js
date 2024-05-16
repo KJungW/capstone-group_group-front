@@ -20,9 +20,6 @@ const SignUpFormModal = ({moveNextModal}) => {
   const [pwErrorMsg, setPwErrorMsg] = useState("");
   const [pwCheckErrorMsg, setPwCheckErrorMsg] = useState("");
 
-  // 인증이메일 전송중인지 여부 
-  const [isSendingEmail, setIsSendingEmail] = useState(false);
-
   // input 태그 입력 처리메소드
   const onChangeInputEmail = (e) => {setInputEmail(e.target.value);};
   const onChangeInputNickName = (e) => {setInputNickName(e.target.value);};
@@ -84,23 +81,7 @@ const SignUpFormModal = ({moveNextModal}) => {
   const signUp = () => {
     console.log("회원가입 수행");
     reqeustSignUpApi(inputEmail, inputNickName, inputPw)
-    .then (res => {
-      console.log("회원가입 요청 성공");
-      moveNextModal(inputEmail, inputNickName, inputPw);
-    })
-    .catch (err => {
-      console.log("회원가입 요청 실패");
-      handleApiReqeustError({
-        err:err,
-        handleBadInput: () => {
-          alert("이미 등록된 회원입니다.");
-        }
-      })
-    })
-    .finally(() => {
-      setIsSendingEmail(false);
-    })
-    setIsSendingEmail(true);
+    moveNextModal(inputEmail, inputNickName, inputPw);
   }
 
   // 회원가입 버튼클릭 메서드
@@ -142,9 +123,7 @@ const SignUpFormModal = ({moveNextModal}) => {
           <input type="password" className={styles.textInput} onChange={onChangeInputPwCheck} value={inputPwCheck} maxLength={15}/>
           <div className={styles.errorMsg}>{pwCheckErrorMsg}</div>
         </div>
-        <button className={styles.signUpButton} onClick={clickSingUpBtn} disabled={isSendingEmail}>
-          {isSendingEmail?"진행중":"회원가입"}
-        </button>
+        <button className={styles.signUpButton} onClick={clickSingUpBtn}>회원가입</button>
       </div>
     </div>
   );
