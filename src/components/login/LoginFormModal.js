@@ -50,23 +50,22 @@ const LoginFormModal = ({completeLogin}) => {
   }
 
   // 로그인 수행 메서드
-  const login = () => {
-    console.log("로그인 요청")
-    requestLoginApi(inputEmail, inputPw)
-      .then(res =>  {
-        console.log("로그인 성공");
-        localStorage.setItem("jwtToken", res.data.jwtToken);
-        completeLogin();
+  const login = async () => {
+    try{
+      console.log("로그인 요청")
+      const res = await requestLoginApi(inputEmail, inputPw)
+      console.log("로그인 성공");
+      localStorage.setItem("jwtToken", res.data.jwtToken);
+      completeLogin();
+    } catch(err) {
+      console.log("로그인 실패")
+      handleApiReqeustError({
+        err:err,
+        handleBadInput: () => {
+          alert("이메일 또는 비밀번호가 맞지않습니다.");
+        }
       })
-      .catch(err => {
-        console.log("로그인 실패")
-        handleApiReqeustError({
-          err:err,
-          handleBadInput: () => {
-            alert("이메일 또는 비밀번호가 맞지않습니다.");
-          }
-        })
-      });
+    }
   }
 
   // 로그인 버튼클릭 메서드
