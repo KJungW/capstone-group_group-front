@@ -6,7 +6,6 @@ import handleApiReqeustError from "util/handleApiReqeustError";
 
 // 검증을 위한 정규표현식
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 
 
 const LoginFormModal = ({completeLogin}) => {
@@ -35,9 +34,7 @@ const LoginFormModal = ({completeLogin}) => {
     let pwError
     if(!inputPw || inputPw.trim() === "") {
       pwError="비밀번호를 입력해주세요";
-    } else if (!passwordRegex.test(inputPw)){
-      pwError="비밀번호는 8자 이상 15자 이내의 영문, 숫자, 특수문자를 포함해야 합니다.";
-    } else {
+    }  else {
       pwError="";
     }
 
