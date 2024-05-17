@@ -73,9 +73,10 @@ const ApplicationRow = ({postId, applicationData, changeAppState}) => {
   )
 }
 
-const SubMenu = ({closeSubMenu, onClickDeleteInSubMenu}) => {
+const SubMenu = ({closeSubMenu, onClickDeleteInSubMenu, onClickUpdateInSubMenu}) => {
   return (
     <div className={styles.tooltip} onMouseLeave={closeSubMenu}>
+      <div className={styles.tooltipItem} onClick={onClickUpdateInSubMenu}>수정</div>
       <div className={styles.tooltipItem} onClick={onClickDeleteInSubMenu}>삭제</div>
     </div>
   )
@@ -124,6 +125,11 @@ const PostTableRow = ({postData, deletePost, changeAppState}) => {
     requestDeletePost(postId);
   }
 
+  // 서브메뉴 내부 수정하기 버튼 클릭 메서드
+  const onClickUpdateInSubMenu = (e, postId) => {
+    navigate(`/recruitUpdate/${postId}`);
+  }
+
   if(!postData) return;
   
   return (
@@ -133,7 +139,10 @@ const PostTableRow = ({postData, deletePost, changeAppState}) => {
         <div className={styles.dateInRow} onClick={onClickPostRow}>{convertDate(postData.postCreateTime)}</div>
         <div className={styles.ellipsisInRow} onClick={openSubMenu}>
           <i className="fas fa-ellipsis-v"></i>
-          {isSubMenuOpen?<SubMenu closeSubMenu={closeSubMenu} onClickDeleteInSubMenu={(e) => onClickDeleteInSubMenu(e, postData.postId)}/>:''}
+          {isSubMenuOpen?<SubMenu closeSubMenu={closeSubMenu} 
+                                  onClickDeleteInSubMenu={(e) => onClickDeleteInSubMenu(e, postData.postId)} 
+                                  onClickUpdateInSubMenu={(e) => onClickUpdateInSubMenu(e, postData.postId)}/>
+          :''}
         </div>
       </div>
       {postData.applicationOverViewList.map((applicationData, ix) =>
@@ -157,7 +166,6 @@ const Recruitments = () => {
     requestFindPostListApi(currentPageNum, 10)
     .then(res => {
       console.log("Recruitments : 작성한 모집글 리스트 조회 성공");
-      console.log(res.data);
       setPostList(res.data.postAndApplicationsOverviews);
       setTotalPageCount(res.data.totalPages);
       setIsLastPage(res.data.lastPage);

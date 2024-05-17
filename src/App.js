@@ -16,6 +16,7 @@ import mainReducerInStore from "store/aboutStore";
 import InitEarlyData from "components/header/InitEarlyData";
 import LoginModalPage from "components/login/LoginModalPage";
 import SignUpModalPage from "components/signup/SignUpModalPage";
+import RecruitUpdate from "components/recruit/RecruitUpdate";
 
 // 전역상태 저장소 생성
 const store = createStore(mainReducerInStore);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/recruitments" element={<Recruitments />} />
           <Route path="/recruit/:boardId" element={<Recruit />} />
           <Route path="/recruitdetail/:postId" element={<RecruitDetail />} />
+          <Route path="/recruitUpdate/:postId" element={<RecruitUpdate />} />
           <Route path="/apply/:postId" element={<ApplicationForm />} />
           <Route path="/review/:applicationId" element={<ApplicationReview />} />
         </Routes>
