@@ -25,7 +25,7 @@ const ApplicationTableRow = ({application}) => {
         <div className={styles.openchatRow}>
           <div className={`${styles.openchatRowContent}`}>
             <div className={`${styles.urlTitleInRow}`}>오픈채팅방 접속:</div>
-            <a className={`${styles.urlInRow}`} href={openChatUrl}>{openChatUrl}</a>
+            <div className={`${styles.urlInRow}`} onClick={e => onClickOpenchatUrl(openChatUrl)}>{openChatUrl}</div>
           </div>
         </div>
       )
@@ -37,12 +37,18 @@ const ApplicationTableRow = ({application}) => {
     navigate(`/review/${applicationId}`);
   }
 
+  const onClickOpenchatUrl = (url) => {
+    window.open(url);
+  }
+
   return (
     <>
       <div className={styles.applicationRow} onClick={()=>onClickRow(application.applicationId)}>
         <div className={styles.titleInRow}>{`<${application.postTitle}> 신청서`}</div>
         <div className={styles.dateInRow}>{application.createdTime}</div>
-        <div className={styles.stateInRow}>{maekApplicationReusltComp(application.applicationState)}</div>
+        <div className={styles.stateInRow}>
+          {maekApplicationReusltComp(application.applicationState)}
+        </div>
       </div>
       {makeOpenChatComp(application.applicationState, application.openChatUrl)}
     </>

@@ -104,6 +104,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
+  cursor: pointer;
+  color:blue;
 }
 
 .yetButton {
