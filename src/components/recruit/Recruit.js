@@ -192,7 +192,6 @@ function Recruit() {
     setSaveBtnActive(false);
     requestSavePostApi({
       boardId : selectedBoardId,
-      writerId : loginData.memberId,
       title : postTitle,
       activityDetail : activityDetail,
       passionSize : passionSize,

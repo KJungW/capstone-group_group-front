@@ -1,12 +1,11 @@
 import axios from "axios"
 
 async function requestSavePostApi({
-    boardId, writerId, title, activityDetail, passionSize, additionalWriting, openChatUrl, requirementList
+    boardId, title, activityDetail, passionSize, additionalWriting, openChatUrl, requirementList
 }) {
     // API 요청을 위한 JSON 데이터 생성
     const postData = {
         boardId : boardId,
-        writerId : writerId,
         title : title,
         activityDetail : activityDetail,
         passionSize : passionSize,
