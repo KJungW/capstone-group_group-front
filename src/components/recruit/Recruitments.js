@@ -4,6 +4,7 @@ import requestFindPostListApi from 'hook/requestFindPostListApi';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "styles/Recruitments.module.css";
+import convertDate from 'util/convertDate';
 import handleApiReqeustError from 'util/handleApiReqeustError';
 
 const ApplicationRow = ({postId, applicationData, changeAppState}) => {
@@ -102,19 +103,6 @@ const PostTableRow = ({postData, deletePost, changeAppState}) => {
       }
     }
   }
-
-  // 작성일자 데이터를 적절히 변형하는 메서드
-  const convertDate = (date) => {
-    const currentDate = new Date();
-    const targetDate = new Date(date);
-    const isToday = targetDate.getDate() === currentDate.getDate() &&
-                    targetDate.getMonth() === currentDate.getMonth() &&
-                    targetDate.getFullYear() === currentDate.getFullYear();
-    return isToday
-    ? `${targetDate.getHours()}:${targetDate.getMinutes()}` 
-    : `${targetDate.getFullYear()}-${targetDate.getMonth()+1}-${targetDate.getDate()}`;
-  }
-  
 
   // 모집글 row 클릭 메서드
   const onClickPostRow = () => {
