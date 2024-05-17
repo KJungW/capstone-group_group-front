@@ -74,7 +74,6 @@ const Nav = () => {
                   onMouseEnter={() => setIsSubMenuVisible(true)}>
             게시판
           </button>
-          {isSubMenuVisible && <SubMenu subMenuData={subMenuData}/>}
           <button onClick={() => handleMenuClick(navStateEnum.RECURITMENTS)}
                   className={`styles.button ${navState===navStateEnum.RECURITMENTS ? styles.active : ''}`}>
             작성글 목록
@@ -83,6 +82,7 @@ const Nav = () => {
                   className={`styles.button ${navState===navStateEnum.APPLICATIONS ? styles.active : ''}`}>
             신청 목록
           </button>
+          {isSubMenuVisible && <SubMenu subMenuData={subMenuData}/>}
         </div>
       </div>
     </div>

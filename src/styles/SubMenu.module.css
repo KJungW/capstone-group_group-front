@@ -1,18 +1,18 @@
 .subMenu {
+    width:70%;
+    min-width: 700px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 110%;
+    top:174px;
     z-index: 1;
-    left: 0;
-    width: 100%;
     background-color: rgb(238, 238, 238);
   }
   
 .subMenuItem {
-  margin-left: 30px;
-  margin-right: 50px;
+  width: 200px;
   font-size: 14px;
 }
 
