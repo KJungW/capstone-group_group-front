@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from "styles/Recruit.module.css";
+import styles from "styles/RecruitUpdate.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import makeUuidV4 from 'util/makeUuidV4';
 import handleApiReqeustError from 'util/handleApiReqeustError';
