@@ -1,0 +1,94 @@
+.contentsbox {
+    background-color: white;
+    border-top: 3px solid navy;
+    min-height: 300px;
+    margin: 0px 20px 20px 20px;
+}
+  
+.applicationTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid navy;
+}
+
+.applicationRow {
+    height: 60px;
+    font-size: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid navy;
+    background-color: rgb(226, 226, 226);
+}
+
+.titleInRow {
+    width: calc(100% - 100px - 70px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    padding-left: 10px;
+    color :rgb(107, 107, 107)
+}
+  
+.dateInRow{
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color :rgb(107, 107, 107)
+}
+  
+.stateInRow {
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.yetButton {
+    background-color: #8d8d8d;
+    color: white;
+    border: none;
+    width: 52px;
+    height: 30px;
+    border-radius: 5px;
+}
+  
+.acceptButton {
+    background-color: #87b489;
+    color: white;
+    border: none;
+    width: 52px;
+    height: 30px;
+    border-radius: 5px;
+}
+  
+.rejectButton {
+    background-color: #b97a75;
+    color: white;
+    border: none;
+    width: 52px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pageNum, .narrow{
+    width:25px;
+    text-decoration: none;
+    color:rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.current_page{
+    color:rgb(105, 151, 252);
+  }
+  
+  

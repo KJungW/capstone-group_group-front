@@ -1,0 +1,29 @@
+.contentsbox {
+    background-color: white;
+    border-top: 3px solid navy;
+    min-height: 300px;
+    margin: 0px 20px 20px 20px;
+}
+  
+.applicationTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid navy;
+}
+
+.applicationTabel {
+    width: 100%;
+}
+  
+.applicationTabel th {
+    background-color: #f2f2f2;
+}
+
+.blankTableContent {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    
