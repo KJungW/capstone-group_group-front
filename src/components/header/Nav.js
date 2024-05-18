@@ -22,7 +22,7 @@ const Nav = () => {
   const [navState, setNavState] = useState(navStateEnum.NONE);
 
   useEffect(() => {
-    if(location.pathname === "/") {
+    if(location.pathname === "/board") {
       setNavState(navStateEnum.BOARD);
     }
     else if(location.pathname.includes("/recruitments")) {
@@ -41,7 +41,7 @@ const Nav = () => {
     switch (menu) {
       case navStateEnum.BOARD:
         setNavState(navStateEnum.BOARD);
-        navigate('/');
+        navigate('/board');
         break;
       case navStateEnum.RECURITMENTS:
         if(loginData && loginData.memberId) {

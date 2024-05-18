@@ -11,7 +11,7 @@ const SubMenu = ({ subMenuData }) => {
   // 서브메뉴 클릭 처리메서드
   const handleSubMenuClick = (boardId) => {
     dispatch(updateCurrentBoardId(boardId))
-    navigate(`/`);
+    navigate(`/board`);
   };
 
   if(subMenuData === undefined)

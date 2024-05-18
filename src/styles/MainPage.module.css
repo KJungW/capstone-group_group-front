@@ -2,9 +2,21 @@
 
     .container {
         width: 100%;
-        height: calc(100vh - 60px);
+        height: 100vh;
+        min-height: 700px;
         display: flex;
-        font-family:Arial, Helvetica, sans-serif
+        font-family:Arial, Helvetica, sans-serif;
+        background-color: aquamarine;
+    }
+
+    .header {
+        display: none;
+    }
+    .headerimage{
+        display: none;
+    }
+    .logoInHeader{
+        display: none;
     }
     
     .leftPanel {
@@ -25,6 +37,31 @@
         justify-content: center;
         align-items: center;
     }
+
+    .headerInleftPanel{
+        width: 100%;
+        height: 60px;
+        background-color: rgb(1, 1, 90);
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .logoboxInLeftPanel{
+        background-color: #ffffffac;
+        border-radius: 20px;
+        width: 130px;
+        height: 50px;
+        margin-left: 30px;
+    }
+
+    .logoInLeftPanel{
+        width: 90%;
+        margin-top: 2px;
+    }
+    
     
     .start {
         color: black;
@@ -41,6 +78,7 @@
     }
     
     .subtitle {
+        width: 600px;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -72,11 +110,11 @@
     }
     
     .leftbubble1 {
-        margin-top: -70px;
+        margin-top: -100px;
     }
     
     .leftbubble2 {
-        margin-top: 110px;
+        margin-top: 150px;
     }
     
     .rightbubble {
@@ -119,13 +157,10 @@
         display: flex;
     }
     
-    .signinbutton {
-        margin-left: 50px;
-    }
-    
-    .signinbutton, .loginbutton {
+    .button {
         padding: 15px 0px;
-        width: 150px;
+        width: 110px;
+        height: 45px;
         background-color: navy;
         color: white;
         border: none;
@@ -133,8 +168,13 @@
         cursor: pointer;
         font-size: 16px;
         font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
     }
-    
+
     .copy {
         font-size: 10px;
         position: absolute;
@@ -152,11 +192,32 @@
         flex-direction: column;
         font-family:Arial, Helvetica, sans-serif
     }
+
+    .header {
+        width:100%;
+        height: 60px;
+        background-color: navy;
+        display: flex;
+        align-items: center;
+    }
+
+    .headerimage {
+        margin-left: 30px;
+        background-color: #ffffffac;
+        border-radius: 20px;
+        width: 130px;
+        height: 50px;
+    }
     
+    .logoInHeader {
+        width: 90%;
+        margin-top: 2px;
+    }
+
     .leftPanel {
         order: 2;
-        height: 100vh;
-        min-height: 600px;
+        height: 100%;
+        min-height: 800px;
         background-color: navy;
         display: flex;
         justify-content: left;
@@ -167,13 +228,21 @@
     
     .rightPanel {
         order: 1;
-        height: calc(100vh - 60px);
+        height: 60vh;
         min-height: 400px;
         background-color: white;
         display: flex;
         position: relative;
         justify-content: center;
         align-items: center;
+    }
+
+    .logoboxInLeftPanel{
+        display: none;
+    }
+
+    .logoInLeftPanel{
+        display: none;
     }
     
     .start {
@@ -191,6 +260,7 @@
     }
     
     .subtitle {
+        width: 600px;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -222,11 +292,11 @@
     }
     
     .leftbubble1 {
-        margin-top: -70px;
+        margin-top: -160px;
     }
     
     .leftbubble2 {
-        margin-top: 110px;
+        margin-top: 150px;
     }
     
     .rightbubble {
@@ -264,14 +334,11 @@
     .buttons {
         display: flex;
     }
-    
-    .signinbutton {
-        margin-left: 50px;
-    }
-    
-    .signinbutton, .loginbutton {
+
+    .button {
         padding: 15px 0px;
-        width: 150px;
+        width: 110px;
+        height: 45px;
         background-color: navy;
         color: white;
         border: none;
@@ -279,6 +346,11 @@
         cursor: pointer;
         font-size: 16px;
         font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     
     .copy {
