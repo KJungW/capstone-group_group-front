@@ -202,7 +202,7 @@ function Recruit() {
     .then(res => {
       console.log("Recurit : 모집글 저장 요청 성공")
       dispatch(updateCurrentBoardId(selectedBoardId))
-      navigate(`/`);
+      navigate(`/board`);
     })
     .catch(err => {
       console.log("Recurit : 모집글 저장 요청 실패")
@@ -214,7 +214,6 @@ function Recruit() {
   }
   
 
-  // 회원가입 버튼클릭 메서드
   const handlePostButtonClick = () => {
     let validateResult = validateInput()
     if(validateResult.isValid) {
