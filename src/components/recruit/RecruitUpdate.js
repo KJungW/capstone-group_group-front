@@ -50,6 +50,18 @@ function RecruitUpdate() {
     requestPostDetail();
   }, [initDataComplete])
 
+  // textarea 관리
+  useEffect(()=> {
+    if(!activityDetailAreaRef || !activityDetailAreaRef.current) return;
+    if(!additionalWritingAreaRef || !additionalWritingAreaRef.current) return;
+    activityDetailAreaRef.current.style.height = "36px";
+    activityDetailAreaRef.current.style.height = activityDetailAreaRef.current.scrollHeight + "px";
+    additionalWritingAreaRef.current.style.height = "36px";
+    additionalWritingAreaRef.current.style.height = additionalWritingAreaRef.current.scrollHeight + "px";
+  }, [postTitle])
+  
+  
+
   const requestPostDetail = async () => {
     try{
         console.log("RecruitUPdate : 모집글 세부정보 요청 시도");
