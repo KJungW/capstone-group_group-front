@@ -33,7 +33,7 @@
     justify-content: center;
 }
 
-.signinbutton, .loginbutton {
+.signinbutton, .loginbutton{
     padding: 10px 15px;
     background-color: #ffffffac;
     color: rgb(0, 0, 0);
@@ -43,11 +43,58 @@
     margin-left: 15px;
 }
 
-.signinbutton:hover, .loginbutton:hover {
+.signinbutton:hover, .loginbutton:hover{
     background-color: white;
     color: rgb(68, 68, 68);
+}
+
+.subMenuBtn {
+    width: 30px;
+    height: 40px;
+    margin-left: 10px;
+    border : none;
+    background-color: #ffffff00;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .nickName {
     color: white;
 }
+
+.tooltip {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    width:100px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 10;
+    padding:  5px 5px 0px 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.tooltipItem {
+    width: 90px;
+    color : black;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.tooltipItem:hover {
+    background-color: rgb(158, 158, 158);
+}
+  
