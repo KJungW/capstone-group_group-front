@@ -1,3 +1,4 @@
+import requestFindNickNameAvailabilityApi from "hook/requestFindNickNameAvailabilityApi";
 import reqeustSignUpApi from "hook/requestSignUpApi";
 import { useState } from "react";
 import styles from "styles/SignUpFormModal.module.css";
@@ -13,6 +14,7 @@ const SignUpFormModal = ({moveNextModal}) => {
   const [inputNickName, setInputNickName] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [inputPwCheck, setInputPwCheck] = useState("");
+  const [nickNameAvailable, setNickNameAvailable] = useState(false);
 
   // 입력값에 따른 검증 에러메세지
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
@@ -22,7 +24,10 @@ const SignUpFormModal = ({moveNextModal}) => {
 
   // input 태그 입력 처리메소드
   const onChangeInputEmail = (e) => {setInputEmail(e.target.value);};
-  const onChangeInputNickName = (e) => {setInputNickName(e.target.value);};
+  const onChangeInputNickName = (e) => {
+    setInputNickName(e.target.value);
+    setNickNameAvailable(false);
+  };
   const onChangeInputPw = (e) => {setInputPw(e.target.value);}
   const onChangeInputPwCheck = (e) => {setInputPwCheck(e.target.value);}
 
@@ -41,7 +46,10 @@ const SignUpFormModal = ({moveNextModal}) => {
 
     // 닉네임 검증
     let nickNameError;
-    if(!inputNickName || inputNickName.trim() === "") {
+    if(!nickNameAvailable) {
+      nickNameError="닉네임이 사용가능한지 확인해주세요";
+    }
+    else if(!inputNickName || inputNickName.trim() === "") {
       nickNameError="닉네임을 입력해주세요";
     } else {
       nickNameError="";
@@ -80,8 +88,32 @@ const SignUpFormModal = ({moveNextModal}) => {
   // 회원가입 수행
   const signUp = () => {
     console.log("회원가입 수행");
-    reqeustSignUpApi(inputEmail, inputNickName, inputPw)
+    reqeustSignUpApi(inputEmail, inputNickName, inputPw);
     moveNextModal(inputEmail, inputNickName, inputPw);
+  }
+
+  // 넥네임 확인 수행
+  const checkNickNameAvailable = async () => {
+    if(!inputNickName) {
+      alert("닉네임을 먼저 입력해주세요");
+      return;
+    }
+
+    try {
+      console.log("SignUpFormModal : 닉네임 이용가능 여부 조회 시작");
+      await requestFindNickNameAvailabilityApi(inputNickName);
+      console.log("SignUpFormModal : 닉네임 이용가능 여부 조회 성공");
+      alert("이용가능한 닉네임입니다.");
+      setNickNameAvailable(true);
+    } catch (err) {
+      console.log("SignUpFormModal : 닉네임 이용가능 여부 조회 실패");
+      handleApiReqeustError({
+        err:err,
+        handleBadInput: () => {
+          alert("이미 사용되고 있는 닉네임입니다.")
+        }
+      })
+    }
   }
 
   // 회원가입 버튼클릭 메서드
@@ -94,7 +126,10 @@ const SignUpFormModal = ({moveNextModal}) => {
     setNickNameErrorMsg(validateResult.nickNameErrorMsg);
     setPwErrorMsg(validateResult.pwErrorMsg);
     setPwCheckErrorMsg(validateResult.pwCheckErrorMsg);
+  }
 
+  const clickNickNameCheckBtn = () => {
+    checkNickNameAvailable();
   }
 
   return (
@@ -110,7 +145,10 @@ const SignUpFormModal = ({moveNextModal}) => {
         </div>
         <div className={styles.inputBox}>
           <div className={styles.labelBox}><span>사용할 닉네임</span></div>
-          <input type="text" className={styles.textInput} onChange={onChangeInputNickName} value={inputNickName} maxLength={20}/>
+          <div className={styles.nickNameInputBox}>
+            <input type="text" className={styles.nickNameInput} onChange={onChangeInputNickName} value={inputNickName} maxLength={20}/>
+            <button className={styles.nickNameCheckBtn} onClick={clickNickNameCheckBtn} disabled={nickNameAvailable}>닉네임 확인</button>
+          </div>
           <div className={styles.errorMsg}>{nickNameErrorMsg}</div>
         </div>
         <div className={styles.inputBox}>
