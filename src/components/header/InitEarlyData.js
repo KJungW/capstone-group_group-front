@@ -32,7 +32,10 @@ const InitEarlyData = () => {
             console.log("InitEarlyData : 초기 로그인 데이터 조회 실패")
             localStorage.clear();
             dispatch(updateLoginData(undefined));
-            handleApiReqeustError({err:err});
+            handleApiReqeustError({
+                err:err,
+                handleBadInput : () => {}
+            });
         }
     }
 
