@@ -326,7 +326,7 @@ function Recruit() {
               <div className={styles.errorInRequirement}>{requirementsTypeErrMsg[index]}</div>
             </div>
           ))}
-          <button className={styles.addbutton} onClick={addRequirement}>+</button>
+          {(requirements.length<6)?<button className={styles.addbutton} onClick={addRequirement}>+</button>:''}
         </div>
         <button className={styles.postbutton} onClick={handlePostButtonClick} disabled={!saveBtnActive}>등록하기</button>
       </div>
