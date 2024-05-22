@@ -1,0 +1,112 @@
+.boardmap {
+    margin: 0px auto;
+    width: 70%;
+    text-align: center;
+    padding-bottom: 10px;
+    min-width: 700px;
+  }
+  
+  .wrap1 {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .boardname {
+    margin: 40px 0px 0px 20px;
+    background-color: navy;
+    height: 25px;
+    color: white;
+    width: 250px;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 8px;
+  }
+  
+  .contentsbox {
+    background-color: white;
+    border-top: 3px solid navy;
+    min-height: 300px;
+    margin: 0px 20px 20px 20px;
+  }
+  
+  .postsTable {
+    width: 100%;
+    border-bottom: 1px solid navy;
+  }
+  
+  .blankTableContent {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .searchString {
+    border:none;
+    font-weight: bold;
+    font-size: 20px;
+    word-break:break-all;
+    overflow-wrap: break-word;
+    resize: none;
+    margin-bottom: 10px;
+  }
+
+  .noneSearchResultText {
+    color: rgb(152, 152, 185);
+  }
+  
+  .postsTableRow {
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    border-bottom: 1px solid navy;
+  }
+  
+  .titleInRow {
+    width: calc(100% - 20% - 110px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    padding-left: 10px;
+  }
+  
+  .nicknameInRow {
+    width: 20%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dateInRow {
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .page a, .narrow a {
+    display: inline-block;
+    width: 20px;
+    margin: 0 2px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .current_page{
+    color:rgb(105, 151, 252);
+  }
+  

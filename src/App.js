@@ -3,7 +3,6 @@ import "styles/App.module.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "components/header/Header";
 import Nav from "components/header/Nav";
-import Board from "components/board/Board";
 import Applications from "components/application/Applications";
 import Recruitments from "components/recruit/Recruitments";
 import Recruit from "components/recruit/Recruit";
@@ -18,6 +17,8 @@ import LoginModalPage from "components/login/LoginModalPage";
 import SignUpModalPage from "components/signup/SignUpModalPage";
 import RecruitUpdate from "components/recruit/RecruitUpdate";
 import MainPage from "components/main/MainPage";
+import Board from "components/board/Board";
+import SearchResultBoard from "components/board/SearchResultBoard";
 
 // 전역상태 저장소 생성
 const store = createStore(mainReducerInStore);
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<><MainPage /></>} />
           <Route path="/board" element={<><Header /><Nav /><Board /></>} />
+          <Route path="/search" element={<><Header /><Nav /><SearchResultBoard /></>} />
           <Route path="/applications" element={<><Header /><Nav /><Applications /></>} />
           <Route path="/recruitments" element={<><Header /><Nav /><Recruitments /></>} />
           <Route path="/recruit/:boardId" element={<><Header /><Nav /><Recruit /></>} />

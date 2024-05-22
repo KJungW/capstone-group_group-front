@@ -105,3 +105,7 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.current_page{
+  color:rgb(105, 151, 252);
+}

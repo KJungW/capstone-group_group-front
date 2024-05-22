@@ -1,11 +1,12 @@
 import requestPostsInBoard from 'hook/requestPostsInBoardApi';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { openLoginModal } from 'store/aboutStore';
 import styles from "styles/Board.module.css";
 import convertDate from 'util/convertDate';
 import handleApiReqeustError from 'util/handleApiReqeustError';
+import SearchBox from './SearchBox';
 
 const Board = () => {
   const navigate = useNavigate();
@@ -13,13 +14,13 @@ const Board = () => {
 
   // 페이지 요청에 필요한 상태값들
   const boardId = useSelector(state => state.currentBoardId);
-  const [currentPageNumber, setCurrentPageNumber] = useState(0);
-  const [postCountInPage, setPostCountInPage] = useState(10);
+  const postCountInPage = 10;
 
   // 페이지 요청 결과 상태값들
   const [boardTitle, setBoardTitle] = useState("게시판");
   const [totalPageSize, setTotalPageSize] = useState(0);
   const [postListInPage, setPostListInPage] = useState([]);
+  const [currentPageNumber, setCurrentPageNumber] = useState(0);
   const [isFirstPage, setIsFirstPage] = useState(true);
   const [isLastPage, setIsLastPage] = useState(true);
 
@@ -50,7 +51,7 @@ const Board = () => {
       console.log("Board : 모집글 목록요청 실패");
       handleApiReqeustError({err:err});
     })
-  }, [boardId, currentPageNumber, postCountInPage]);
+  }, [boardId, currentPageNumber]);
 
   // 모집글 클릭 메서드
   const onClickRecruit = (postId) => {
@@ -84,33 +85,43 @@ const Board = () => {
       dispatch(openLoginModal());
   };
 
+  // 검색 버튼 클릭 메서드
+  const onClickSearchBtn = (searchString) => {
+    navigate("/search", {state: {searchString : searchString}});
+  }
+
   if(!boardId || !postListInPage || postListInPage.length==0) {
     return (
-      <div className={styles.scrollcontainer}>
-      <div className={styles.boardmap}>
-        <div className={styles.boardcontent}>
-          <div className={styles.wrap1}>
-            <div className={styles.boardname}>
-              {boardTitle}
+      <>
+        <SearchBox boardName={boardTitle} onClickSearchBtn={onClickSearchBtn}/>
+        <div className={styles.scrollcontainer}>
+        <div className={styles.boardmap}>
+          <div className={styles.boardcontent}>
+            <div className={styles.wrap1}>
+              <div className={styles.boardname}>
+                {boardTitle}
+              </div>
+              <button className={styles.writebutton} onClick={handleWriteButtonClick}>글쓰기</button>
             </div>
-            <button className={styles.writebutton} onClick={handleWriteButtonClick}>글쓰기</button>
-          </div>
-          <div className={styles.contentsbox}>
-            <table className={styles.postsTable}>
-              <tbody>
-                <tr><td>
-                  <div className={styles.blankTableContent}>모집글이 존재하지 않습니다.</div>  
-                </td></tr>
-              </tbody>
-            </table>
+            <div className={styles.contentsbox}>
+              <table className={styles.postsTable}>
+                <tbody>
+                  <tr><td>
+                    <div className={styles.blankTableContent}>모집글이 존재하지 않습니다.</div>  
+                  </td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
     )
   }
 
   return (
+    <>
+      <SearchBox boardName={boardTitle} onClickSearchBtn={onClickSearchBtn}/>
       <div className={styles.scrollcontainer}>
         <div className={styles.boardmap}>
           <div className={styles.boardcontent}>
@@ -138,7 +149,10 @@ const Board = () => {
                 <a onClick={onClickBackPageBtn}>&lt;</a>
               </div>
               <div className={styles.page}>
-                {[... new Array(totalPageSize)].map((_, i) => <a key={i} onClick={() => onclickPageBtn(i)}>{i+1}</a>)}
+                {
+                  [... new Array(totalPageSize)].map((_, i) => 
+                    <a className={`${ i==currentPageNumber?styles.current_page:''}`} key={i} onClick={() => onclickPageBtn(i)}>{i+1}</a>)
+                }
               </div>
               <div onClick={onClickNextPageBtn} className={styles.narrow}>
                 <a>&gt;</a>
@@ -147,7 +161,8 @@ const Board = () => {
           </div>
         </div>
       </div>
+    </>
   );
-};
+}
 
 export default Board;

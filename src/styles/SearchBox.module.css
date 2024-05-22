@@ -1,0 +1,35 @@
+.searchBoxArea *{
+    box-sizing: border-box;
+}
+
+.searchBoxArea{
+    width: 100%;
+    min-width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.searchInput{
+    width:60%;
+    min-width: 600px;
+    max-width: 900px;
+    height: 40px;
+    border: 8px solid navy;
+    border-right: 0px;
+    padding-left: 10px;
+    outline: none;
+}
+
+.searchBtn {
+    width: 40px;
+    height: 40px;
+    color: white;
+    background-color: navy;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+}
+  
