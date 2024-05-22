@@ -92,6 +92,7 @@ const PostTableRow = ({postData, deletePost, changeAppState}) => {
       console.log("Recruitments: 모집글 삭제 요청 시작");
       await requestDeletePostApi(postId);
       console.log("Recruitments: 모집글 삭제 요청 성공");
+      setIsSubMenuOpen(false);
       deletePost(postId);
     } catch (err) {
       console.log(err);
@@ -202,7 +203,11 @@ const Recruitments = () => {
   // 모집글 삭제 메서드
   const deletePost = (postId) => {
     const newPostList = postList.filter(post => post.postId != postId);
-    setPostList(newPostList);
+    if(newPostList.length === 0 && currentPageNum !==0 ){
+      setCurrentPageNum(currentPageNum-1);
+    } else {
+      setPostList(newPostList);
+    }
   }
 
   // 모집글 상태변경 메서드
