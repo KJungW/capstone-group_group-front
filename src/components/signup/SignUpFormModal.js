@@ -156,13 +156,13 @@ const SignUpFormModal = ({moveNextModal}) => {
       <div className={styles.body}>
         <div className={styles.inputBox}>
           <div className={styles.labelBox}><span>이메일</span></div>
-          <input type="text" className={styles.textInput} onChange={onChangeInputEmail} value={inputEmail} maxLength={40}/>
+          <input type="text" className={styles.textInput} spellcheck="false" onChange={onChangeInputEmail} value={inputEmail} maxLength={40}/>
           <div className={styles.errorMsg}>{emailErrorMsg}</div>
         </div>
         <div className={styles.inputBox}>
           <div className={styles.labelBox}><span>사용할 닉네임</span></div>
           <div className={styles.nickNameInputBox}>
-            <input type="text" className={styles.nickNameInput} onChange={onChangeInputNickName} value={inputNickName} maxLength={20}/>
+            <input type="text" className={styles.nickNameInput} spellcheck="false" onChange={onChangeInputNickName} value={inputNickName} maxLength={20}/>
             <button className={styles.nickNameCheckBtn} onClick={clickNickNameCheckBtn} disabled={nickNameAvailable}>중복확인</button>
           </div>
           <div className={styles.errorMsg}>{nickNameErrorMsg}</div>

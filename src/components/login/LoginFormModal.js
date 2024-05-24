@@ -83,7 +83,7 @@ const LoginFormModal = ({completeLogin}) => {
       <div className={styles.body}>
         <div className={styles.inputBox}>
           <div className={styles.labelBox}><span>이메일</span></div>
-          <input type="text" className={styles.textInput} onChange={onChangeInputEmail} value={inputEmail} maxLength={40}/>
+          <input type="text" className={styles.textInput} spellCheck="false" onChange={onChangeInputEmail} value={inputEmail} maxLength={40}/>
           <div className={styles.errorMsg}>{emailErrorMsg}</div>
         </div>
         <div className={styles.inputBox}>

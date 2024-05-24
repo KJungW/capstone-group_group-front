@@ -254,14 +254,14 @@ function RecruitUpdate() {
             <div className={styles.text1}>제목 :</div>
             <div className={styles.wordCounter}>{`(${titleCount}/30)`}</div>
           </div>
-          <input type="text" name="input" value={postTitle} onChange={(e) => handleInputChange(e, setPostTitle, setTitleCount, 30)} />
+          <input type="text" name="input" value={postTitle} spellCheck="false" onChange={(e) => handleInputChange(e, setPostTitle, setTitleCount, 30)} />
           <div className={styles.error}>{postTitleErrMsg}</div>
           {/*활동내용 입력칸*/}
           <div className={styles.header}>
             <div className={styles.text1}>활동내용 :</div>
             <div className={styles.wordCounter}>{`(${activityDetailCount}/100)`}</div>
           </div>
-          <textarea name="activity" value={activityDetail}  ref={activityDetailAreaRef} onChange={(e) => handleTextAreaChange(e, activityDetailAreaRef, setActivityDetail, setActivityDetailCount, 100)} />
+          <textarea name="activity" value={activityDetail} spellCheck="false" ref={activityDetailAreaRef} onChange={(e) => handleTextAreaChange(e, activityDetailAreaRef, setActivityDetail, setActivityDetailCount, 100)} />
           <div className={styles.error}>{activityDetailErrMsg}</div>
           {/*팀성향 입력칸 radio*/}
           <div className={styles.header}>
@@ -287,14 +287,14 @@ function RecruitUpdate() {
             <div className={styles.text1}>오픈채팅방 주소 :</div>
             <div className={styles.wordCounter}>{`(${openChatUrlCount}/100)`}</div>
           </div>
-          <input type="text" name="input" value={openChatUrl} onChange={(e) => handleInputChange(e, setOpenChatUrl, setOpenChatUrlCount, 100)} />
+          <input type="text" name="input" value={openChatUrl} spellCheck="false" onChange={(e) => handleInputChange(e, setOpenChatUrl, setOpenChatUrlCount, 100)} />
           <div className={styles.error}>{openChatUrlErrMsg}</div>
           {/*추가로 하고싶은말 입력값*/}
           <div className={styles.header}>
             <div className={styles.text1}>하고싶은 말 :</div>
             <div className={styles.wordCounter}>{`(${additionalWritingCount}/100)`}</div>
           </div>
-          <textarea name="additionalComments" value={additionalWriting} ref={additionalWritingAreaRef} onChange={(e) => handleTextAreaChange(e, additionalWritingAreaRef, setAdditionalWriting, setAdditionalWritingCount, 100)} />
+          <textarea name="additionalComments" spellCheck="false" value={additionalWriting} ref={additionalWritingAreaRef} onChange={(e) => handleTextAreaChange(e, additionalWritingAreaRef, setAdditionalWriting, setAdditionalWritingCount, 100)} />
           <div className={styles.error}>{additionalWritingErrMsg}</div>
           {/*참여요건 입력 박스*/}
           <div className={styles.header}>
@@ -305,7 +305,7 @@ function RecruitUpdate() {
               {/*참여요건 설명 입력*/}
               <div className={styles.requirement}>
                 <div className={styles.text2}>참여요건 :</div>
-                <input type="text" name="input" value={requirement.title} onChange={(e) => handleRequirementTitleChange(
+                <input type="text" name="input" value={requirement.title} spellCheck="false" onChange={(e) => handleRequirementTitleChange(
                   e, (value) => {
                     const updatedRequirements = [...requirements];
                     updatedRequirements[index].title = value;

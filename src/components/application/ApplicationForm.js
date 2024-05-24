@@ -42,6 +42,7 @@ const TextRequireForm = ({ix, title, setInput, error}) => {
         <textarea 
           ref={textInputArea}
           maxLength={100}
+          spellCheck="false"
           onChange={(e) => onChangeTextInput(e.target.value)}
           onBlur={(e) => setInput(ix, textInput)}
         ></textarea>
@@ -90,7 +91,7 @@ const FileRequireForm = ({ix, title, setInput, error}) => {
     <div className={styles.requirementBox}>
       <div className={styles.requirementFileTitle}>{title}</div>
       <div className={styles.requirementFileBox}>
-        <input className={styles.fileUploadInput} id={`upload_${ix}`} type="file" onChange={handleFileChange}></input>
+        <input className={styles.fileUploadInput} id={`upload_${ix}`} type="file" spellCheck="false" onChange={handleFileChange}></input>
         <label htmlFor={`upload_${ix}`}>
           <div className={styles.fileUploadBtn}>파일 업로드</div>
         </label>
