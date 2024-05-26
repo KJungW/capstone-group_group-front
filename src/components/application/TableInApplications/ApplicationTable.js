@@ -41,7 +41,11 @@ const ApplicationTableRow = ({application}) => {
   
     // 오픈채티방 주소 클릭 메서드
     const onClickOpenchatUrl = (url) => {
-      window.open(url);
+      let targetUrl = url;
+      if(!url.startsWith("https://")) {
+        targetUrl = `https://${url}`
+      }
+      window.open(encodeURI(targetUrl));
     }
   
     return (
