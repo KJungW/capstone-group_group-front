@@ -206,7 +206,7 @@ const Recruitments = () => {
     if(newPostList.length === 0 && currentPageNum !==0 ){
       setCurrentPageNum(currentPageNum-1);
     } else {
-      setPostList(newPostList);
+      requestPostList();
     }
   }
 
