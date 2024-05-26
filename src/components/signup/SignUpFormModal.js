@@ -27,8 +27,7 @@ const SignUpFormModal = ({moveNextModal}) => {
   // input 태그 입력 처리메소드
   const onChangeInputEmail = (e) => {setInputEmail(e.target.value);};
   const onChangeInputNickName = (e) => {
-    const inputString = e.target.value;
-    if(inputString[inputString.length - 1] === " ") return;
+    const inputString = (e.target.value).replaceAll(' ', '');
     setInputNickName(inputString);
     setNickNameAvailable(false);
   };
