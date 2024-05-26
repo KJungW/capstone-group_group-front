@@ -262,15 +262,15 @@ const Recruitments = () => {
             </div>
           </div>
         </div>
+        <div className={styles.navigation}>
+          <div className={styles.narrow}onClick={onClickBackPage}>&lt;</div>
+          {[... new Array(tatolPageCount)].map((_, i) => 
+                <div className={`${styles.pageNum} ${ i==currentPageNum?styles.current_page:''}`} key={i} onClick={()=>onClickPageNum(i)}>{i+1}</div>
+          )}
+          <div className={styles.narrow} onClick={onClickNextPage}>&gt;</div>
         </div>
-          <div className={styles.navigation}>
-            <div className={styles.narrow}onClick={onClickBackPage}>&lt;</div>
-            {[... new Array(tatolPageCount)].map((_, i) => 
-                  <div className={`${styles.pageNum} ${ i==currentPageNum?styles.current_page:''}`} key={i} onClick={()=>onClickPageNum(i)}>{i+1}</div>
-            )}
-            <div className={styles.narrow} onClick={onClickNextPage}>&gt;</div>
-          </div>
       </div>
+    </div>
   );
 };
 
