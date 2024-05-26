@@ -14,7 +14,10 @@ const SignUpCheckModel = ({ formData }) => {
     })
     .catch(err => {
       console.log("회원가입 요청 재전송 실패");
-      handleApiReqeustError({err:err})
+      handleApiReqeustError({
+        err:err,
+        handleBadInput: () => {alert("이미 인증된 이메일입니다.");}
+      })
     })
     .finally(() => {
       setIsSendingEmail(false);
