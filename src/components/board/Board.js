@@ -20,7 +20,7 @@ const Board = () => {
   const [boardTitle, setBoardTitle] = useState("게시판");
   const [totalPageSize, setTotalPageSize] = useState(0);
   const [postListInPage, setPostListInPage] = useState([]);
-  const [currentPageNumber, setCurrentPageNumber] = useState(0);
+  const [currentPageNumber, setCurrentPageNumber] = useState();
   const [isFirstPage, setIsFirstPage] = useState(true);
   const [isLastPage, setIsLastPage] = useState(true);
 
@@ -38,9 +38,8 @@ const Board = () => {
     );
   }
 
-  // 페이지 요청 API
-  useEffect(() => {
-    if(!boardId) return;
+  // 페이지 요청 메서드 
+  const requestPosts = () => {
     console.log("Board : 모집글 목록요청")
     requestPostsInBoard(boardId, currentPageNumber, postCountInPage)
     .then(res => {
@@ -51,7 +50,26 @@ const Board = () => {
       console.log("Board : 모집글 목록요청 실패");
       handleApiReqeustError({err:err});
     })
-  }, [boardId, currentPageNumber]);
+  }
+
+  useEffect(() => {
+    if(!boardId) return;
+    if(currentPageNumber === undefined) {
+      setCurrentPageNumber(0);
+      return;
+    }
+    if(currentPageNumber === 0) {
+      requestPosts();
+    } else {
+      setCurrentPageNumber(0);
+    }
+  }, [boardId])
+
+  useEffect(() => {
+    if(!boardId) return;
+    if(currentPageNumber === undefined) return;
+    requestPosts();
+  }, [currentPageNumber]);
 
   // 모집글 클릭 메서드
   const onClickRecruit = (postId) => {
